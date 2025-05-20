@@ -5,43 +5,45 @@ import java.util.List;
 
 public class FuerzaBruta {
 
-	private List<Camino> caminosValidos;
+	private List<Camino> caminosValidosSinPoda;
+	
+
 	private Camino caminoActual;
 	private Grilla grilla;
 	private int filas;
 	private int columnas;
-	
+
 	// Estadisticas
-	private int llamadas;
+	private int llamadasSinPoda;
+	
 
 	public FuerzaBruta(Grilla grilla) {
 		this.grilla = grilla;
 		this.filas = grilla.getFilas();
 		this.columnas = grilla.getColumnas();
-		this.caminosValidos = new ArrayList<>();
-		this.caminoActual = new Camino();
-		this.llamadas = 0;
+		this.caminosValidosSinPoda = new ArrayList<>();
+		this.caminoActual= new Camino();		
+		this.llamadasSinPoda = 0;
+	
 	}
 
-	public List<Camino> buscarCaminosMinimos() {
-		if ((filas + columnas - 1) % 2 != 0) {
-			return caminosValidos;
-		}
+	public List<Camino> buscarCaminosMinimosSinPoda() {
+
 		Celda inicio = grilla.getCelda(0, 0);
 		caminoActual.agregarCelda(inicio);
-		
-		buscar(0, 0, cargaComoEntero(inicio));
-		
-		return caminosValidos;
+
+		buscarSinPoda(0, 0, cargaComoEntero(inicio));
+
+		return caminosValidosSinPoda;
 	}
 
-	private void buscar(int fila, int columna, int suma) {
-		llamadas++;
-		
+	private void buscarSinPoda(int fila, int columna, int suma) {
+		llamadasSinPoda++;
+
 		// caso base
 		if (llegoAlDestino(fila, columna)) {
 			if (suma == 0) {
-				caminosValidos.add(new Camino(caminoActual));
+				caminosValidosSinPoda.add(new Camino(caminoActual));
 			}
 			return;
 		}
@@ -49,21 +51,23 @@ public class FuerzaBruta {
 		// Abajo
 		if (fila + 1 < filas) {
 			Celda abajo = grilla.getCelda(fila + 1, columna);
-			
+
 			caminoActual.agregarCelda(abajo);
-			buscar(fila + 1, columna, suma + cargaComoEntero(abajo));
+			buscarSinPoda(fila + 1, columna, suma + cargaComoEntero(abajo));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
 
 		// Derecha
 		if (columna + 1 < columnas) {
 			Celda derecha = grilla.getCelda(fila, columna + 1);
-			
+
 			caminoActual.agregarCelda(derecha);
-			buscar(fila, columna + 1, suma + cargaComoEntero(derecha));
+			buscarSinPoda(fila, columna + 1, suma + cargaComoEntero(derecha));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
 	}
+
+	
 
 	public boolean llegoAlDestino(int fila, int columna) {
 		return fila == filas - 1 && columna == columnas - 1;
@@ -74,22 +78,26 @@ public class FuerzaBruta {
 	}
 
 	// para ver en el main
-	public int getLlamadas() {
-		return llamadas;
+	public int getLlamadasSinPoda() {
+		return llamadasSinPoda;
 	}
 	
-	public int getCantidadCaminos() {
-		return caminosValidos.size();
+
+	public int getCantidadCaminosSinPoda() {
+		return caminosValidosSinPoda.size();
 	}
 
-	public void imprimirCaminos() {
-	    for (Camino camino : caminosValidos) {
-	        for (int i = 0; i < camino.getTamaño(); i++) {
-	            System.out.print(camino.getCelda(i) + " ");
-	        }
-	        System.out.println("\n-----");
-	    }
+
+	public void imprimirCaminosSinPoda() {
+		for (Camino camino : caminosValidosSinPoda) {
+			for (int i = 0; i < camino.getTamaño(); i++) {
+				System.out.print(camino.getCelda(i) + " ");
+			}
+			System.out.println("\n-----");
+		}
 	}
 
-	
+
+
+
 }
