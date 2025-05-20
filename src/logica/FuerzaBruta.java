@@ -5,8 +5,8 @@ import java.util.List;
 
 public class FuerzaBruta {
 
-	private List<List<Celda>> caminosValidos;
-	private List<Celda> caminoActual;
+	private List<Camino> caminosValidos;
+	private Camino caminoActual;
 	private Grilla grilla;
 	private int filas;
 	private int columnas;
@@ -19,16 +19,16 @@ public class FuerzaBruta {
 		this.filas = grilla.getFilas();
 		this.columnas = grilla.getColumnas();
 		this.caminosValidos = new ArrayList<>();
-		this.caminoActual = new ArrayList<>();
+		this.caminoActual = new Camino();
 		this.llamadas = 0;
 	}
 
-	public List<List<Celda>> buscarCaminosMinimos() {
+	public List<Camino> buscarCaminosMinimos() {
 		if ((filas + columnas - 1) % 2 != 0) {
 			return caminosValidos;
 		}
 		Celda inicio = grilla.getCelda(0, 0);
-		caminoActual.add(inicio);
+		caminoActual.agregarCelda(inicio);
 		
 		buscar(0, 0, cargaComoEntero(inicio));
 		
@@ -39,9 +39,9 @@ public class FuerzaBruta {
 		llamadas++;
 		
 		// caso base
-		if (fila == filas - 1 && columna == columnas - 1) {
+		if (llegoAlDestino(fila, columna)) {
 			if (suma == 0) {
-				caminosValidos.add(new ArrayList<>(caminoActual));
+				caminosValidos.add(new Camino(caminoActual));
 			}
 			return;
 		}
@@ -50,19 +50,23 @@ public class FuerzaBruta {
 		if (fila + 1 < filas) {
 			Celda abajo = grilla.getCelda(fila + 1, columna);
 			
-			caminoActual.add(abajo);
+			caminoActual.agregarCelda(abajo);
 			buscar(fila + 1, columna, suma + cargaComoEntero(abajo));
-			caminoActual.remove(caminoActual.size() - 1);
+			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
 
 		// Derecha
 		if (columna + 1 < columnas) {
 			Celda derecha = grilla.getCelda(fila, columna + 1);
 			
-			caminoActual.add(derecha);
+			caminoActual.agregarCelda(derecha);
 			buscar(fila, columna + 1, suma + cargaComoEntero(derecha));
-			caminoActual.remove(caminoActual.size() - 1);
+			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
+	}
+
+	public boolean llegoAlDestino(int fila, int columna) {
+		return fila == filas - 1 && columna == columnas - 1;
 	}
 
 	private int cargaComoEntero(Celda celda) {
@@ -79,9 +83,13 @@ public class FuerzaBruta {
 	}
 
 	public void imprimirCaminos() {
-		for (List<Celda> camino : caminosValidos) {
-			System.out.println(camino);
-		}
+	    for (Camino camino : caminosValidos) {
+	        for (int i = 0; i < camino.getTamaño(); i++) {
+	            System.out.print(camino.getCelda(i) + " ");
+	        }
+	        System.out.println("\n-----");
+	    }
 	}
+
 	
 }
