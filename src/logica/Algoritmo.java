@@ -6,11 +6,16 @@ import java.util.List;
 public abstract class Algoritmo {
 	protected List<Camino> caminosValidos;
 	protected Camino caminoActual;
+	
 	protected Grilla grilla;
 	protected int filas;
 	protected int columnas;
+	
+	// Estadisticas
 	protected int llamadas;
-
+	// tiempo de ejecucion se maneja acá
+	// ...
+	
 	public Algoritmo(Grilla grilla) {
 		this.grilla = grilla;
 		this.filas = grilla.getFilas();
