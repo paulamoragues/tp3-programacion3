@@ -13,8 +13,7 @@ public abstract class Algoritmo {
 	
 	// Estadisticas
 	protected int llamadas;
-	// tiempo de ejecucion se maneja acá
-	// ...
+	protected double tiempoEjecucion;
 	
 	public Algoritmo(Grilla grilla) {
 		this.grilla = grilla;
@@ -23,6 +22,7 @@ public abstract class Algoritmo {
 		this.caminoActual = new Camino();
 		this.caminosValidos = new ArrayList<>();
 		this.llamadas = 0;
+		this.tiempoEjecucion = 0;
 	}
 
 	public int getCantidadLlamadas() {
@@ -33,6 +33,10 @@ public abstract class Algoritmo {
 		return caminosValidos.size();
 	}
 
+    public double getTiempoEjecucion() {
+        return tiempoEjecucion;
+    }
+	
 	// Cada subclase define su propio algoritmo de búsqueda
 	public abstract List<Camino> buscarCaminos();
 	
