@@ -8,21 +8,20 @@ public class Grilla {
 	private int columnas;
 
 	public Grilla(int filas, int columnas) {
-	    this.filas = filas;
-	    this.columnas = columnas;
-	    this.matriz = new Celda[filas][columnas];
+		this.filas = filas;
+		this.columnas = columnas;
+		this.matriz = new Celda[filas][columnas];
 	}
 
 	public void generarGrillaAleatoria() {
-	    Random rand = new Random();
-	    for (int fila = 0; fila < filas; fila++) {
-	        for (int col = 0; col < columnas; col++) {
-	            boolean carga = rand.nextBoolean();
-	            matriz[fila][col] = new Celda(fila, col, carga);
-	        }
-	    }
+		Random rand = new Random();
+		for (int fila = 0; fila < filas; fila++) {
+			for (int col = 0; col < columnas; col++) {
+				boolean carga = rand.nextBoolean();
+				matriz[fila][col] = new Celda(fila, col, carga);
+			}
+		}
 	}
-
 
 	public Celda getCelda(int fila, int columna) {
 		return matriz[fila][columna];
@@ -35,6 +34,5 @@ public class Grilla {
 	public int getColumnas() {
 		return columnas;
 	}
-
 
 }

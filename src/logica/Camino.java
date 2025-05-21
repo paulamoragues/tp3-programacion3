@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Camino {
-	
+
 	private List<Celda> celdas;
-	
+
 	public Camino() {
 		celdas = new ArrayList<>();
 	}
 
 	public Camino(Camino otro) {
-		celdas = new ArrayList<>(otro.celdas);  // Copia superficial
+		celdas = new ArrayList<>(otro.celdas); // Copia superficial
 	}
 
 	public void agregarCelda(Celda celda) {

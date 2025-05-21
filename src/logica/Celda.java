@@ -18,13 +18,9 @@ public class Celda {
 	public int getColumna() {
 		return columna;
 	}
-	
+
 	public boolean getCarga() {
 		return carga;
 	}
 
-	@Override
-	public String toString() {
-		return "(" + fila + "," + columna + ")";
-	}
 }
