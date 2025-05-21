@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Camino {
-
 	private List<Celda> celdas;
 
 	public Camino() {

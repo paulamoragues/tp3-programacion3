@@ -114,10 +114,10 @@ public class Pantalla extends JFrame {
 			grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
 			tiempoFuerzaBruta,
 			tiempoBackTracking,
-			algoritmoSinPoda.getCantidadCaminosSinPoda(),
-			algoritmoConPoda.getCantidadCaminosConPoda(),
-			algoritmoSinPoda.getLlamadasSinPoda(),
-			algoritmoConPoda.getLlamadasConPoda()
+			algoritmoSinPoda.getCantidadCaminos(),
+			algoritmoConPoda.getCantidadCaminos(),
+			algoritmoSinPoda.getCantidadLlamadas(),
+			algoritmoConPoda.getCantidadLlamadas()
 		});
 
 		actualizarPanelGrilla();
@@ -127,7 +127,7 @@ public class Pantalla extends JFrame {
 
 	public double medirTiempoSinPoda(FuerzaBruta algoritmoSinPoda) {
 		long inicioSinPoda = System.currentTimeMillis();
-		algoritmoSinPoda.buscarCaminosMinimosSinPoda();
+		algoritmoSinPoda.buscarCaminos();
 		long finSinPoda = System.currentTimeMillis();
 		
 		return finSinPoda - inicioSinPoda;
@@ -136,7 +136,7 @@ public class Pantalla extends JFrame {
 
 	public double medirTiempoConPoda(BackTracking algoritmoConPoda) {
 		long inicioConPoda = System.currentTimeMillis();
-		algoritmoConPoda.buscarCaminosMinimosConPoda();
+		algoritmoConPoda.buscarCaminos();
 		long finConPoda = System.currentTimeMillis();
 		
 		return finConPoda - inicioConPoda;
@@ -207,7 +207,7 @@ public class Pantalla extends JFrame {
 
 	
 	private void guardarPrimerCaminoEncontrado() {
-		var caminos = new FuerzaBruta(grillaActual).buscarCaminosMinimosSinPoda();
+		var caminos = new FuerzaBruta(grillaActual).buscarCaminos();
 		if (!caminos.isEmpty()) {
 			Camino camino = caminos.get(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
