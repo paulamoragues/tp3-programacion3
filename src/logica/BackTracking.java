@@ -26,16 +26,23 @@ public class BackTracking {
 }
 	
 	public List<Camino> buscarCaminosMinimosConPoda() {
-		if ((filas + columnas - 1) % 2 != 0) {
-			return caminosValidosConPoda;
-		}
-		Celda inicio = grilla.getCelda(0, 0);
-		caminoActual.agregarCelda(inicio);
+	    caminosValidosConPoda.clear();   // Limpiar resultados anteriores
+	    llamadasConPoda = 0;             // Reiniciar contador
+	    caminoActual = new Camino();     // Reiniciar camino actual
 
-		buscarConPoda(0, 0, cargaComoEntero(inicio));
+	    // Validar solo después de reiniciar para que funcione bien en varias llamadas
+	    if ((filas + columnas - 1) % 2 != 0) {
+	        return caminosValidosConPoda;
+	    }
 
-		return caminosValidosConPoda;
+	    Celda inicio = grilla.getCelda(0, 0);
+	    caminoActual.agregarCelda(inicio);
+
+	    buscarConPoda(0, 0, cargaComoEntero(inicio));
+
+	    return caminosValidosConPoda;
 	}
+
 
 
 	private void buscarConPoda(int fila, int columna, int suma) {
@@ -76,8 +83,10 @@ public class BackTracking {
 	}
 
 	private int cargaComoEntero(Celda celda) {
-		return celda.getCarga() ? 1 : -1;
+	 
+	    return celda.getCarga() ? 1 : -1;
 	}
+
 
 	// para ver en el main
 
