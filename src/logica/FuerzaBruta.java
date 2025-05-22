@@ -10,7 +10,7 @@ public class FuerzaBruta extends Algoritmo {
 
 	@Override
 	public List<Camino> buscarCaminos() {
-		long tiempoInicial = System.currentTimeMillis();
+		long tiempoInicial = System.nanoTime();
 		
 		caminosValidos.clear();
 		llamadas = 0;
@@ -20,8 +20,8 @@ public class FuerzaBruta extends Algoritmo {
 		caminoActual.agregarCelda(inicio);
 		buscar(0, 0, cargaComoEntero(inicio));
 		
-		long tiempoFinal = System.currentTimeMillis();
-		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1000.0;
+		long tiempoFinal = System.nanoTime();
+		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1_000_000.0; // en milisegundos
 
 		return caminosValidos;
 	}

@@ -16,11 +16,11 @@ public abstract class Algoritmo {
 	protected double tiempoEjecucion;
 	
 	public Algoritmo(Grilla grilla) {
+		this.caminosValidos = new ArrayList<>();
+		this.caminoActual = new Camino();
 		this.grilla = grilla;
 		this.filas = grilla.getFilas();
 		this.columnas = grilla.getColumnas();
-		this.caminoActual = new Camino();
-		this.caminosValidos = new ArrayList<>();
 		this.llamadas = 0;
 		this.tiempoEjecucion = 0;
 	}
