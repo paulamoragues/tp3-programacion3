@@ -32,21 +32,19 @@ public class BackTracking extends Algoritmo {
 	private void buscar(int fila, int columna, int suma) {
 		llamadas++;
 
-		int restantes = (filas - fila - 1) + (columnas - columna - 1);
-		if (suma + restantes < 0 || suma - restantes > 0) {
-			return;
-		}
+        int pasosRestantes = (filas - fila - 1) + (columnas - columna - 1);
+        if (Math.abs(suma) > pasosRestantes) return;
 
 		if (llegoAlDestino(fila, columna)) {
-			if (suma == 0) {
+			if (suma == 0) 
 				caminosValidos.add(new Camino(caminoActual));
-			}
 			return;
 		}
 		
 		// Abajo
 		if (fila + 1 < filas) {
 			Celda abajo = grilla.getCelda(fila + 1, columna);
+			
 			caminoActual.agregarCelda(abajo);
 			buscar(fila + 1, columna, suma + cargaComoEntero(abajo));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
@@ -55,6 +53,7 @@ public class BackTracking extends Algoritmo {
 		// Derecha
 		if (columna + 1 < columnas) {
 			Celda derecha = grilla.getCelda(fila, columna + 1);
+			
 			caminoActual.agregarCelda(derecha);
 			buscar(fila, columna + 1, suma + cargaComoEntero(derecha));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);

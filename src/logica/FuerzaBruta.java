@@ -39,6 +39,7 @@ public class FuerzaBruta extends Algoritmo {
 		// Abajo
 		if (fila + 1 < filas) {
 			Celda abajo = grilla.getCelda(fila + 1, columna);
+			
 			caminoActual.agregarCelda(abajo);
 			buscar(fila + 1, columna, suma + cargaComoEntero(abajo));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
@@ -47,6 +48,7 @@ public class FuerzaBruta extends Algoritmo {
 		// Derecha
 		if (columna + 1 < columnas) {
 			Celda derecha = grilla.getCelda(fila, columna + 1);
+			
 			caminoActual.agregarCelda(derecha);
 			buscar(fila, columna + 1, suma + cargaComoEntero(derecha));
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
