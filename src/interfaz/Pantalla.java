@@ -21,6 +21,8 @@ public class Pantalla extends JFrame {
 
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
+	private int _limitePosiblesFilas = 50;
+	private int _limitePosiblesColumnas = 10;
 
 	public Pantalla() {
 		setTitle("Comparación de Métodos de Búsqueda");
@@ -41,8 +43,11 @@ public class Pantalla extends JFrame {
 	}
 
 	private void crearTablaResultados() {
-		String[] columnas = { "Tamaño de Grilla", "Tiempo sin Poda (ms)", "Tiempo con Poda (ms)", "# Caminos sin Poda",
-				"# Caminos con Poda", "# Llamadas sin Poda", "# Llamadas con Poda" };
+		
+		String[] columnas = { "Tamaño de Grilla", "Tiempo Fuerza Bruta (ms)", "Tiempo Backtracking (ms)",
+				"Tiempo Genético (ms)", 
+				"# Caminos Fuerza Bruta", "# Caminos Backtracking", "# Caminos Genético", 
+				"# Llamadas Fuerza Bruta", "# Llamadas Backtracking" };
 		modeloResultados = new DefaultTableModel(columnas, 0);
 		tablaResultados = new JTable(modeloResultados);
 	}
@@ -88,15 +93,19 @@ public class Pantalla extends JFrame {
 
 		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
+		Genetico algoritmoGenetico = new Genetico(grillaActual); 
 
-		guardarPrimerCaminoEncontrado();
+		guardarPrimerCaminoEncontrado(); 
 
 		algoritmoSinPoda.buscarCaminos();
 		algoritmoConPoda.buscarCaminos();
+		algoritmoGenetico.buscarCaminos(); // Ejecutar Algoritmo Genético
 
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
 				algoritmoSinPoda.getTiempoEjecucion(), algoritmoConPoda.getTiempoEjecucion(),
+				algoritmoGenetico.getTiempoEjecucion(), // Tiempo del Algoritmo Genético
 				algoritmoSinPoda.getCantidadCaminos(), algoritmoConPoda.getCantidadCaminos(),
+				algoritmoGenetico.getCantidadCaminos(), // Cantidad de caminos del Algoritmo Genético
 				algoritmoSinPoda.getCantidadLlamadas(), algoritmoConPoda.getCantidadLlamadas() });
 
 		actualizarPanelGrilla();
@@ -106,8 +115,8 @@ public class Pantalla extends JFrame {
 
 	private void inicializarPanelGrilla() {
 		panelGrilla = new JPanel();
-		panelGrilla.setBounds(241, 199, 500, 300); // o el tamaño que prefieras inicialmente
-		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY)); // opcional: borde visible
+		panelGrilla.setBounds(241, 199, 500, 300); 
+		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY)); 
 		getContentPane().add(panelGrilla);
 	}
 
@@ -163,7 +172,8 @@ public class Pantalla extends JFrame {
 	}
 
 	private void guardarPrimerCaminoEncontrado() {
-		var caminos = new FuerzaBruta(grillaActual).buscarCaminos();
+		// Se usa el algoritmo genetico para obtener un camino y mostrarlo en la grilla
+		var caminos = new Genetico(grillaActual).buscarCaminos();
 		if (!caminos.isEmpty()) {
 			Camino camino = caminos.get(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
@@ -182,10 +192,12 @@ public class Pantalla extends JFrame {
 
 	private void generarGrillaAleatoria() {
 		Random rand = new Random();
-		int filas = rand.nextInt(2, 7);
-		int columnas = rand.nextInt(2, 7);
-
-		grillaActual = new Grilla(filas, columnas);
+		
+		int cantFilas = rand.nextInt(_limitePosiblesFilas);
+		int cantColumnas = rand.nextInt(_limitePosiblesColumnas);
+		
+		grillaActual = new Grilla(cantFilas, cantColumnas);
+//		grillaActual = new Grilla(10, 21);
 		grillaActual.generarGrillaAleatoria();
 	}
 
