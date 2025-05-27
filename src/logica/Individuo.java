@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random; // Necesario para Collections.shuffle
 
+import generador.Generador;
+
 public class Individuo implements Comparable<Individuo> {
 	// Representamos a un individuo como una secuencia de movimientos:
 	// 0 = mover hacia abajo

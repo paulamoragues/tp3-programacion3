@@ -10,11 +10,11 @@ public class BackTracking extends Algoritmo {
 
 	@Override
 	public List<Camino> buscarCaminos() {
+		long tiempoInicial = System.nanoTime();
+
 		caminosValidos.clear();
 		llamadas = 0;
 		caminoActual = new Camino();
-		
-		long tiempoInicial = System.nanoTime();
 
 		if ((filas + columnas - 1) % 2 != 0) {
 			return caminosValidos;

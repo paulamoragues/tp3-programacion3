@@ -1,25 +1,22 @@
-package logica;
+package generador;
 
 import java.util.Random;
 
 public class GeneradorAleatorio implements Generador {
+	private Random random;
 
-	private Random _random;
-	
 	public GeneradorAleatorio() {
-		_random = new Random();
+		random = new Random();
 	}
-	
+
 	@Override
 	public boolean nextBoolean() {
-		// TODO Auto-generated method stub
-		return _random.nextBoolean();
+		return random.nextBoolean();
 	}
 
 	@Override
 	public int nextInt(int rango) {
-		// TODO Auto-generated method stub
-		return _random.nextInt(rango);
+		return random.nextInt(rango);
 	}
 
 }

@@ -6,15 +6,14 @@ import java.util.List;
 public abstract class Algoritmo {
 	protected List<Camino> caminosValidos;
 	protected Camino caminoActual;
-	
 	protected Grilla grilla;
 	protected int filas;
 	protected int columnas;
-	
-	//Estadisticas
+
+	// Estadísticas
 	protected int llamadas;
 	protected double tiempoEjecucion;
-	
+
 	public Algoritmo(Grilla grilla) {
 		this.caminosValidos = new ArrayList<>();
 		this.caminoActual = new Camino();
@@ -33,13 +32,13 @@ public abstract class Algoritmo {
 		return caminosValidos.size();
 	}
 
-    public double getTiempoEjecucion() {
-        return tiempoEjecucion;
-    }
-	
+	public double getTiempoEjecucion() {
+		return tiempoEjecucion;
+	}
+
 	// Cada subclase define su propio algoritmo de búsqueda
 	public abstract List<Camino> buscarCaminos();
-	
+
 	protected int cargaComoEntero(Celda celda) {
 		return celda.getCarga() ? 1 : -1;
 	}
@@ -47,6 +46,7 @@ public abstract class Algoritmo {
 	protected boolean llegoAlDestino(int fila, int columna) {
 		return fila == filas - 1 && columna == columnas - 1;
 	}
+
 	public Camino getCamino(int i) {
 		return caminosValidos.get(i);
 	}

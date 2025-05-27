@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import generador.Generador;
+import generador.GeneradorAleatorio;
+
 public class Genetico extends Algoritmo {
 
 	// Los individuos de la poblacion
