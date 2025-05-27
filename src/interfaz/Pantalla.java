@@ -95,12 +95,15 @@ public class Pantalla extends JFrame {
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
 		Genetico algoritmoGenetico = new Genetico(grillaActual); 
 
-		guardarPrimerCaminoEncontrado(); 
+		
 
 		algoritmoSinPoda.buscarCaminos();
 		algoritmoConPoda.buscarCaminos();
 		algoritmoGenetico.buscarCaminos(); // Ejecutar Algoritmo Genético
 
+		guardarPrimerCaminoEncontrado(algoritmoGenetico); //guardamos cualquier primer camino de cualquier algoritmo
+
+		
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
 				algoritmoSinPoda.getTiempoEjecucion(), algoritmoConPoda.getTiempoEjecucion(),
 				algoritmoGenetico.getTiempoEjecucion(), // Tiempo del Algoritmo Genético
@@ -171,11 +174,9 @@ public class Pantalla extends JFrame {
 		panelGrilla.setPreferredSize(new Dimension(columnas * anchoCelda, filas * alturaCelda));
 	}
 
-	private void guardarPrimerCaminoEncontrado() {
-		// Se usa el algoritmo genetico para obtener un camino y mostrarlo en la grilla
-		var caminos = new Genetico(grillaActual).buscarCaminos();
-		if (!caminos.isEmpty()) {
-			Camino camino = caminos.get(0);
+	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {		
+		if (algoritmo.getCantidadCaminos() >0) {
+			Camino camino = algoritmo.getCamino(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
 				Celda celda = camino.getCelda(i);
 				celdasCamino.add(new Point(celda.getFila(), celda.getColumna()));
