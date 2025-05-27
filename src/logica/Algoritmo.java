@@ -11,7 +11,7 @@ public abstract class Algoritmo {
 	protected int filas;
 	protected int columnas;
 	
-	// Estadisticas
+	//Estadisticas
 	protected int llamadas;
 	protected double tiempoEjecucion;
 	
