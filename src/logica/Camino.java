@@ -27,6 +27,34 @@ public class Camino {
 	}
 
 	public Celda getCelda(int i) {
-		return celdas.get(i);
+		if (i >= 0 && i < celdas.size()) { // Asegurar índice válido
+			return celdas.get(i);
+		}
+		return null; // O lanzar una excepción
 	}
+
+
+	public List<Celda> getCeldas() {
+		return celdas;
+	}
+
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Camino camino = (Camino) o;
+        // Dos caminos son iguales si tienen las mismas celdas en el mismo orden y tamaño
+        if (this.celdas.size() != camino.celdas.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.celdas.size(); i++) {
+            Celda c1 = this.celdas.get(i);
+            Celda c2 = camino.celdas.get(i);
+            // Compara las celdas por su posición (fila, columna), no por la carga directamente
+            if (c1.getFila() != c2.getFila() || c1.getColumna() != c2.getColumna()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
