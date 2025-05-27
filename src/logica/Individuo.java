@@ -126,7 +126,7 @@ public class Individuo implements Comparable<Individuo> {
 		for (Celda celda : camino.getCeldas()) {
 			suma += (celda.getCarga() ? 1 : -1);
 		}
-		return suma; 
+		return Math.abs(suma);
 	}
 
 	// Método para generar el Camino real a partir de los movimientos del individuo
