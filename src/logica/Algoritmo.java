@@ -47,4 +47,7 @@ public abstract class Algoritmo {
 	protected boolean llegoAlDestino(int fila, int columna) {
 		return fila == filas - 1 && columna == columnas - 1;
 	}
+	public Camino getCamino(int i) {
+		return caminosValidos.get(i);
+	}
 }
