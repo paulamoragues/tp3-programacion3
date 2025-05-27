@@ -21,8 +21,8 @@ public class Pantalla extends JFrame {
 
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
-	private int _limitePosiblesFilas = 50;
-	private int _limitePosiblesColumnas = 10;
+	private int _limitePosiblesFilas = 15;
+	private int _limitePosiblesColumnas = 15;
 
 	public Pantalla() {
 		setTitle("Comparación de Métodos de Búsqueda");
@@ -193,8 +193,8 @@ public class Pantalla extends JFrame {
 	private void generarGrillaAleatoria() {
 		Random rand = new Random();
 		
-		int cantFilas = rand.nextInt(_limitePosiblesFilas);
-		int cantColumnas = rand.nextInt(_limitePosiblesColumnas);
+		int cantFilas = rand.nextInt(_limitePosiblesFilas)+1;
+		int cantColumnas = rand.nextInt(_limitePosiblesColumnas)+1; //+1 para evitar que se cree una grilla 0x0
 		
 		grillaActual = new Grilla(cantFilas, cantColumnas);
 //		grillaActual = new Grilla(10, 21);
