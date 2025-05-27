@@ -12,12 +12,13 @@ public class Genetico extends Algoritmo {
 	// Generador de numeros aleatorios
 	private Generador _random; 
 
+	
 	// Parametros de la poblacion
-	private int _tamano = 10; 
-	private int _mutadosPorIteracion = 2; 
-	private int _recombinadosPorIteracion = 4; 
-	private int _eliminadosPorIteracion = 14;
-	private int _maxIteraciones = 100; 
+	private int _tamano = 100; 
+	private int _mutadosPorIteracion = 10; 
+	private int _recombinadosPorIteracion =20; 
+	private int _eliminadosPorIteracion = 60;
+	private int _maxIteraciones = 1000; 
 
 	// Estadisticas
 	private int _iteracion;
