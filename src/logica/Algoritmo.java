@@ -1,11 +1,7 @@
-package algoritmo;
+package logica;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import logica.Camino;
-import logica.Celda;
-import logica.Grilla;
 
 public abstract class Algoritmo {
 	protected List<Camino> caminosValidos;

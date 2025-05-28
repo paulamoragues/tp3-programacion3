@@ -1,4 +1,4 @@
-package algoritmo;
+package logica;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,6 @@ import java.util.List;
 
 import generador.Generador;
 import generador.GeneradorAleatorio;
-import logica.Camino;
-import logica.Grilla;
 
 public class Genetico extends Algoritmo {
 

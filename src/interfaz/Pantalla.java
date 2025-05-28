@@ -3,11 +3,6 @@ package interfaz;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import algoritmo.Algoritmo;
-import algoritmo.BackTracking;
-import algoritmo.FuerzaBruta;
-import algoritmo.Genetico;
-
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Random;
