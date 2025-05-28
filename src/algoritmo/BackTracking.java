@@ -1,10 +1,14 @@
-package logica;
+package algoritmo;
 
 import java.util.List;
 
-public class FuerzaBruta extends Algoritmo {
+import logica.Camino;
+import logica.Celda;
+import logica.Grilla;
 
-	public FuerzaBruta(Grilla grilla) {
+public class BackTracking extends Algoritmo {
+
+	public BackTracking(Grilla grilla) {
 		super(grilla);
 	}
 
@@ -15,6 +19,10 @@ public class FuerzaBruta extends Algoritmo {
 		caminosValidos.clear();
 		llamadas = 0;
 		caminoActual = new Camino();
+
+		if ((filas + columnas - 1) % 2 != 0) {
+			return caminosValidos;
+		}
 
 		Celda inicio = grilla.getCelda(0, 0);
 		caminoActual.agregarCelda(inicio);
@@ -28,6 +36,10 @@ public class FuerzaBruta extends Algoritmo {
 
 	private void buscar(int fila, int columna, int suma) {
 		llamadas++;
+
+		int pasosRestantes = (filas - fila - 1) + (columnas - columna - 1);
+		if (Math.abs(suma) > pasosRestantes)
+			return;
 
 		if (llegoAlDestino(fila, columna)) {
 			if (suma == 0)

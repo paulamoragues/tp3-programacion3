@@ -7,7 +7,8 @@ public class Grilla {
 	private int filas;
 	private int columnas;
 
-	public Grilla() {}
+	public Grilla() {
+	}
 
 	public Grilla(int filas, int columnas) {
 		this.filas = filas;

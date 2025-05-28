@@ -1,4 +1,4 @@
-package logica;
+package algoritmo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Random; // Necesario para Collections.shuffle
 
 import generador.Generador;
+import logica.Camino;
+import logica.Celda;
+import logica.Grilla;
 
 public class Individuo implements Comparable<Individuo> {
 	// Representamos a un individuo como una secuencia de movimientos:
