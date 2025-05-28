@@ -10,10 +10,11 @@ import logica.Grilla;
 public class Json {
 
 	public static Grilla cargarDesdeJSON(String archivo) {
+		Gson gson = new Gson();
 		Grilla grilla = null;
+
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(archivo));
-			Gson gson = new Gson();
 			grilla = gson.fromJson(br, Grilla.class);
 		} catch (Exception e) {
 			e.printStackTrace();

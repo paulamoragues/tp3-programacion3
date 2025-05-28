@@ -6,8 +6,8 @@ public class Grilla {
 	private Celda[][] matriz;
 	private int filas;
 	private int columnas;
-	
-    public Grilla() {}  // Obligatorio para que Gson cree la instancia
+
+	public Grilla() {}
 
 	public Grilla(int filas, int columnas) {
 		this.filas = filas;

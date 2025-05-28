@@ -3,42 +3,45 @@ package interfaz;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import java.io.File;
 import java.util.HashSet;
-import java.util.Random;
+//import java.util.Random;
 import java.util.Set;
 import logica.*;
 import utilidades.Json;
 
-public class Pantalla extends JFrame {
+public class Pantalla {
 	private static final int ANCHO = 1000;
 	private static final int ALTO = 600;
 
+	private JFrame frame;
 	private JTable tablaResultados;
 	private DefaultTableModel modeloResultados;
 
 	private JPanel panelGrilla;
-	private JButton botonEjecutar;
+	// private JButton botonEjecutar;
 	private JScrollPane scrollResultados;
 
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
-	private int _limitePosiblesFilas = 15;
-	private int _limitePosiblesColumnas = 15;
+//	private int _limitePosiblesFilas = 15;
+//	private int _limitePosiblesColumnas = 15;
 
 	public Pantalla() {
-		setTitle("Comparación de Métodos de Búsqueda");
-		setSize(ANCHO, ALTO);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
+		frame = new JFrame("Comparación de Métodos de Búsqueda");
+		frame.setSize(ANCHO, ALTO);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 
 		inicializarBotonCargarGrilla();
-		
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
-		//inicializarBotonGenerarGrilla();
-		
-		setLocationRelativeTo(null);
+		// inicializarBotonGenerarGrilla();
+
+		frame.setLocationRelativeTo(null);
+	}
+
+	public void mostrar() {
+		frame.setVisible(true);
 	}
 
 	private void inicializarTablaResultados() {
@@ -48,10 +51,8 @@ public class Pantalla extends JFrame {
 	}
 
 	private void crearTablaResultados() {
-		
 		String[] columnas = { "Tamaño de Grilla", "Tiempo Fuerza Bruta (ms)", "Tiempo Backtracking (ms)",
-				"Tiempo Genético (ms)", 
-				"# Caminos Fuerza Bruta", "# Caminos Backtracking", "# Caminos Genético", 
+				"Tiempo Genético (ms)", "# Caminos Fuerza Bruta", "# Caminos Backtracking", "# Caminos Genético",
 				"# Llamadas Fuerza Bruta", "# Llamadas Backtracking" };
 		modeloResultados = new DefaultTableModel(columnas, 0);
 		tablaResultados = new JTable(modeloResultados);
@@ -65,11 +66,9 @@ public class Pantalla extends JFrame {
 
 		centrarCeldas();
 		configurarEncabezado();
-
 	}
 
 	private void configurarEncabezado() {
-		// Estilo del encabezado
 		JTableHeader header = tablaResultados.getTableHeader();
 		DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
 		headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -77,7 +76,6 @@ public class Pantalla extends JFrame {
 	}
 
 	private void centrarCeldas() {
-		// Centrado de celdas
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < tablaResultados.getColumnCount(); i++) {
@@ -88,32 +86,28 @@ public class Pantalla extends JFrame {
 	private void agregarTablaResultadosAScrollPane() {
 		scrollResultados = new JScrollPane(tablaResultados);
 		scrollResultados.setBounds(22, 75, 934, 50);
-		getContentPane().add(scrollResultados);
+		frame.getContentPane().add(scrollResultados);
 	}
 
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
 		celdasCamino = new HashSet<>();
-		//generarGrillaAleatoria();
+		// generarGrillaAleatoria();
 
 		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
-		Genetico algoritmoGenetico = new Genetico(grillaActual); 
-
-		
+		Genetico algoritmoGenetico = new Genetico(grillaActual);
 
 		algoritmoSinPoda.buscarCaminos();
 		algoritmoConPoda.buscarCaminos();
 		algoritmoGenetico.buscarCaminos(); // Ejecutar Algoritmo Genético
 
-		guardarPrimerCaminoEncontrado(algoritmoGenetico); //guardamos cualquier primer camino de cualquier algoritmo
+		guardarPrimerCaminoEncontrado(algoritmoGenetico); // guardamos cualquier primer camino de cualquier algoritmo
 
-		
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
 				algoritmoSinPoda.getTiempoEjecucion(), algoritmoConPoda.getTiempoEjecucion(),
-				algoritmoGenetico.getTiempoEjecucion(), // Tiempo del Algoritmo Genético
-				algoritmoSinPoda.getCantidadCaminos(), algoritmoConPoda.getCantidadCaminos(),
-				algoritmoGenetico.getCantidadCaminos(), // Cantidad de caminos del Algoritmo Genético
+				algoritmoGenetico.getTiempoEjecucion(), algoritmoSinPoda.getCantidadCaminos(),
+				algoritmoConPoda.getCantidadCaminos(), algoritmoGenetico.getCantidadCaminos(),
 				algoritmoSinPoda.getCantidadLlamadas(), algoritmoConPoda.getCantidadLlamadas() });
 
 		actualizarPanelGrilla();
@@ -123,9 +117,9 @@ public class Pantalla extends JFrame {
 
 	private void inicializarPanelGrilla() {
 		panelGrilla = new JPanel();
-		panelGrilla.setBounds(241, 199, 500, 300); 
-		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY)); 
-		getContentPane().add(panelGrilla);
+		panelGrilla.setBounds(241, 199, 500, 300);
+		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		frame.getContentPane().add(panelGrilla);
 	}
 
 	private void actualizarPanelGrilla() {
@@ -154,16 +148,12 @@ public class Pantalla extends JFrame {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-		// Color de fondo por defecto
 		Color colorFondo = Color.WHITE;
-
-		// Cambia color si la celda forma parte del camino
 		if (celdasCamino.contains(new Point(fila, columna))) {
 			colorFondo = new Color(144, 238, 144); // Verde claro
 		}
 		panel.setBackground(colorFondo);
 
-		// Texto que indica la carga ("1" o "-1")
 		String textoCarga = celda.getCarga() ? "1" : "-1";
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 
@@ -179,8 +169,8 @@ public class Pantalla extends JFrame {
 		panelGrilla.setPreferredSize(new Dimension(columnas * anchoCelda, filas * alturaCelda));
 	}
 
-	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {		
-		if (algoritmo.getCantidadCaminos() >0) {
+	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {
+		if (algoritmo.getCantidadCaminos() > 0) {
 			Camino camino = algoritmo.getCamino(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
 				Celda celda = camino.getCelda(i);
@@ -189,47 +179,39 @@ public class Pantalla extends JFrame {
 		}
 	}
 
-//	private void inicializarBotonGenerarGrilla() {
-//		botonEjecutar = new JButton("Generar Grilla Aleatoria");
-//		botonEjecutar.setBounds(389, 142, 200, 40);
-//		botonEjecutar.addActionListener(e -> ejecutarMediciones());
-//		getContentPane().add(botonEjecutar);
+//	private void generarGrillaAleatoria() {
+//		Random rand = new Random();
+//
+//		int cantFilas = rand.nextInt(_limitePosiblesFilas) + 1;
+//		int cantColumnas = rand.nextInt(_limitePosiblesColumnas) + 1;
+//
+//		grillaActual = new Grilla(cantFilas, cantColumnas);
+//		grillaActual.generarGrillaAleatoria();
 //	}
 
-	private void generarGrillaAleatoria() {
-		Random rand = new Random();
-		
-		int cantFilas = rand.nextInt(_limitePosiblesFilas)+1;
-		int cantColumnas = rand.nextInt(_limitePosiblesColumnas)+1; //+1 para evitar que se cree una grilla 0x0
-		
-		grillaActual = new Grilla(cantFilas, cantColumnas);
-//		grillaActual = new Grilla(10, 21);
-		grillaActual.generarGrillaAleatoria();
-	}
-	
 	private void inicializarBotonCargarGrilla() {
-	    JButton botonCargar = new JButton("Cargar Grilla desde JSON");
-	    botonCargar.setBounds(170, 142, 200, 40);
-	    botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
-	    getContentPane().add(botonCargar);
+		JButton botonCargar = new JButton("Cargar Grilla desde JSON");
+		botonCargar.setBounds(170, 142, 200, 40);
+		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
+		frame.getContentPane().add(botonCargar);
 	}
-	
+
+	// mmmmm ???
 	private void cargarGrillaDesdeArchivo() {
-	    try {
-	        grillaActual = Json.cargarDesdeJSON("grilla.json"); 
-	    } catch (Exception e) {
-	        e.printStackTrace(); 
-	        JOptionPane.showMessageDialog(this, "Error al leer el archivo JSON.", "Error", JOptionPane.ERROR_MESSAGE);
-	        return; 
-	    }
+		try {
+			grillaActual = Json.cargarDesdeJSON("grilla.json");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Error al leer el archivo JSON.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
-	    if (grillaActual != null) {
-	        ejecutarMediciones();
-	        JOptionPane.showMessageDialog(this, "Grilla cargada correctamente.");
-	    } else {
-	        JOptionPane.showMessageDialog(this, "El archivo está vacío o malformado.", "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+		if (grillaActual != null) {
+			ejecutarMediciones();
+			JOptionPane.showMessageDialog(frame, "Grilla cargada correctamente.");
+		} else {
+			JOptionPane.showMessageDialog(frame, "El archivo está vacío o malformado.", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
-	
-
 }
