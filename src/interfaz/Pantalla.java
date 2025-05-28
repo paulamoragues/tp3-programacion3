@@ -4,56 +4,54 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.HashSet;
-//import java.util.Random;
+import java.util.Random;
 import java.util.Set;
 import logica.*;
-import utilidades.Json;
 
 public class Pantalla {
 	private static final int ANCHO = 1000;
 	private static final int ALTO = 600;
+	private int limitePosiblesFilas = 15;
+	private int limitePosiblesColumnas = 15;
 
-	private JFrame frame;
+	private JFrame ventana;
 	private JTable tablaResultados;
 	private DefaultTableModel modeloResultados;
 
 	private JPanel panelGrilla;
-	// private JButton botonEjecutar;
+	private JButton botonEjecutar;
 	private JScrollPane scrollResultados;
 
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
-//	private int _limitePosiblesFilas = 15;
-//	private int _limitePosiblesColumnas = 15;
 
 	public Pantalla() {
-		frame = new JFrame("Comparación de Métodos de Búsqueda");
-		frame.setSize(ANCHO, ALTO);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		inicializarBotonCargarGrilla();
+		inicializarPantalla();
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
-		// inicializarBotonGenerarGrilla();
-
-		frame.setLocationRelativeTo(null);
+		inicializarBotonCargarGrilla();
+		inicializarBotonGenerarGrilla();
+		ventana.setVisible(true);
 	}
 
-	public void mostrar() {
-		frame.setVisible(true);
+	private void inicializarPantalla() {
+		ventana = new JFrame("Comparación de Métodos de Búsqueda");
+		ventana.setSize(ANCHO, ALTO);
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.getContentPane().setLayout(null);
+		ventana.setLocationRelativeTo(null);
 	}
 
 	private void inicializarTablaResultados() {
 		crearTablaResultados();
 		configurarTablaResultados();
-		agregarTablaResultadosAScrollPane();
+		agregarTablaResultados();
 	}
 
 	private void crearTablaResultados() {
 		String[] columnas = { "Tamaño de Grilla", "Tiempo Fuerza Bruta (ms)", "Tiempo Backtracking (ms)",
-				"Tiempo Genético (ms)", "# Caminos Fuerza Bruta", "# Caminos Backtracking", "# Caminos Genético",
-				"# Llamadas Fuerza Bruta", "# Llamadas Backtracking" };
+				"Tiempo Genético (ms)", "Caminos Fuerza Bruta", "Caminos Backtracking", "Caminos Genético",
+				"Llamadas Fuerza Bruta", "Llamadas Backtracking" };
 		modeloResultados = new DefaultTableModel(columnas, 0);
 		tablaResultados = new JTable(modeloResultados);
 	}
@@ -63,7 +61,6 @@ public class Pantalla {
 		tablaResultados.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tablaResultados.setShowGrid(true);
 		tablaResultados.setGridColor(Color.LIGHT_GRAY);
-
 		centrarCeldas();
 		configurarEncabezado();
 	}
@@ -83,16 +80,16 @@ public class Pantalla {
 		}
 	}
 
-	private void agregarTablaResultadosAScrollPane() {
+	private void agregarTablaResultados() {
 		scrollResultados = new JScrollPane(tablaResultados);
 		scrollResultados.setBounds(22, 75, 934, 50);
-		frame.getContentPane().add(scrollResultados);
+		ventana.getContentPane().add(scrollResultados);
 	}
 
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
 		celdasCamino = new HashSet<>();
-		// generarGrillaAleatoria();
+		generarGrillaAleatoria();
 
 		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
@@ -100,15 +97,21 @@ public class Pantalla {
 
 		algoritmoSinPoda.buscarCaminos();
 		algoritmoConPoda.buscarCaminos();
-		algoritmoGenetico.buscarCaminos(); // Ejecutar Algoritmo Genético
+		algoritmoGenetico.buscarCaminos();
 
-		guardarPrimerCaminoEncontrado(algoritmoGenetico); // guardamos cualquier primer camino de cualquier algoritmo
+		guardarPrimerCaminoEncontrado(algoritmoGenetico);
 
-		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
-				algoritmoSinPoda.getTiempoEjecucion(), algoritmoConPoda.getTiempoEjecucion(),
-				algoritmoGenetico.getTiempoEjecucion(), algoritmoSinPoda.getCantidadCaminos(),
-				algoritmoConPoda.getCantidadCaminos(), algoritmoGenetico.getCantidadCaminos(),
-				algoritmoSinPoda.getCantidadLlamadas(), algoritmoConPoda.getCantidadLlamadas() });
+		modeloResultados.addRow(new Object[] {
+			grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
+			algoritmoSinPoda.getTiempoEjecucion(),
+			algoritmoConPoda.getTiempoEjecucion(),
+			algoritmoGenetico.getTiempoEjecucion(),
+			algoritmoSinPoda.getCantidadCaminos(),
+			algoritmoConPoda.getCantidadCaminos(),
+			algoritmoGenetico.getCantidadCaminos(),
+			algoritmoSinPoda.getCantidadLlamadas(),
+			algoritmoConPoda.getCantidadLlamadas()
+		});
 
 		actualizarPanelGrilla();
 		tablaResultados.repaint();
@@ -119,7 +122,7 @@ public class Pantalla {
 		panelGrilla = new JPanel();
 		panelGrilla.setBounds(241, 199, 500, 300);
 		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-		frame.getContentPane().add(panelGrilla);
+		ventana.getContentPane().add(panelGrilla);
 	}
 
 	private void actualizarPanelGrilla() {
@@ -149,14 +152,14 @@ public class Pantalla {
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
 		Color colorFondo = Color.WHITE;
+
 		if (celdasCamino.contains(new Point(fila, columna))) {
-			colorFondo = new Color(144, 238, 144); // Verde claro
+			colorFondo = new Color(144, 238, 144);
 		}
 		panel.setBackground(colorFondo);
 
 		String textoCarga = celda.getCarga() ? "1" : "-1";
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
-
 		labelCarga.setForeground(Color.BLACK);
 
 		panel.add(labelCarga, BorderLayout.CENTER);
@@ -179,39 +182,25 @@ public class Pantalla {
 		}
 	}
 
-//	private void generarGrillaAleatoria() {
-//		Random rand = new Random();
-//
-//		int cantFilas = rand.nextInt(_limitePosiblesFilas) + 1;
-//		int cantColumnas = rand.nextInt(_limitePosiblesColumnas) + 1;
-//
-//		grillaActual = new Grilla(cantFilas, cantColumnas);
-//		grillaActual.generarGrillaAleatoria();
-//	}
+	private void inicializarBotonGenerarGrilla() {
+		botonEjecutar = new JButton("Generar Grilla Aleatoria");
+		botonEjecutar.setBounds(389, 142, 200, 40);
+		botonEjecutar.addActionListener(e -> ejecutarMediciones());
+		ventana.getContentPane().add(botonEjecutar);
+	}
+
+	private void generarGrillaAleatoria() {
+		Random rand = new Random();
+		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
+		int cantColumnas = rand.nextInt(limitePosiblesColumnas) + 1;
+		grillaActual = new Grilla(cantFilas, cantColumnas);
+		grillaActual.generarGrillaAleatoria();
+	}
 
 	private void inicializarBotonCargarGrilla() {
 		JButton botonCargar = new JButton("Cargar Grilla desde JSON");
 		botonCargar.setBounds(170, 142, 200, 40);
-		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
-		frame.getContentPane().add(botonCargar);
-	}
-
-	// mmmmm ???
-	private void cargarGrillaDesdeArchivo() {
-		try {
-			grillaActual = Json.cargarDesdeJSON("grilla.json");
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(frame, "Error al leer el archivo JSON.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		if (grillaActual != null) {
-			ejecutarMediciones();
-			JOptionPane.showMessageDialog(frame, "Grilla cargada correctamente.");
-		} else {
-			JOptionPane.showMessageDialog(frame, "El archivo está vacío o malformado.", "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
+		// botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
+		ventana.getContentPane().add(botonCargar);
 	}
 }
