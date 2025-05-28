@@ -29,8 +29,8 @@ public class Pantalla {
 		inicializarPantalla();
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
-		inicializarBotonCargarGrilla();
 		inicializarBotonGenerarGrilla();
+		inicializarBotonCargarGrilla();
 		ventana.setVisible(true);
 	}
 
@@ -61,15 +61,9 @@ public class Pantalla {
 		tablaResultados.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		tablaResultados.setShowGrid(true);
 		tablaResultados.setGridColor(Color.LIGHT_GRAY);
+		
 		centrarCeldas();
 		configurarEncabezado();
-	}
-
-	private void configurarEncabezado() {
-		JTableHeader header = tablaResultados.getTableHeader();
-		DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
-		headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		header.setFont(header.getFont().deriveFont(Font.BOLD));
 	}
 
 	private void centrarCeldas() {
@@ -79,17 +73,50 @@ public class Pantalla {
 			tablaResultados.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 		}
 	}
+	
+	private void configurarEncabezado() {
+		JTableHeader header = tablaResultados.getTableHeader();
+		DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
+		headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		header.setFont(header.getFont().deriveFont(Font.BOLD));
+	}
 
 	private void agregarTablaResultados() {
 		scrollResultados = new JScrollPane(tablaResultados);
 		scrollResultados.setBounds(22, 75, 934, 50);
 		ventana.getContentPane().add(scrollResultados);
 	}
+	
+	private void inicializarPanelGrilla() {
+		panelGrilla = new JPanel();
+		panelGrilla.setBounds(241, 199, 500, 300);
+		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+		ventana.getContentPane().add(panelGrilla);
+	}
+	
+	private void inicializarBotonGenerarGrilla() {
+		botonEjecutar = new JButton("Generar Grilla Aleatoria");
+		botonEjecutar.setBounds(510, 142, 200, 40); 
+		botonEjecutar.addActionListener(e -> generarGrillaAleatoria());
+		ventana.getContentPane().add(botonEjecutar);
+	}
+	
+	private void generarGrillaAleatoria() {
+		Random rand = new Random();
+		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
+		int cantColumnas = rand.nextInt(limitePosiblesColumnas) + 1;
+		
+		grillaActual = new Grilla(cantFilas, cantColumnas);
+		grillaActual.generarGrillaAleatoria();
+		
+		ejecutarMediciones();
+	}
 
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
 		celdasCamino = new HashSet<>();
-		generarGrillaAleatoria();
+		
+		// grilla tiene que ser != null
 
 		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
@@ -117,13 +144,7 @@ public class Pantalla {
 		tablaResultados.repaint();
 		panelGrilla.repaint();
 	}
-
-	private void inicializarPanelGrilla() {
-		panelGrilla = new JPanel();
-		panelGrilla.setBounds(241, 199, 500, 300);
-		panelGrilla.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-		ventana.getContentPane().add(panelGrilla);
-	}
+	
 
 	private void actualizarPanelGrilla() {
 		int filas = grillaActual.getFilas();
@@ -182,24 +203,9 @@ public class Pantalla {
 		}
 	}
 
-	private void inicializarBotonGenerarGrilla() {
-		botonEjecutar = new JButton("Generar Grilla Aleatoria");
-		botonEjecutar.setBounds(389, 142, 200, 40);
-		botonEjecutar.addActionListener(e -> ejecutarMediciones());
-		ventana.getContentPane().add(botonEjecutar);
-	}
-
-	private void generarGrillaAleatoria() {
-		Random rand = new Random();
-		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
-		int cantColumnas = rand.nextInt(limitePosiblesColumnas) + 1;
-		grillaActual = new Grilla(cantFilas, cantColumnas);
-		grillaActual.generarGrillaAleatoria();
-	}
-
 	private void inicializarBotonCargarGrilla() {
-		JButton botonCargar = new JButton("Cargar Grilla desde JSON");
-		botonCargar.setBounds(170, 142, 200, 40);
+		JButton botonCargar = new JButton("Cargar Grilla");
+		botonCargar.setBounds(290, 142, 200, 40); 
 		// botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
