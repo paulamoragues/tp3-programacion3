@@ -1,0 +1,24 @@
+{
+  "filas": 3,
+  "columnas": 4,
+  "matriz": [
+    [
+      { "fila": 0, "columna": 0, "carga": true },
+      { "fila": 0, "columna": 1, "carga": false },
+      { "fila": 0, "columna": 2, "carga": false },
+      { "fila": 0, "columna": 3, "carga": false }
+    ],
+    [
+      { "fila": 1, "columna": 0, "carga": false },
+      { "fila": 1, "columna": 1, "carga": true },
+      { "fila": 1, "columna": 2, "carga": true },
+      { "fila": 1, "columna": 3, "carga": false }
+    ],
+    [
+      { "fila": 2, "columna": 0, "carga": true },
+      { "fila": 2, "columna": 1, "carga": true },
+      { "fila": 2, "columna": 2, "carga": true },
+      { "fila": 2, "columna": 3, "carga": false }
+    ]
+  ]
+}

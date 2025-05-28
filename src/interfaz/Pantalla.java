@@ -3,10 +3,12 @@ package interfaz;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import logica.*;
+import utilidades.Json;
 
 public class Pantalla extends JFrame {
 	private static final int ANCHO = 1000;
@@ -30,9 +32,12 @@ public class Pantalla extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
+		inicializarBotonCargarGrilla();
+		
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
-		inicializarBotonGenerarGrilla();
+		//inicializarBotonGenerarGrilla();
+		
 		setLocationRelativeTo(null);
 	}
 
@@ -89,7 +94,7 @@ public class Pantalla extends JFrame {
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
 		celdasCamino = new HashSet<>();
-		generarGrillaAleatoria();
+		//generarGrillaAleatoria();
 
 		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
@@ -184,12 +189,12 @@ public class Pantalla extends JFrame {
 		}
 	}
 
-	private void inicializarBotonGenerarGrilla() {
-		botonEjecutar = new JButton("Generar Grilla Aleatoria");
-		botonEjecutar.setBounds(389, 142, 200, 40);
-		botonEjecutar.addActionListener(e -> ejecutarMediciones());
-		getContentPane().add(botonEjecutar);
-	}
+//	private void inicializarBotonGenerarGrilla() {
+//		botonEjecutar = new JButton("Generar Grilla Aleatoria");
+//		botonEjecutar.setBounds(389, 142, 200, 40);
+//		botonEjecutar.addActionListener(e -> ejecutarMediciones());
+//		getContentPane().add(botonEjecutar);
+//	}
 
 	private void generarGrillaAleatoria() {
 		Random rand = new Random();
@@ -201,5 +206,30 @@ public class Pantalla extends JFrame {
 //		grillaActual = new Grilla(10, 21);
 		grillaActual.generarGrillaAleatoria();
 	}
+	
+	private void inicializarBotonCargarGrilla() {
+	    JButton botonCargar = new JButton("Cargar Grilla desde JSON");
+	    botonCargar.setBounds(170, 142, 200, 40);
+	    botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
+	    getContentPane().add(botonCargar);
+	}
+	
+	private void cargarGrillaDesdeArchivo() {
+	    try {
+	        grillaActual = Json.cargarDesdeJSON("grilla.json"); 
+	    } catch (Exception e) {
+	        e.printStackTrace(); 
+	        JOptionPane.showMessageDialog(this, "Error al leer el archivo JSON.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return; 
+	    }
+
+	    if (grillaActual != null) {
+	        ejecutarMediciones();
+	        JOptionPane.showMessageDialog(this, "Grilla cargada correctamente.");
+	    } else {
+	        JOptionPane.showMessageDialog(this, "El archivo está vacío o malformado.", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+	
 
 }

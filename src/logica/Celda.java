@@ -5,6 +5,8 @@ public class Celda {
 	private int columna;
 	private boolean carga;
 
+    public Celda() {}  // Obligatorio para Gson
+    
 	public Celda(int fila, int columna, boolean carga) {
 		this.fila = fila;
 		this.columna = columna;
