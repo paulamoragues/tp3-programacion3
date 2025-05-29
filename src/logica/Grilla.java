@@ -27,6 +27,8 @@ public class Grilla {
 	}
 
 	public Celda getCelda(int fila, int columna) {
+//		verificarFilaValida();
+//		verificarColumnaValida();
 		return matriz[fila][columna];
 	}
 

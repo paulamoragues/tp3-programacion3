@@ -30,8 +30,8 @@ public class Genetico extends Algoritmo {
 	@Override
 	public List<Camino> buscarCaminos() {
 		long tiempoInicial = System.nanoTime();
-		
-		caminosValidos.clear(); 
+
+		caminosValidos.clear();
 		generarIndividuos();
 		iteracion = 0;
 
@@ -44,10 +44,9 @@ public class Genetico extends Algoritmo {
 			iteracion++;
 
 		}
-		
-		long tiempoFinal = System.nanoTime();
-		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1_000_000.0; // Calcular tiempo en milisegundos
 
+		long tiempoFinal = System.nanoTime();
+		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1_000_000.0;
 		return caminosValidos;
 	}
 
@@ -81,7 +80,7 @@ public class Genetico extends Algoritmo {
 		for (int j = 0; j < mutadosPorIteracion; j++) {
 			// Asegurarse de que haya individuos en la población para mutar
 			if (!individuos.isEmpty()) {
-				individuoAlAzar().mutar();
+				individuoAleatorio().mutar();
 			}
 		}
 	}
@@ -90,12 +89,12 @@ public class Genetico extends Algoritmo {
 		for (int j = 0; j < recombinadosPorIteracion; j++) {
 			// Necesitamos al menos dos individuos para la recombinación
 			if (individuos.size() >= 2) {
-				Individuo padre1 = individuoAlAzar();
-				Individuo padre2 = individuoAlAzar();
+				Individuo padre1 = individuoAleatorio();
+				Individuo padre2 = individuoAleatorio();
 
 				// Asegurarse de que los padres sean diferentes
 				while (padre1 == padre2 && individuos.size() > 1) {
-					padre2 = individuoAlAzar();
+					padre2 = individuoAleatorio();
 				}
 
 				for (Individuo hijo : padre1.recombinar(padre2)) {
@@ -106,7 +105,7 @@ public class Genetico extends Algoritmo {
 	}
 
 	private void eliminarPeores() {
-		Collections.sort(individuos); // Ordena la población por fitness (los mejores primero)
+		Collections.sort(individuos); // Los mejores primero
 
 		for (int i = 0; i < eliminadosPorIteracion; i++) {
 			individuos.remove(individuos.size() - 1);
@@ -114,24 +113,25 @@ public class Genetico extends Algoritmo {
 	}
 
 	private void agregarNuevos() {
-		// Rellena la población con nuevos individuos aleatorios hasta alcanzar el
-		// tamaño deseado
 		while (individuos.size() < tamaño) {
 			individuos.add(Individuo.aleatorio(grilla));
 		}
 	}
 
-	// Método auxiliar para seleccionar un individuo aleatorio de la población
-	private Individuo individuoAlAzar() {
-		if (individuos.isEmpty()) {
-			return null; // O lanzar una excepción si la población está vacía
-		}
+	private Individuo individuoAleatorio() {
+		verificarIndividuos();
 		int i = random.nextInt(individuos.size());
 		return individuos.get(i);
 	}
 
 	public int getIteracion() {
 		return iteracion;
+	}
+
+	private void verificarIndividuos() {
+		if (individuos.isEmpty()) {
+			throw new IllegalStateException("La población está vacía.");
+		}
 	}
 
 }
