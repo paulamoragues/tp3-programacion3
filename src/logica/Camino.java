@@ -18,23 +18,28 @@ public class Camino {
 		celdas.add(celda);
 	}
 
-	public int getTamaño() {
-		return celdas.size();
-	}
-
 	public void eliminarCelda(int i) {
+		verificarRangoValido(i);
 		celdas.remove(i);
 	}
 
 	public Celda getCelda(int i) {
-		if (i >= 0 && i < celdas.size()) { // Asegurar índice válido
-			return celdas.get(i);
-		}
-		return null; // O lanzar una excepción
+		verificarRangoValido(i);
+		return celdas.get(i);
+	}
+	
+	public int getTamaño() {
+		return celdas.size();
 	}
 
 	public List<Celda> getCeldas() {
-		return celdas;
+		return new ArrayList<>(celdas); // Copia superficial
+	}
+	
+	private void verificarRangoValido(int i) {
+		if (i < 0 || i >= celdas.size()) {
+			throw new IndexOutOfBoundsException("Índice fuera de rango: " + i);
+		}
 	}
 
 	@Override

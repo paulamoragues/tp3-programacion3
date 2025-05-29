@@ -62,11 +62,11 @@ public class Pantalla {
 		tablaResultados.setShowGrid(true);
 		tablaResultados.setGridColor(Color.LIGHT_GRAY);
 
-		centrarCeldas();
-		configurarEncabezado();
+		centrarCeldasTabla();
+		configurarEncabezadoTabla();
 	}
 
-	private void centrarCeldas() {
+	private void centrarCeldasTabla() {
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < tablaResultados.getColumnCount(); i++) {
@@ -74,7 +74,7 @@ public class Pantalla {
 		}
 	}
 
-	private void configurarEncabezado() {
+	private void configurarEncabezadoTabla() {
 		JTableHeader header = tablaResultados.getTableHeader();
 		DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
 		headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,6 +101,7 @@ public class Pantalla {
 		ventana.getContentPane().add(botonEjecutar);
 	}
 
+	// ..
 	private void generarGrillaAleatoria() {
 		Random rand = new Random();
 		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
@@ -118,21 +119,21 @@ public class Pantalla {
 
 		// grilla tiene que ser != null
 
-		FuerzaBruta algoritmoSinPoda = new FuerzaBruta(grillaActual);
-		BackTracking algoritmoConPoda = new BackTracking(grillaActual);
+		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
+		BackTracking algoritmoBT = new BackTracking(grillaActual);
 		Genetico algoritmoGenetico = new Genetico(grillaActual);
 
-		algoritmoSinPoda.buscarCaminos();
-		algoritmoConPoda.buscarCaminos();
+		algoritmoFB.buscarCaminos();
+		algoritmoBT.buscarCaminos();
 		algoritmoGenetico.buscarCaminos();
 
 		guardarPrimerCaminoEncontrado(algoritmoGenetico);
 
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
-				algoritmoSinPoda.getTiempoEjecucion(), algoritmoConPoda.getTiempoEjecucion(),
-				algoritmoGenetico.getTiempoEjecucion(), algoritmoSinPoda.getCantidadCaminos(),
-				algoritmoConPoda.getCantidadCaminos(), algoritmoGenetico.getCantidadCaminos(),
-				algoritmoSinPoda.getCantidadLlamadas(), algoritmoConPoda.getCantidadLlamadas() });
+				algoritmoFB.getTiempoEjecucion(), algoritmoBT.getTiempoEjecucion(),
+				algoritmoGenetico.getTiempoEjecucion(), algoritmoFB.getCantidadCaminos(),
+				algoritmoBT.getCantidadCaminos(), algoritmoGenetico.getCantidadCaminos(),
+				algoritmoFB.getCantidadLlamadas(), algoritmoBT.getCantidadLlamadas() });
 
 		actualizarPanelGrilla();
 		tablaResultados.repaint();
@@ -147,8 +148,8 @@ public class Pantalla {
 		panelGrilla.setLayout(new GridLayout(filas, columnas));
 
 		llenarPanelConCeldas(filas, columnas);
-
 		ajustarDimensionPanel(filas, columnas);
+		
 		panelGrilla.revalidate();
 		panelGrilla.repaint();
 	}
@@ -202,4 +203,9 @@ public class Pantalla {
 		// botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
+	
+//	private void cargarGrillaDesdeArchivo() {
+//		
+//	}
+	
 }
