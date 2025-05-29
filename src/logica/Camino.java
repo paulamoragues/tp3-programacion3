@@ -27,7 +27,7 @@ public class Camino {
 		verificarRangoValido(i);
 		return celdas.get(i);
 	}
-	
+
 	public int getTamaño() {
 		return celdas.size();
 	}
@@ -35,7 +35,7 @@ public class Camino {
 	public List<Celda> getCeldas() {
 		return new ArrayList<>(celdas); // Copia superficial
 	}
-	
+
 	private void verificarRangoValido(int i) {
 		if (i < 0 || i >= getTamaño()) {
 			throw new IndexOutOfBoundsException("Índice fuera de rango: " + i);

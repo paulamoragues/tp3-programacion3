@@ -3,11 +3,15 @@ package interfaz;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import com.google.gson.JsonSyntaxException;
+
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import logica.*;
+import utilidades.JsonGrilla;
 
 public class Pantalla {
 	private static final int ANCHO = 1000;
@@ -18,10 +22,9 @@ public class Pantalla {
 	private JFrame ventana;
 	private JTable tablaResultados;
 	private DefaultTableModel modeloResultados;
-
-	private JPanel panelGrilla;
 	private JScrollPane scrollResultados;
-
+	
+	private JPanel panelGrilla;
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
 
@@ -201,12 +204,27 @@ public class Pantalla {
 	private void inicializarBotonCargarGrilla() {
 		JButton botonCargar = new JButton("Cargar Grilla");
 		botonCargar.setBounds(290, 142, 200, 40);
-		// botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
+		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
-	
-//	private void cargarGrillaDesdeArchivo() {
-//		
-//	}
-	
+
+	// está maaaal
+	private void cargarGrillaDesdeArchivo() {
+	    try {
+	        grillaActual = JsonGrilla.cargarDesdeJSON("grilla.json");
+	        JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+	        
+	        if (grillaActual != null) {
+	            ejecutarMediciones();
+	        }
+	        
+	        // polémico 
+	    } catch (IOException e) {
+	        JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura", JOptionPane.ERROR_MESSAGE);
+	    } catch (JsonSyntaxException e) {
+	        JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(), "Error de formato", JOptionPane.ERROR_MESSAGE);
+	    } catch (Exception e) {
+	        JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
 }
