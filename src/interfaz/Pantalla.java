@@ -196,6 +196,7 @@ public class Pantalla {
 			}
 		}
 	}
+	// ..
 
 	private void inicializarBotonCargarGrilla() {
 		JButton botonCargar = new JButton("Cargar Grilla");

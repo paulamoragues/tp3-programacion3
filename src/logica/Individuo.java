@@ -11,16 +11,16 @@ public class Individuo implements Comparable<Individuo> {
 	// Representamos a un individuo como una secuencia de movimientos:
 	// 0 = mover hacia abajo
 	// 1 = mover hacia la derecha 
-	private boolean[] _movimientos; // true para '1' (derecha), false para '0' (abajo)
+	private boolean[] movimientos; // true para '1' (derecha), false para '0' (abajo)
 
 	// La grilla asociada
-	private Grilla _grilla;
+	private Grilla grilla;
 
 	// Generador de valores aleatorios
-	private static Generador _random;
+	private static Generador random;
 
 	public static void setGenerador(Generador generador) {
-		_random = generador;
+		random = generador;
 	}
 
 	public static Individuo aleatorio(Grilla grilla) {
@@ -44,64 +44,64 @@ public class Individuo implements Comparable<Individuo> {
 
 		// Convertir la lista barajada de nuevo a un array booleano
 		for (int i = 0; i < totalMovimientos; i++) {
-			ret._movimientos[i] = listaMovimientos.get(i);
+			ret.movimientos[i] = listaMovimientos.get(i);
 		}
 
 		return ret;
 	}
 
 	private Individuo(Grilla grilla) {
-		_grilla = grilla;
+		this.grilla = grilla;
 		int totalMovimientos = grilla.getFilas() - 1 + grilla.getColumnas() - 1;
-		_movimientos = new boolean[totalMovimientos];
+		movimientos = new boolean[totalMovimientos];
 	}
 
 	public void mutar() {
-		if (_movimientos.length == 0) { // Grilla 1x1, no hay movimientos
+		if (movimientos.length == 0) { // Grilla 1x1, no hay movimientos
 			return;
 		}
 
 		// Implementación de mutación por intercambio para asegurar que el camino siga siendo válido
 		// (manteniendo el número de movimientos 'abajo' y 'derecha').
-		if (_movimientos.length >= 2) {
-			int cambio1 = _random.nextInt(_movimientos.length);
-			int cambio2 = _random.nextInt(_movimientos.length);
+		if (movimientos.length >= 2) {
+			int cambio1 = random.nextInt(movimientos.length);
+			int cambio2 = random.nextInt(movimientos.length);
 
 			// Asegurarse de que no sean el mismo índice
 			while (cambio1 == cambio2) {
-				cambio2 = _random.nextInt(_movimientos.length);
+				cambio2 = random.nextInt(movimientos.length);
 			}
 
 			// Intercambiar los movimientos
-			boolean aux = _movimientos[cambio1];
-			_movimientos[cambio1] = _movimientos[cambio2];
-			_movimientos[cambio2] = aux;
-		} else if (_movimientos.length == 1) {
+			boolean aux = movimientos[cambio1];
+			movimientos[cambio1] = movimientos[cambio2];
+			movimientos[cambio2] = aux;
+		} else if (movimientos.length == 1) {
 			// En una grilla de 1x2 o 2x1, solo hay un movimiento. Una mutación simple es una inversión.
-			_movimientos[0] = !_movimientos[0];
+			movimientos[0] = !movimientos[0];
 		}
 	}
 
 	public Individuo[] recombinar(Individuo other) {
-		if (_movimientos.length == 0) { // Grilla 1x1
-			return new Individuo[] {new Individuo(_grilla), new Individuo(_grilla)};
+		if (movimientos.length == 0) { // Grilla 1x1
+			return new Individuo[] {new Individuo(grilla), new Individuo(grilla)};
 		}
 
 		// Se elige un punto de cruce aleatorio
-		int k = _random.nextInt(_movimientos.length);
+		int k = random.nextInt(movimientos.length);
 
-		Individuo hijo1 = new Individuo(_grilla);
-		Individuo hijo2 = new Individuo(_grilla);
+		Individuo hijo1 = new Individuo(grilla);
+		Individuo hijo2 = new Individuo(grilla);
 
 		// Copiar la primera parte de los movimientos
 		for (int i = 0; i < k; i++) {
-			hijo1._movimientos[i] = this._movimientos[i];
-			hijo2._movimientos[i] = other._movimientos[i];
+			hijo1.movimientos[i] = this.movimientos[i];
+			hijo2.movimientos[i] = other.movimientos[i];
 		}
 		// Copiar la segunda parte de los movimientos (intercambiada)
-		for (int i = k; i < _movimientos.length; i++) {
-			hijo1._movimientos[i] = other._movimientos[i];
-			hijo2._movimientos[i] = this._movimientos[i];
+		for (int i = k; i < movimientos.length; i++) {
+			hijo1.movimientos[i] = other.movimientos[i];
+			hijo2.movimientos[i] = this.movimientos[i];
 		}
 
 		// Como se mencionó antes, el cruce de un punto puede generar hijos que no tienen el número correcto
@@ -119,7 +119,7 @@ public class Individuo implements Comparable<Individuo> {
 	public int fitness() {
 		Camino camino = this.generarCamino();
 		// Un camino válido siempre debe tener la longitud correcta para la grilla.
-		int longitudEsperada = _grilla.getFilas() + _grilla.getColumnas() - 1;
+		int longitudEsperada = grilla.getFilas() + grilla.getColumnas() - 1;
 		if (camino.getTamaño() != longitudEsperada) {
 			// Penalización muy alta si el camino no tiene la longitud correcta
 			return Integer.MAX_VALUE / 2;
@@ -138,13 +138,13 @@ public class Individuo implements Comparable<Individuo> {
 		int columnaActual = 0;
 
 		// Asegurarse de que la celda inicial exista y agregarla
-		if (filaActual < _grilla.getFilas() && columnaActual < _grilla.getColumnas()) {
-			camino.agregarCelda(_grilla.getCelda(filaActual, columnaActual));
+		if (filaActual < grilla.getFilas() && columnaActual < grilla.getColumnas()) {
+			camino.agregarCelda(grilla.getCelda(filaActual, columnaActual));
 		} else {
 			return camino;
 		}
 
-		for (boolean movimiento : _movimientos) {
+		for (boolean movimiento : movimientos) {
 			if (movimiento) { // true = '1' = derecha
 				columnaActual++;
 			} else { // false = '0' = abajo
@@ -152,8 +152,8 @@ public class Individuo implements Comparable<Individuo> {
 			}
 
 			// Verificar límites de la grilla antes de agregar la celda
-			if (filaActual < _grilla.getFilas() && columnaActual < _grilla.getColumnas()) {
-				camino.agregarCelda(_grilla.getCelda(filaActual, columnaActual));
+			if (filaActual < grilla.getFilas() && columnaActual < grilla.getColumnas()) {
+				camino.agregarCelda(grilla.getCelda(filaActual, columnaActual));
 			} else {
 				// Si el camino se sale de los límites, detenemos la construcción.
 				// El fitness se encargará de penalizar este individuo por no tener la longitud correcta.

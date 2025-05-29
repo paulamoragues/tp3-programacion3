@@ -37,7 +37,7 @@ public class Camino {
 	}
 	
 	private void verificarRangoValido(int i) {
-		if (i < 0 || i >= celdas.size()) {
+		if (i < 0 || i >= getTamaño()) {
 			throw new IndexOutOfBoundsException("Índice fuera de rango: " + i);
 		}
 	}

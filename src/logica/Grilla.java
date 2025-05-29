@@ -7,8 +7,7 @@ public class Grilla {
 	private int filas;
 	private int columnas;
 
-	public Grilla() {
-	}
+	public Grilla() {}
 
 	public Grilla(int filas, int columnas) {
 		this.filas = filas;
@@ -27,8 +26,8 @@ public class Grilla {
 	}
 
 	public Celda getCelda(int fila, int columna) {
-//		verificarFilaValida();
-//		verificarColumnaValida();
+		verificarFilaValida(fila);
+		verificarColumnaValida(columna);
 		return matriz[fila][columna];
 	}
 
@@ -38,6 +37,18 @@ public class Grilla {
 
 	public int getColumnas() {
 		return columnas;
+	}
+	
+	private void verificarFilaValida(int fila) {
+		if (fila < 0 || fila >= filas) {
+			throw new IndexOutOfBoundsException("Fila fuera de rango: " + fila);
+		}
+	}
+
+	private void verificarColumnaValida(int columna) {
+		if (columna < 0 || columna >= columnas) {
+			throw new IndexOutOfBoundsException("Columna fuera de rango: " + columna);
+		}
 	}
 
 }
