@@ -7,7 +7,7 @@ public class Grilla {
 	private int filas;
 	private int columnas;
 
-	public Grilla() {}
+	
 
 	public Grilla(int filas, int columnas) {
 		this.filas = filas;
@@ -15,6 +15,17 @@ public class Grilla {
 		this.matriz = new Celda[filas][columnas];
 	}
 
+	
+	public void generarGrillaPrefijada(boolean[][] cargas) {
+		for (int fila = 0; fila < filas; fila++) {
+			for (int col = 0; col < columnas; col++) {
+				boolean carga = cargas[fila][col];
+				matriz[fila][col] = new Celda(fila, col, carga);
+			}
+		}
+	}
+	
+	
 	public void generarGrillaAleatoria() {
 		Random rand = new Random();
 		for (int fila = 0; fila < filas; fila++) {
