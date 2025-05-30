@@ -10,7 +10,7 @@ public class Genetico extends Algoritmo {
 	private ArrayList<Individuo> individuos;
 	private Generador random;
 
-	// Parametros de la población
+	// Parámetros de la población
 	private int tamaño = 100;
 	private int mutadosPorIteracion = 10;
 	private int recombinadosPorIteracion = 20;
@@ -22,7 +22,8 @@ public class Genetico extends Algoritmo {
 
 	public Genetico(Grilla grilla, Generador generador) {
 		super(grilla);
-		random = generador;
+		this.random = generador;
+
 		Individuo.setGenerador(random); // Configurar el generador para la clase Individuo
 	}
 
@@ -39,26 +40,14 @@ public class Genetico extends Algoritmo {
 			recombinarAlgunos();
 			eliminarPeores();
 			agregarNuevos();
-			agregarIndividuosValidos(); // Verificar y agregar soluciones encontradas
-			iteracion++;
 
+			agregarCaminosValidos();
+			iteracion++;
 		}
 
 		long tiempoFinal = System.nanoTime();
 		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1_000_000.0;
 		return caminosValidos;
-	}
-
-	private void agregarIndividuosValidos() {
-
-		for (Individuo individuo : individuos) {
-
-			Camino caminoEncontrado = individuo.generarCamino();
-			// Evitar añadir caminos duplicados a la lista final de soluciones
-			if (caminoEncontrado.esCaminoValido(grilla) && !caminosValidos.contains(caminoEncontrado)) {
-				caminosValidos.add(caminoEncontrado);
-			}
-		}
 	}
 
 	private void generarIndividuos() {
@@ -74,7 +63,6 @@ public class Genetico extends Algoritmo {
 
 	private void mutarAlgunos() {
 		for (int j = 0; j < mutadosPorIteracion; j++) {
-			// Asegurarse de que haya individuos en la población para mutar
 			if (!individuos.isEmpty()) {
 				individuoAleatorio().mutar();
 			}
@@ -83,21 +71,25 @@ public class Genetico extends Algoritmo {
 
 	private void recombinarAlgunos() {
 		for (int j = 0; j < recombinadosPorIteracion; j++) {
-			// Necesitamos al menos dos individuos para la recombinación
 			if (individuos.size() >= 2) {
 				Individuo padre1 = individuoAleatorio();
 				Individuo padre2 = individuoAleatorio();
 
-				// Asegurarse de que los padres sean diferentes
+				// Padres diferentes
 				while (padre1 == padre2 && individuos.size() > 1) {
 					padre2 = individuoAleatorio();
 				}
 
 				for (Individuo hijo : padre1.recombinar(padre2)) {
-					individuos.add(hijo); // Añadir los hijos generados a la población
+					individuos.add(hijo);
 				}
 			}
 		}
+	}
+
+	private Individuo individuoAleatorio() {
+		int i = random.nextInt(individuos.size());
+		return individuos.get(i);
 	}
 
 	private void eliminarPeores() {
@@ -114,20 +106,19 @@ public class Genetico extends Algoritmo {
 		}
 	}
 
-	private Individuo individuoAleatorio() {
-		verificarIndividuos();
-		int i = random.nextInt(individuos.size());
-		return individuos.get(i);
+	private void agregarCaminosValidos() {
+		for (Individuo individuo : individuos) {
+			Camino caminoEncontrado = individuo.generarCamino();
+			
+			// Evitar añadir caminos duplicados a la lista final de soluciones
+			if (caminoEncontrado.esCaminoValido(grilla) && !caminosValidos.contains(caminoEncontrado)) {
+				caminosValidos.add(caminoEncontrado);
+			}
+		}
 	}
 
 	public int getIteracion() {
 		return iteracion;
-	}
-
-	private void verificarIndividuos() {
-		if (individuos.isEmpty()) {
-			throw new IllegalStateException("La población está vacía.");
-		}
 	}
 
 }
