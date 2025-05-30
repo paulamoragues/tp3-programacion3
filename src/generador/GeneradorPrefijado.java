@@ -3,7 +3,9 @@ package generador;
 public class GeneradorPrefijado implements Generador {
 	private boolean[] bits;
 	private int indice;
-	private int entero;
+	private int posicionMutar1;
+	private int posicionMutar2;
+	private int posicion;
 
 	public GeneradorPrefijado(String str) {
 		bits = new boolean[str.length()];
@@ -12,8 +14,12 @@ public class GeneradorPrefijado implements Generador {
 		indice = 0;
 	}
 
+	public GeneradorPrefijado(int entero1, int entero2) {
+		this.posicionMutar1 = entero1;
+		this.posicionMutar2 = entero2;
+	}
 	public GeneradorPrefijado(int entero) {
-		this.entero = entero;
+		this.posicion = entero;
 	}
 
 	@Override
@@ -22,8 +28,21 @@ public class GeneradorPrefijado implements Generador {
 	}
 
 	@Override
-	public int nextInt(int rango) {
-		return entero;
+	public int nextIntMutar1(int rango) {
+		return posicionMutar1;
 	}
+	@Override
+	public int nextIntMutar2(int rango) {
+		return posicionMutar2;
+	}
+
+	@Override
+	public int nextInt(int rango) {
+		
+		return posicion;
+	}
+
+
+	
 
 }
