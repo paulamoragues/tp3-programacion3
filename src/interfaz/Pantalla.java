@@ -5,6 +5,8 @@ import javax.swing.table.*;
 
 import com.google.gson.JsonSyntaxException;
 
+import generador.GeneradorAleatorio;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.HashSet;
@@ -124,7 +126,7 @@ public class Pantalla {
 
 		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoBT = new BackTracking(grillaActual);
-		Genetico algoritmoGenetico = new Genetico(grillaActual);
+		Genetico algoritmoGenetico = new Genetico(grillaActual, new GeneradorAleatorio());
 
 		algoritmoFB.buscarCaminos();
 		algoritmoBT.buscarCaminos();
