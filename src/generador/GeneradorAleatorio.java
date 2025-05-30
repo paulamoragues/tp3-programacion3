@@ -14,6 +14,17 @@ public class GeneradorAleatorio implements Generador {
 		return random.nextBoolean();
 	}
 
+
+	@Override
+	public int nextIntMutar1(int rango) {
+		return random.nextInt(rango);
+	}
+
+	@Override
+	public int nextIntMutar2(int rango) {
+		return random.nextInt(rango);
+	}
+
 	@Override
 	public int nextInt(int rango) {
 		return random.nextInt(rango);
