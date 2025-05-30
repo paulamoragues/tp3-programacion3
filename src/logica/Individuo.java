@@ -1,10 +1,5 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random; // Necesario para Collections.shuffle
-
 import generador.Generador;
 
 public class Individuo implements Comparable<Individuo> {
@@ -23,6 +18,9 @@ public class Individuo implements Comparable<Individuo> {
 		random = generador;
 	}
 
+	
+
+
 	public static Individuo aleatorio(Grilla grilla) {
 		Individuo ret = new Individuo(grilla);
 
@@ -30,25 +28,15 @@ public class Individuo implements Comparable<Individuo> {
 		int movimientosDerecha = grilla.getColumnas() - 1;
 		int totalMovimientos = movimientosAbajo + movimientosDerecha;
 
-		// Crear una lista de booleanos con la cantidad correcta de '0' (abajo) y '1' (derecha)
-		List<Boolean> listaMovimientos = new ArrayList<>();
-		for (int i = 0; i < movimientosAbajo; i++) {
-			listaMovimientos.add(false); // '0' para abajo
-		}
-		for (int i = 0; i < movimientosDerecha; i++) {
-			listaMovimientos.add(true); // '1' para derecha
-		}
-
-		// Barajar la lista para obtener una secuencia aleatoria de movimientos válidos
-		Collections.shuffle(listaMovimientos, new Random()); // Usa java.util.Random para el shuffle
-
-		// Convertir la lista barajada de nuevo a un array booleano
 		for (int i = 0; i < totalMovimientos; i++) {
-			ret.movimientos[i] = listaMovimientos.get(i);
+			ret.set(i, random.nextBoolean());
 		}
-
+	
 		return ret;
 	}
+
+
+
 
 	private Individuo(Grilla grilla) {
 		this.grilla = grilla;
@@ -57,37 +45,20 @@ public class Individuo implements Comparable<Individuo> {
 	}
 
 	public void mutar() {
-		if (movimientos.length == 0) { // Grilla 1x1, no hay movimientos
-			return;
-		}
-
-		// Implementación de mutación por intercambio para asegurar que el camino siga siendo válido
-		// (manteniendo el número de movimientos 'abajo' y 'derecha').
-		if (movimientos.length >= 2) {
-			int cambio1 = random.nextInt(movimientos.length);
-			int cambio2 = random.nextInt(movimientos.length);
-
-			// Asegurarse de que no sean el mismo índice
-			while (cambio1 == cambio2) {
-				cambio2 = random.nextInt(movimientos.length);
-			}
-
-			// Intercambiar los movimientos
-			boolean aux = movimientos[cambio1];
-			movimientos[cambio1] = movimientos[cambio2];
-			movimientos[cambio2] = aux;
-		} else if (movimientos.length == 1) {
-			// En una grilla de 1x2 o 2x1, solo hay un movimiento. Una mutación simple es una inversión.
-			movimientos[0] = !movimientos[0];
-		}
+		// El bit que se muta se decide aleatoriamente
+		int k = random.nextIntMutar1(movimientos.length);
+		int j = random.nextIntMutar2(movimientos.length);
+		set(k, !get(k));
+		set(j, !get(j));
 	}
+
 
 	public Individuo[] recombinar(Individuo other) {
 		if (movimientos.length == 0) { // Grilla 1x1
 			return new Individuo[] {new Individuo(grilla), new Individuo(grilla)};
 		}
 
-		// Se elige un punto de cruce aleatorio
+		// Se elige un punto de cruce 
 		int k = random.nextInt(movimientos.length);
 
 		Individuo hijo1 = new Individuo(grilla);
@@ -110,10 +81,6 @@ public class Individuo implements Comparable<Individuo> {
 		return new Individuo[] {hijo1, hijo2};
 	}
 
-	@Override
-	public int compareTo(Individuo other) {
-		return Integer.compare(this.fitness(), other.fitness());
-	}
 
 	// Calcula la aptitud del individuo. Un fitness de 0 es una solución óptima.
 	public int fitness() {
@@ -161,6 +128,19 @@ public class Individuo implements Comparable<Individuo> {
 			}
 		}
 		return camino;
+	}
+
+	public boolean get(int i) {
+		return movimientos[i];
+	}
+	private void set(int i, boolean valor) {
+		movimientos[i] = valor;
+	
+}
+
+	@Override
+	public int compareTo(Individuo other) {
+		return Integer.compare(this.fitness(), other.fitness());
 	}
 	
 }
