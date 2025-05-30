@@ -44,12 +44,24 @@ public class Individuo implements Comparable<Individuo> {
 		movimientos = new boolean[totalMovimientos];
 	}
 
-	public void mutar() {
-		// El bit que se muta se decide aleatoriamente
-		int k = random.nextIntMutar1(movimientos.length);
-		int j = random.nextIntMutar2(movimientos.length);
-		set(k, !get(k));
-		set(j, !get(j));
+		public void mutar() {
+		if (movimientos.length < 2) {
+			if (movimientos.length == 1) { // Si solo hay un movimiento, mutar ese
+				set(0, !get(0));
+			}
+			return; // No hay suficientes bits para una mutación 
+		}
+
+		// El primer bit que se muta se decide aleatoriamente
+		int posicionMutar1 = random.nextIntMutar1(movimientos.length);
+
+		// El segundo bit que se muta se decide aleatoriamente, asegurando que sea diferente de k
+		int posicionMutar2;
+		do {
+			posicionMutar2 = random.nextIntMutar2(movimientos.length);
+		} while (posicionMutar2 == posicionMutar1); // Repetir mientras j sea igual a k
+		set(posicionMutar1, !get(posicionMutar1));
+		set(posicionMutar2, !get(posicionMutar2));
 	}
 
 
