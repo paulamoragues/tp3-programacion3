@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import generador.Generador;
-import generador.GeneradorAleatorio;
 
 public class Genetico extends Algoritmo {
 	private ArrayList<Individuo> individuos;
@@ -16,7 +15,7 @@ public class Genetico extends Algoritmo {
 	private int mutadosPorIteracion = 10;
 	private int recombinadosPorIteracion = 20;
 	private int eliminadosPorIteracion = 60;
-	private int maxIteraciones =1000;
+	private int maxIteraciones = 1000;
 
 	// Estadísticas
 	private int iteracion;
@@ -53,16 +52,14 @@ public class Genetico extends Algoritmo {
 	private void agregarIndividuosValidos() {
 
 		for (Individuo individuo : individuos) {
-			
-				Camino caminoEncontrado = individuo.generarCamino();
-				// Evitar añadir caminos duplicados a la lista final de soluciones
-				if (caminoEncontrado.esCaminoValido(grilla)  && !caminosValidos.contains(caminoEncontrado)) {
-					caminosValidos.add(caminoEncontrado);
-				}
+
+			Camino caminoEncontrado = individuo.generarCamino();
+			// Evitar añadir caminos duplicados a la lista final de soluciones
+			if (caminoEncontrado.esCaminoValido(grilla) && !caminosValidos.contains(caminoEncontrado)) {
+				caminosValidos.add(caminoEncontrado);
 			}
 		}
-		
-	
+	}
 
 	private void generarIndividuos() {
 		individuos = new ArrayList<Individuo>(tamaño);

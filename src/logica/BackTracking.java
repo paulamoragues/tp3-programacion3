@@ -11,7 +11,7 @@ public class BackTracking extends Algoritmo {
 	@Override
 	public List<Camino> buscarCaminos() {
 		long tiempoInicial = System.nanoTime();
-		
+
 		reiniciarValores();
 
 		if ((filas + columnas - 1) % 2 != 0) {

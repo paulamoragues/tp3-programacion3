@@ -23,12 +23,12 @@ public class JsonGrilla {
 //		}
 //		return grilla;
 //	}
-	
-    public static Grilla cargarDesdeJSON(String archivo) throws IOException, JsonSyntaxException {
-        Gson gson = new Gson();
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            return gson.fromJson(br, Grilla.class);
-        }
-    }
+
+	public static Grilla cargarDesdeJSON(String archivo) throws IOException, JsonSyntaxException {
+		Gson gson = new Gson();
+		try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+			return gson.fromJson(br, Grilla.class);
+		}
+	}
 
 }

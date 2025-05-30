@@ -26,20 +26,21 @@ public class Celda {
 	public boolean getCarga() {
 		return carga;
 	}
+
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Celda celda = (Celda) o;
 		// Compara fila, columna Y carga
-		return fila == celda.fila &&
-			   columna == celda.columna &&
-			   carga == celda.carga; 
+		return fila == celda.fila && columna == celda.columna && carga == celda.carga;
 	}
 
 	@Override
 	public int hashCode() {
-	
+
 		return Objects.hash(fila, columna, carga);
 	}
 

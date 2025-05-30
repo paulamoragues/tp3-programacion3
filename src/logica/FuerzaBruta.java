@@ -11,9 +11,9 @@ public class FuerzaBruta extends Algoritmo {
 	@Override
 	public List<Camino> buscarCaminos() {
 		long tiempoInicial = System.nanoTime();
-		
+
 		reiniciarValores();
-		
+
 		Celda inicio = grilla.getCelda(0, 0);
 		caminoActual.agregarCelda(inicio);
 		buscar(0, 0, cargaComoEntero(inicio));

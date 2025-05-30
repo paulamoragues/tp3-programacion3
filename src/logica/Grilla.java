@@ -7,15 +7,12 @@ public class Grilla {
 	private int filas;
 	private int columnas;
 
-	
-
 	public Grilla(int filas, int columnas) {
 		this.filas = filas;
 		this.columnas = columnas;
 		this.matriz = new Celda[filas][columnas];
 	}
 
-	
 	public void generarGrillaPrefijada(boolean[][] cargas) {
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
@@ -24,8 +21,7 @@ public class Grilla {
 			}
 		}
 	}
-	
-	
+
 	public void generarGrillaAleatoria() {
 		Random rand = new Random();
 		for (int fila = 0; fila < filas; fila++) {
@@ -49,7 +45,7 @@ public class Grilla {
 	public int getColumnas() {
 		return columnas;
 	}
-	
+
 	private void verificarFilaValida(int fila) {
 		if (fila < 0 || fila >= filas) {
 			throw new IndexOutOfBoundsException("Fila fuera de rango: " + fila);

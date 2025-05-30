@@ -25,7 +25,7 @@ public class Pantalla {
 	private JTable tablaResultados;
 	private DefaultTableModel modeloResultados;
 	private JScrollPane scrollResultados;
-	
+
 	private JPanel panelGrilla;
 	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
@@ -154,7 +154,7 @@ public class Pantalla {
 
 		llenarPanelConCeldas(filas, columnas);
 		ajustarDimensionPanel(filas, columnas);
-		
+
 		panelGrilla.revalidate();
 		panelGrilla.repaint();
 	}
@@ -212,21 +212,24 @@ public class Pantalla {
 
 	// está maaaal
 	private void cargarGrillaDesdeArchivo() {
-	    try {
-	        grillaActual = JsonGrilla.cargarDesdeJSON("grilla.json");
-	        JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
-	        
-	        if (grillaActual != null) {
-	            ejecutarMediciones();
-	        }
-	        
-	        // polémico 
-	    } catch (IOException e) {
-	        JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura", JOptionPane.ERROR_MESSAGE);
-	    } catch (JsonSyntaxException e) {
-	        JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(), "Error de formato", JOptionPane.ERROR_MESSAGE);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-	    }
+		try {
+			grillaActual = JsonGrilla.cargarDesdeJSON("grilla.json");
+			JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+
+			if (grillaActual != null) {
+				ejecutarMediciones();
+			}
+
+			// polémico
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (JsonSyntaxException e) {
+			JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
+					"Error de formato", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

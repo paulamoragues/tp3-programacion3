@@ -18,6 +18,7 @@ public class GeneradorPrefijado implements Generador {
 		this.posicionMutar1 = entero1;
 		this.posicionMutar2 = entero2;
 	}
+
 	public GeneradorPrefijado(int entero) {
 		this.posicion = entero;
 	}
@@ -31,6 +32,7 @@ public class GeneradorPrefijado implements Generador {
 	public int nextIntMutar1(int rango) {
 		return posicionMutar1;
 	}
+
 	@Override
 	public int nextIntMutar2(int rango) {
 		return posicionMutar2;
@@ -38,11 +40,8 @@ public class GeneradorPrefijado implements Generador {
 
 	@Override
 	public int nextInt(int rango) {
-		
+
 		return posicion;
 	}
-
-
-	
 
 }

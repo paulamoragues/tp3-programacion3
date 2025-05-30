@@ -5,7 +5,7 @@ import generador.Generador;
 public class Individuo implements Comparable<Individuo> {
 	// Representamos a un individuo como una secuencia de movimientos:
 	// 0 = mover hacia abajo
-	// 1 = mover hacia la derecha 
+	// 1 = mover hacia la derecha
 	private boolean[] movimientos; // true para '1' (derecha), false para '0' (abajo)
 
 	// La grilla asociada
@@ -18,9 +18,6 @@ public class Individuo implements Comparable<Individuo> {
 		random = generador;
 	}
 
-	
-
-
 	public static Individuo aleatorio(Grilla grilla) {
 		Individuo ret = new Individuo(grilla);
 
@@ -31,12 +28,9 @@ public class Individuo implements Comparable<Individuo> {
 		for (int i = 0; i < totalMovimientos; i++) {
 			ret.set(i, random.nextBoolean());
 		}
-	
+
 		return ret;
 	}
-
-
-
 
 	private Individuo(Grilla grilla) {
 		this.grilla = grilla;
@@ -44,19 +38,21 @@ public class Individuo implements Comparable<Individuo> {
 		movimientos = new boolean[totalMovimientos];
 	}
 
-		public void mutar() {
+	public void mutar() {
 		if (movimientos.length < 2) {
 			if (movimientos.length == 1) { // Si solo hay un movimiento, mutar ese
 				set(0, !get(0));
 			}
-			return; // No hay suficientes bits para una mutación 
+			return; // No hay suficientes bits para una mutación
 		}
 
 		// El primer bit que se muta se decide aleatoriamente
 		int posicionMutar1 = random.nextIntMutar1(movimientos.length);
 
-		// El segundo bit que se muta se decide aleatoriamente, asegurando que sea diferente de k
-		int posicionMutar2= random.nextIntMutar2(movimientos.length);;
+		// El segundo bit que se muta se decide aleatoriamente, asegurando que sea
+		// diferente de k
+		int posicionMutar2 = random.nextIntMutar2(movimientos.length);
+		;
 		while (posicionMutar2 == posicionMutar1) { // Repetir mientras j sea igual a k
 			posicionMutar2 = random.nextIntMutar2(movimientos.length);
 		}
@@ -64,14 +60,12 @@ public class Individuo implements Comparable<Individuo> {
 		set(posicionMutar2, !get(posicionMutar2));
 	}
 
-
-
 	public Individuo[] recombinar(Individuo other) {
 		if (movimientos.length == 0) { // Grilla 1x1
-			return new Individuo[] {new Individuo(grilla), new Individuo(grilla)};
+			return new Individuo[] { new Individuo(grilla), new Individuo(grilla) };
 		}
 
-		// Se elige un punto de cruce 
+		// Se elige un punto de cruce
 		int k = random.nextInt(movimientos.length);
 
 		Individuo hijo1 = new Individuo(grilla);
@@ -88,12 +82,13 @@ public class Individuo implements Comparable<Individuo> {
 			hijo2.movimientos[i] = this.movimientos[i];
 		}
 
-		// Como se mencionó antes, el cruce de un punto puede generar hijos que no tienen el número correcto
-		// de movimientos 'abajo' y 'derecha'. El fitness se encargará de penalizar esto.
+		// Como se mencionó antes, el cruce de un punto puede generar hijos que no
+		// tienen el número correcto
+		// de movimientos 'abajo' y 'derecha'. El fitness se encargará de penalizar
+		// esto.
 
-		return new Individuo[] {hijo1, hijo2};
+		return new Individuo[] { hijo1, hijo2 };
 	}
-
 
 	// Calcula la aptitud del individuo. Un fitness de 0 es una solución óptima.
 	public int fitness() {
@@ -136,7 +131,8 @@ public class Individuo implements Comparable<Individuo> {
 				camino.agregarCelda(grilla.getCelda(filaActual, columnaActual));
 			} else {
 				// Si el camino se sale de los límites, detenemos la construcción.
-				// El fitness se encargará de penalizar este individuo por no tener la longitud correcta.
+				// El fitness se encargará de penalizar este individuo por no tener la longitud
+				// correcta.
 				break;
 			}
 		}
@@ -146,14 +142,15 @@ public class Individuo implements Comparable<Individuo> {
 	public boolean get(int i) {
 		return movimientos[i];
 	}
+
 	private void set(int i, boolean valor) {
 		movimientos[i] = valor;
-	
-}
+
+	}
 
 	@Override
 	public int compareTo(Individuo other) {
 		return Integer.compare(this.fitness(), other.fitness());
 	}
-	
+
 }

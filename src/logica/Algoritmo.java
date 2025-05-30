@@ -23,7 +23,7 @@ public abstract class Algoritmo {
 		this.llamadas = 0;
 		this.tiempoEjecucion = 0;
 	}
-	
+
 	// Cada subclase define su propio algoritmo de búsqueda
 	public abstract List<Camino> buscarCaminos();
 
@@ -34,15 +34,15 @@ public abstract class Algoritmo {
 	public double getTiempoEjecucion() {
 		return tiempoEjecucion;
 	}
-	
+
 	public int getCantidadCaminos() {
 		return caminosValidos.size();
 	}
-	
+
 	public Camino getCamino(int i) {
 		return caminosValidos.get(i);
 	}
-	
+
 	protected void reiniciarValores() {
 		caminosValidos.clear();
 		llamadas = 0;
@@ -56,5 +56,5 @@ public abstract class Algoritmo {
 	protected boolean llegoAlDestino(int fila, int columna) {
 		return fila == filas - 1 && columna == columnas - 1;
 	}
-	
+
 }

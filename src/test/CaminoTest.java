@@ -14,13 +14,13 @@ public class CaminoTest {
 
 	private Camino camino;
 	private Celda celda1;
-	//private Celda celda2;
+	// private Celda celda2;
 
 	@Before
 	public void setUp() {
 		camino = new Camino();
 		celda1 = new Celda(0, 0, false);
-		//celda2 = new Celda(1, 1, true);
+		// celda2 = new Celda(1, 1, true);
 	}
 
 	@Test
@@ -47,72 +47,72 @@ public class CaminoTest {
 		camino.getCelda(0); // sin agregar nada
 	}
 
-    @Test
-    public void getCeldaIndiceValidoTest() {
-        camino.agregarCelda(celda1);
-        assertEquals(celda1, camino.getCelda(0));
-    }
+	@Test
+	public void getCeldaIndiceValidoTest() {
+		camino.agregarCelda(celda1);
+		assertEquals(celda1, camino.getCelda(0));
+	}
 
-    @Test
-    public void constructorCopiaTest() {
-        camino.agregarCelda(celda1);
+	@Test
+	public void constructorCopiaTest() {
+		camino.agregarCelda(celda1);
 
-        Camino caminoCopia = new Camino(camino);
-        assertEquals(camino.getTamaño(), caminoCopia.getTamaño());
-        assertEquals(camino.getCelda(0), caminoCopia.getCelda(0));
-        
-        assertNotSame(camino.getCeldas(), caminoCopia.getCeldas());
-    }
+		Camino caminoCopia = new Camino(camino);
+		assertEquals(camino.getTamaño(), caminoCopia.getTamaño());
+		assertEquals(camino.getCelda(0), caminoCopia.getCelda(0));
 
-    @Test
-    public void getCeldasDevuelveCopiaTest() {
-        camino.agregarCelda(celda1);
+		assertNotSame(camino.getCeldas(), caminoCopia.getCeldas());
+	}
 
-        List<Celda> listaCeldas = camino.getCeldas();
-        assertEquals(1, listaCeldas.size());
-        listaCeldas.clear();
+	@Test
+	public void getCeldasDevuelveCopiaTest() {
+		camino.agregarCelda(celda1);
 
-        // La lista interna no debería cambiar al modificar la copia
-        assertEquals(1, camino.getTamaño());
-    }
+		List<Celda> listaCeldas = camino.getCeldas();
+		assertEquals(1, listaCeldas.size());
+		listaCeldas.clear();
 
-    @Test
-    public void equalsTest() {
-        Camino camino2 = new Camino();
+		// La lista interna no debería cambiar al modificar la copia
+		assertEquals(1, camino.getTamaño());
+	}
 
-        Celda celda2 = new Celda(0, 1, true);
+	@Test
+	public void equalsTest() {
+		Camino camino2 = new Camino();
 
-        camino.agregarCelda(celda1);
-        camino2.agregarCelda(celda2);
+		Celda celda2 = new Celda(0, 1, true);
 
-        // Misma posición pero cargas distintas, debe ser igual
-        camino2.agregarCelda(new Celda(0, 0, false));
-        camino2.agregarCelda(new Celda(0, 1, true));
+		camino.agregarCelda(celda1);
+		camino2.agregarCelda(celda2);
 
-        assertFalse(camino.equals(camino2));
-    }
+		// Misma posición pero cargas distintas, debe ser igual
+		camino2.agregarCelda(new Celda(0, 0, false));
+		camino2.agregarCelda(new Celda(0, 1, true));
 
-    @Test
-    public void equalsDistintoTamanioTest() {
-        Camino camino2 = new Camino();
+		assertFalse(camino.equals(camino2));
+	}
 
-        camino.agregarCelda(new Celda(0, 0, true));
-        camino2.agregarCelda(new Celda(0, 0, true));
-        camino2.agregarCelda(new Celda(0, 1, false));
+	@Test
+	public void equalsDistintoTamanioTest() {
+		Camino camino2 = new Camino();
 
-        assertFalse(camino.equals(camino2));
-    }
+		camino.agregarCelda(new Celda(0, 0, true));
+		camino2.agregarCelda(new Celda(0, 0, true));
+		camino2.agregarCelda(new Celda(0, 1, false));
 
-    @Test
-    public void equalsDistintaPosicionTest() {
-        Camino camino2 = new Camino();
+		assertFalse(camino.equals(camino2));
+	}
 
-        camino.agregarCelda(new Celda(0, 0, true));
-        camino2.agregarCelda(new Celda(1, 0, true)); // distinta fila
+	@Test
+	public void equalsDistintaPosicionTest() {
+		Camino camino2 = new Camino();
 
-        assertFalse(camino.equals(camino2));
-    }
-	
+		camino.agregarCelda(new Celda(0, 0, true));
+		camino2.agregarCelda(new Celda(1, 0, true)); // distinta fila
+
+		assertFalse(camino.equals(camino2));
+	}
+
 	// Faltan másss
 
 }
