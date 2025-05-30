@@ -16,14 +16,14 @@ public class Genetico extends Algoritmo {
 	private int mutadosPorIteracion = 10;
 	private int recombinadosPorIteracion = 20;
 	private int eliminadosPorIteracion = 60;
-	private int maxIteraciones = 1000;
+	private int maxIteraciones =1000;
 
 	// Estadísticas
 	private int iteracion;
 
-	public Genetico(Grilla grilla) {
+	public Genetico(Grilla grilla, Generador generador) {
 		super(grilla);
-		random = new GeneradorAleatorio();
+		random = generador;
 		Individuo.setGenerador(random); // Configurar el generador para la clase Individuo
 	}
 
@@ -53,17 +53,16 @@ public class Genetico extends Algoritmo {
 	private void agregarIndividuosValidos() {
 
 		for (Individuo individuo : individuos) {
-			// Un fitness de 0 significa que la suma de cargas del camino es 0 Y que tiene
-			// la longitud correcta
-			if (individuo.fitness() == 0) {
+			
 				Camino caminoEncontrado = individuo.generarCamino();
 				// Evitar añadir caminos duplicados a la lista final de soluciones
-				if (!caminosValidos.contains(caminoEncontrado)) {
+				if (caminoEncontrado.esCaminoValido(grilla)  && !caminosValidos.contains(caminoEncontrado)) {
 					caminosValidos.add(caminoEncontrado);
 				}
 			}
 		}
-	}
+		
+	
 
 	private void generarIndividuos() {
 		individuos = new ArrayList<Individuo>(tamaño);
