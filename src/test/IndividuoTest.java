@@ -14,7 +14,7 @@ import logica.Individuo;
 
 public class IndividuoTest {
 
-	private Grilla _grilla;
+	private Grilla grilla;
 	private boolean[][] cargas;
 
 	@Before
@@ -26,21 +26,21 @@ public class IndividuoTest {
 	public void generarCaminoCorrectoTest() {
 		Individuo individuo = crearIndividuo("11100");
 		Camino camino = individuo.generarCamino();
-		assertTrue(camino.esCaminoValido(_grilla));
+		assertTrue(camino.esCaminoValido(grilla));
 	}
 
 	@Test
 	public void generarCaminoConSumaIncorrectaTest() {
 		Individuo individuo = crearIndividuo("10110");
 		Camino camino = individuo.generarCamino();
-		assertFalse(camino.esCaminoValido(_grilla));
+		assertFalse(camino.esCaminoValido(grilla));
 	}
 
 	@Test
 	public void generarCaminoDestinoIncorrectoTest() {
 		Individuo individuo = crearIndividuo("10111");
 		Camino camino = individuo.generarCamino();
-		assertFalse(camino.esCaminoValido(_grilla));
+		assertFalse(camino.esCaminoValido(grilla));
 	}
 
 	@Test
@@ -118,7 +118,7 @@ public class IndividuoTest {
 
 	private Individuo crearIndividuo(String str) {
 		Individuo.setGenerador(new GeneradorPrefijado(str));
-		Individuo individuo = Individuo.aleatorio(_grilla);
+		Individuo individuo = Individuo.aleatorio(grilla);
 		return individuo;
 	}
 
@@ -138,7 +138,7 @@ public class IndividuoTest {
 	}
 
 	public void generarGrilla() {
-		_grilla = new Grilla(3, 4);
+		grilla = new Grilla(3, 4);
 		cargas = new boolean[3][4];
 		cargas[0][0] = true;
 		cargas[0][1] = true;
@@ -152,7 +152,7 @@ public class IndividuoTest {
 		cargas[2][1] = true;
 		cargas[2][2] = true;
 		cargas[2][3] = false;
-		_grilla.generarGrillaPrefijada(cargas);
+		grilla.generarGrillaPrefijada(cargas);
 	}
 
 }

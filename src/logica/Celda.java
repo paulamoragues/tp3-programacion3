@@ -34,13 +34,12 @@ public class Celda {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Celda celda = (Celda) o;
-		// Compara fila, columna Y carga
+		// Compara fila, columna y carga
 		return fila == celda.fila && columna == celda.columna && carga == celda.carga;
 	}
 
 	@Override
 	public int hashCode() {
-
 		return Objects.hash(fila, columna, carga);
 	}
 

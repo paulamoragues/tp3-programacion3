@@ -14,6 +14,8 @@ public class Grilla {
 	}
 
 	public void generarGrillaPrefijada(boolean[][] cargas) {
+		//  verificar que cargas es rectangular y tiene misma cant de fil y col
+		//
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
 				boolean carga = cargas[fila][col];

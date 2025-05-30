@@ -3,6 +3,7 @@ package generador;
 public class GeneradorPrefijado implements Generador {
 	private boolean[] bits;
 	private int indice;
+	
 	private int posicionMutar1;
 	private int posicionMutar2;
 	private int posicion;
@@ -39,8 +40,7 @@ public class GeneradorPrefijado implements Generador {
 	}
 
 	@Override
-	public int nextInt(int rango) {
-
+	public int nextIntPosicion(int rango) {
 		return posicion;
 	}
 

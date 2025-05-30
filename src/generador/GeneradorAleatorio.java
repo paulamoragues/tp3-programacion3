@@ -25,7 +25,7 @@ public class GeneradorAleatorio implements Generador {
 	}
 
 	@Override
-	public int nextInt(int rango) {
+	public int nextIntPosicion(int rango) {
 		return random.nextInt(rango);
 	}
 

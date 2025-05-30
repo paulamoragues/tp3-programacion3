@@ -3,7 +3,7 @@ package generador;
 public interface Generador {
 	boolean nextBoolean();
 
-	int nextInt(int rango);
+	int nextIntPosicion(int rango);
 
 	int nextIntMutar1(int rango);
 

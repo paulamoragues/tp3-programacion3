@@ -88,7 +88,7 @@ public class Genetico extends Algoritmo {
 	}
 
 	private Individuo individuoAleatorio() {
-		int i = random.nextInt(individuos.size());
+		int i = random.nextIntPosicion(individuos.size());
 		return individuos.get(i);
 	}
 
