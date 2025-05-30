@@ -56,13 +56,14 @@ public class Individuo implements Comparable<Individuo> {
 		int posicionMutar1 = random.nextIntMutar1(movimientos.length);
 
 		// El segundo bit que se muta se decide aleatoriamente, asegurando que sea diferente de k
-		int posicionMutar2;
-		do {
+		int posicionMutar2= random.nextIntMutar2(movimientos.length);;
+		while (posicionMutar2 == posicionMutar1) { // Repetir mientras j sea igual a k
 			posicionMutar2 = random.nextIntMutar2(movimientos.length);
-		} while (posicionMutar2 == posicionMutar1); // Repetir mientras j sea igual a k
+		}
 		set(posicionMutar1, !get(posicionMutar1));
 		set(posicionMutar2, !get(posicionMutar2));
 	}
+
 
 
 	public Individuo[] recombinar(Individuo other) {
