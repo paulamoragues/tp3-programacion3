@@ -23,8 +23,8 @@ public class Celda {
 		return columna;
 	}
 
-	public boolean getCarga() {
-		return carga;
+	public int getCargaEntero() {
+	    return carga ? 1 : -1;
 	}
 
 	@Override
@@ -34,7 +34,6 @@ public class Celda {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Celda celda = (Celda) o;
-		// Compara fila, columna y carga
 		return fila == celda.fila && columna == celda.columna && carga == celda.carga;
 	}
 

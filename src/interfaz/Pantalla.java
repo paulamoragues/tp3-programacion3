@@ -5,6 +5,7 @@ import javax.swing.table.*;
 
 import com.google.gson.JsonSyntaxException;
 
+import algoritmo.Algoritmo;
 import generador.GeneradorAleatorio;
 
 import java.awt.*;
@@ -178,14 +179,14 @@ public class Pantalla {
 		}
 		panel.setBackground(colorFondo);
 
-		String textoCarga = celda.getCarga() ? "1" : "-1";
+		String textoCarga = celda.getCargaEntero() + "" ;
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
 
 		panel.add(labelCarga, BorderLayout.CENTER);
 		return panel;
 	}
-
+	
 	private void ajustarDimensionPanel(int filas, int columnas) {
 		int alturaCelda = 40;
 		int anchoCelda = 40;

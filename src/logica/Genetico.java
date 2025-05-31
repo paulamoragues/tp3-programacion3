@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import algoritmo.Algoritmo;
 import generador.Generador;
 
 public class Genetico extends Algoritmo {
@@ -24,7 +25,8 @@ public class Genetico extends Algoritmo {
 		super(grilla);
 		this.random = generador;
 
-		Individuo.setGenerador(random); // Configurar el generador para la clase Individuo
+		// Configurar el generador para la clase Individuo
+		Individuo.setGenerador(random); 
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class Genetico extends Algoritmo {
 	private void generarIndividuos() {
 		individuos = new ArrayList<Individuo>(tamaño);
 		for (int i = 0; i < tamaño; i++) {
-			individuos.add(Individuo.aleatorio(grilla)); // Crea individuos aleatorios para la población inicial
+			individuos.add(Individuo.aleatorio(grilla)); 
 		}
 	}
 
@@ -93,7 +95,8 @@ public class Genetico extends Algoritmo {
 	}
 
 	private void eliminarPeores() {
-		Collections.sort(individuos); // Los mejores primero
+		// Los mejores primero
+		Collections.sort(individuos);
 
 		for (int i = 0; i < eliminadosPorIteracion; i++) {
 			individuos.remove(individuos.size() - 1);
@@ -110,7 +113,7 @@ public class Genetico extends Algoritmo {
 		for (Individuo individuo : individuos) {
 			Camino caminoEncontrado = individuo.generarCamino();
 			
-			// Evitar añadir caminos duplicados a la lista final de soluciones
+			// Evitar añadir caminos duplicados a la lista de soluciones
 			if (caminoEncontrado.esCaminoValido(grilla) && !caminosValidos.contains(caminoEncontrado)) {
 				caminosValidos.add(caminoEncontrado);
 			}

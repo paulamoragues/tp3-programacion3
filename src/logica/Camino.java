@@ -32,7 +32,7 @@ public class Camino {
 	public int calcularSumaCargas() {
 		int suma = 0;
 		for (Celda celda : celdas) {
-			suma += (celda.getCarga() ? 1 : -1);
+			suma += (celda.getCargaEntero());
 		}
 		return suma;
 	}
@@ -86,7 +86,7 @@ public class Camino {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(celdas); // Genera el hashcode basado en la lista de celdas
+		return Objects.hash(celdas); 
 	}
 
 }

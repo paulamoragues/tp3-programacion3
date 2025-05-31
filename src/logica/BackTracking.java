@@ -2,7 +2,9 @@ package logica;
 
 import java.util.List;
 
-public class BackTracking extends Algoritmo {
+import algoritmo.AlgoritmoRecursivo;
+
+public class BackTracking extends AlgoritmoRecursivo {
 
 	public BackTracking(Grilla grilla) {
 		super(grilla);
@@ -20,7 +22,7 @@ public class BackTracking extends Algoritmo {
 
 		Celda inicio = grilla.getCelda(0, 0);
 		caminoActual.agregarCelda(inicio);
-		buscar(0, 0, cargaComoEntero(inicio));
+		buscar(0, 0, inicio.getCargaEntero());
 
 		long tiempoFinal = System.nanoTime();
 		tiempoEjecucion = (tiempoFinal - tiempoInicial) / 1_000_000.0; // En milisegundos
@@ -46,7 +48,7 @@ public class BackTracking extends Algoritmo {
 			Celda abajo = grilla.getCelda(fila + 1, columna);
 
 			caminoActual.agregarCelda(abajo);
-			buscar(fila + 1, columna, suma + cargaComoEntero(abajo));
+			buscar(fila + 1, columna, suma + abajo.getCargaEntero());
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
 
@@ -55,7 +57,7 @@ public class BackTracking extends Algoritmo {
 			Celda derecha = grilla.getCelda(fila, columna + 1);
 
 			caminoActual.agregarCelda(derecha);
-			buscar(fila, columna + 1, suma + cargaComoEntero(derecha));
+			buscar(fila, columna + 1, suma + derecha.getCargaEntero());
 			caminoActual.eliminarCelda(caminoActual.getTamaño() - 1);
 		}
 	}
