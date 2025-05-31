@@ -14,8 +14,7 @@ public class Grilla {
 	}
 
 	public void generarGrillaPrefijada(boolean[][] cargas) {
-		//  verificar que cargas es rectangular y tiene misma cant de fil y col
-		//
+		verificarCargasValida(cargas);
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
 				boolean carga = cargas[fila][col];
@@ -57,6 +56,17 @@ public class Grilla {
 	private void verificarColumnaValida(int columna) {
 		if (columna < 0 || columna >= columnas) {
 			throw new IndexOutOfBoundsException("Columna fuera de rango: " + columna);
+		}
+	}
+
+	private void verificarCargasValida(boolean[][] cargas) {
+		if (cargas.length != filas) {
+			throw new IllegalArgumentException("Cantidad de filas no coincide.");
+		}
+		for (int i = 0; i < filas; i++) {
+			if (cargas[i].length != columnas) {
+				throw new IllegalArgumentException("La fila " + i + " no tiene la cantidad de columnas esperadas.");
+			}
 		}
 	}
 
