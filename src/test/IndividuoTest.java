@@ -55,7 +55,7 @@ public class IndividuoTest {
 	}
 
 	@Test
-	public void fitnessSumaExcedPorDosTest() {
+	public void fitnessSumaExcedidaPorDosTest() {
 		Individuo individuo = crearIndividuo("10011");
 		assertEquals(2, individuo.fitness());
 	}

@@ -11,7 +11,7 @@ public abstract class Algoritmo {
 	protected Grilla grilla;
 	protected int filas;
 	protected int columnas;
-	
+
 	// Estadísticas
 	protected double tiempoEjecucion;
 
@@ -29,10 +29,13 @@ public abstract class Algoritmo {
 	public double getTiempoEjecucion() {
 		return tiempoEjecucion;
 	}
-	
+
 	public int getCantidadCaminos() {
 		return caminosValidos.size();
 	}
+
+	// Obtener un camino para dibujar por pantalla desde acá, en vez de
+	// por interfaz
 
 	public Camino getCamino(int i) {
 		return caminosValidos.get(i);

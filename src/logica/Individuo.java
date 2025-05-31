@@ -7,6 +7,7 @@ public class Individuo implements Comparable<Individuo> {
 	// Representamos a un individuo como una secuencia de movimientos:
 	// false = mover hacia abajo
 	// true = mover hacia la derecha
+
 	private boolean[] movimientos;
 
 	private Grilla grilla;
@@ -54,8 +55,9 @@ public class Individuo implements Comparable<Individuo> {
 		set(posicionMutar2, !get(posicionMutar2));
 	}
 
-	public Individuo[] recombinar(Individuo other) {
-		if (movimientos.length == 0) { // Grilla 1x1
+	public Individuo[] recombinar(Individuo otro) {
+		// Grilla 1x1
+		if (movimientos.length == 0) {
 			return new Individuo[] { new Individuo(grilla), new Individuo(grilla) };
 		}
 
@@ -66,10 +68,10 @@ public class Individuo implements Comparable<Individuo> {
 
 		for (int i = 0; i < k; i++) {
 			hijo1.set(i, this.get(i));
-			hijo2.set(i, other.get(i));
+			hijo2.set(i, otro.get(i));
 		}
 		for (int i = k; i < movimientos.length; i++) {
-			hijo1.set(i, other.get(i));
+			hijo1.set(i, otro.get(i));
 			hijo2.set(i, this.get(i));
 		}
 
@@ -84,13 +86,11 @@ public class Individuo implements Comparable<Individuo> {
 	// Un fitness de 0 es una solución óptima
 	public int fitness() {
 		Camino camino = this.generarCamino();
-		// Un camino válido siempre debe tener la longitud correcta para la grilla.
 		int longitudEsperada = grilla.getFilas() + grilla.getColumnas() - 1;
 		if (camino.getTamaño() != longitudEsperada) {
 			// Penalización muy alta si el camino no tiene la longitud correcta
 			return Integer.MAX_VALUE / 2;
 		}
-		
 		int suma = camino.calcularSumaCargas();
 		return Math.abs(suma);
 	}
