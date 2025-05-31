@@ -46,7 +46,6 @@ public class FuerzaBrutaTest {
 		fb.buscarCaminos();
 		
 		assertEquals(fb.getCantidadLlamadas(), 34);
-		// Son exactamente 34 llamadas para la instancia prefijada
 	}
 	
 	@Test

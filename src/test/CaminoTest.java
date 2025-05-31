@@ -113,6 +113,6 @@ public class CaminoTest {
 		assertFalse(camino.equals(camino2));
 	}
 
-	// Faltan másss
+	// Faltan más
 
 }

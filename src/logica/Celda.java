@@ -24,7 +24,7 @@ public class Celda {
 	}
 
 	public int getCargaEntero() {
-	    return carga ? 1 : -1;
+		return carga ? 1 : -1;
 	}
 
 	@Override
