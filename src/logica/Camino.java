@@ -7,12 +7,14 @@ import java.util.Objects;
 public class Camino {
 	private List<Celda> celdas;
 
+	// Constructores
 	public Camino() {
 		celdas = new ArrayList<>();
 	}
 
 	public Camino(Camino otro) {
-		celdas = new ArrayList<>(otro.celdas); // Copia superficial
+		// Copia superficial
+		celdas = new ArrayList<>(otro.celdas); 
 	}
 
 	public void agregarCelda(Celda celda) {
@@ -32,14 +34,14 @@ public class Camino {
 		return suma;
 	}
 
-	public boolean esCaminoValido(Grilla grilla) {
+	public boolean esCaminoValido(int filas, int columnas) {
 		if (celdas.isEmpty()) {
 			return false;
 		}
 		Celda ultimaCelda = celdas.get(getTamaño() - 1);
 
-		boolean llegoAlDestino = (ultimaCelda.getFila() == grilla.getFilas() - 1)
-				&& (ultimaCelda.getColumna() == grilla.getColumnas() - 1);
+		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1)
+				&& (ultimaCelda.getColumna() == columnas - 1);
 		boolean sumaCorrecta = (calcularSumaCargas() == 0);
 
 		return llegoAlDestino && sumaCorrecta;

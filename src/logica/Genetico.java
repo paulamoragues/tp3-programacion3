@@ -114,7 +114,7 @@ public class Genetico extends Algoritmo {
 			Camino caminoEncontrado = individuo.generarCamino();
 			
 			// Evitar añadir caminos duplicados a la lista de soluciones
-			if (caminoEncontrado.esCaminoValido(grilla) && !caminosValidos.contains(caminoEncontrado)) {
+			if (caminoEncontrado.esCaminoValido(filas, columnas) && !caminosValidos.contains(caminoEncontrado)) {
 				caminosValidos.add(caminoEncontrado);
 			}
 		}

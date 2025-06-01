@@ -25,21 +25,21 @@ public class IndividuoTest {
 	public void generarCaminoCorrectoTest() {
 		Individuo individuo = crearIndividuo("11100");
 		Camino camino = individuo.generarCamino();
-		assertTrue(camino.esCaminoValido(grilla));
+		assertTrue(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test
 	public void generarCaminoConSumaIncorrectaTest() {
 		Individuo individuo = crearIndividuo("10110");
 		Camino camino = individuo.generarCamino();
-		assertFalse(camino.esCaminoValido(grilla));
+		assertFalse(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test
 	public void generarCaminoDestinoIncorrectoTest() {
 		Individuo individuo = crearIndividuo("10111");
 		Camino camino = individuo.generarCamino();
-		assertFalse(camino.esCaminoValido(grilla));
+		assertFalse(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test
@@ -138,11 +138,8 @@ public class IndividuoTest {
 
 	private void generarGrilla() {
 		grilla = new Grilla(3, 4);
-		boolean[][] cargas = { 
-				{ true, true, true, false }, 
-				{ false, false, false, false },
-				{ true, true, true, false } 
-		};
+		boolean[][] cargas = { { true, true, true, false }, { false, false, false, false },
+				{ true, true, true, false } };
 		grilla.generarGrillaPrefijada(cargas);
 	}
 
