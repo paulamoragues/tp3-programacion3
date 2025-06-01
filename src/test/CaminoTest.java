@@ -2,8 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,28 +51,6 @@ public class CaminoTest {
 		assertEquals(celda1, camino.getCelda(0));
 	}
 
-	@Test
-	public void constructorCopiaTest() {
-		camino.agregarCelda(celda1);
-
-		Camino caminoCopia = new Camino(camino);
-		assertEquals(camino.getTamaño(), caminoCopia.getTamaño());
-		assertEquals(camino.getCelda(0), caminoCopia.getCelda(0));
-
-		assertNotSame(camino.getCeldas(), caminoCopia.getCeldas());
-	}
-
-	@Test
-	public void getCeldasDevuelveCopiaTest() {
-		camino.agregarCelda(celda1);
-
-		List<Celda> listaCeldas = camino.getCeldas();
-		assertEquals(1, listaCeldas.size());
-		listaCeldas.clear();
-
-		// La lista interna no debería cambiar al modificar la copia
-		assertEquals(1, camino.getTamaño());
-	}
 
 	@Test
 	public void equalsTest() {

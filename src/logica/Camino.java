@@ -24,11 +24,6 @@ public class Camino {
 		celdas.remove(i);
 	}
 
-	public Celda getCelda(int i) {
-		verificarRangoValido(i);
-		return celdas.get(i);
-	}
-	
 	public int calcularSumaCargas() {
 		int suma = 0;
 		for (Celda celda : celdas) {
@@ -36,7 +31,7 @@ public class Camino {
 		}
 		return suma;
 	}
-	
+
 	public boolean esCaminoValido(Grilla grilla) {
 		if (celdas.isEmpty()) {
 			return false;
@@ -50,12 +45,13 @@ public class Camino {
 		return llegoAlDestino && sumaCorrecta;
 	}
 
-	public int getTamaño() {
-		return celdas.size();
+	public Celda getCelda(int i) {
+		verificarRangoValido(i);
+		return celdas.get(i);
 	}
 
-	public List<Celda> getCeldas() {
-		return new ArrayList<>(celdas); // Copia superficial
+	public int getTamaño() {
+		return celdas.size();
 	}
 
 	private void verificarRangoValido(int i) {
@@ -86,7 +82,7 @@ public class Camino {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(celdas); 
+		return Objects.hash(celdas);
 	}
 
 }

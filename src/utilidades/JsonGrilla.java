@@ -3,6 +3,7 @@ package utilidades;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -10,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 import logica.Grilla;
 
 public class JsonGrilla {
+	List<Grilla> grillas;
 
 //	public static Grilla cargarDesdeJSON(String archivo) {
 //		Gson gson = new Gson();

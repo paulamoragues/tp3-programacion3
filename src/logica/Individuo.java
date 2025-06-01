@@ -43,7 +43,6 @@ public class Individuo implements Comparable<Individuo> {
 			}
 			return;
 		}
-
 		int posicionMutar1 = random.nextIntMutar1(movimientos.length);
 		int posicionMutar2 = random.nextIntMutar2(movimientos.length);
 

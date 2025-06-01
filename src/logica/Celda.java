@@ -7,8 +7,6 @@ public class Celda {
 	private int columna;
 	private boolean carga;
 
-	public Celda() {}
-
 	public Celda(int fila, int columna, boolean carga) {
 		this.fila = fila;
 		this.columna = columna;
