@@ -13,7 +13,6 @@ public class Camino {
 	}
 
 	public Camino(Camino otro) {
-		// Copia superficial
 		celdas = new ArrayList<>(otro.celdas); 
 	}
 

@@ -123,8 +123,6 @@ public class Pantalla {
 		modeloResultados.setRowCount(0);
 		celdasCamino = new HashSet<>();
 
-		// grilla tiene que ser != null
-
 		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoBT = new BackTracking(grillaActual);
 		Genetico algoritmoGenetico = new Genetico(grillaActual, new GeneradorAleatorio());
