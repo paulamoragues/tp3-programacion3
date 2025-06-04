@@ -33,20 +33,19 @@ public class Grilla {
 		}
 	}
 
-	//Lector de archivos
+	// Archivo
 	public void cargarDesdeEnteros(int[][] datos) {
-	if (datos.length != filas || datos[0].length != columnas) {
-		throw new IllegalArgumentException("Dimensiones no coinciden con la grilla.");
-	}
+		if (datos.length != filas || datos[0].length != columnas) {
+			throw new IllegalArgumentException("Dimensiones no coinciden con la grilla.");
+		}
 
-	for (int i = 0; i < filas; i++) {
-		for (int j = 0; j < columnas; j++) {
-			boolean carga = (datos[i][j] == 1);
-			matriz[i][j] = new Celda(i, j, carga);
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
+				boolean carga = (datos[i][j] == 1);
+				matriz[i][j] = new Celda(i, j, carga);
+			}
 		}
 	}
-}
-
 
 	public Celda getCelda(int fila, int columna) {
 		verificarFilaValida(fila);

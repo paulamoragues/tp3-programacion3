@@ -9,7 +9,8 @@ import logica.Grilla;
 
 public class GrillaServicio {
 
-    public static List<JsonGrilla.GrillaConDescripcion> cargarTodasLasGrillas(String ruta) throws IOException, JsonSyntaxException {
+    public static List<JsonGrilla.GrillaConDescripcion> cargarTodasLasGrillas(String ruta)
+            throws IOException, JsonSyntaxException {
         return JsonGrilla.cargarTodas(ruta);
     }
 

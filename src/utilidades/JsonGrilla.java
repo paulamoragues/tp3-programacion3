@@ -32,7 +32,8 @@ public class JsonGrilla {
         Gson gson = new Gson();
         Reader reader = new FileReader(ruta);
 
-        Type tipoLista = new TypeToken<List<GrillaConDescripcion>>() {}.getType();
+        Type tipoLista = new TypeToken<List<GrillaConDescripcion>>() {
+        }.getType();
         List<GrillaConDescripcion> grillas = gson.fromJson(reader, tipoLista);
 
         reader.close();

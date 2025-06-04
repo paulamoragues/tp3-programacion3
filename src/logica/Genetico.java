@@ -26,7 +26,7 @@ public class Genetico extends Algoritmo {
 		this.random = generador;
 
 		// Configurar el generador para la clase Individuo
-		Individuo.setGenerador(random); 
+		Individuo.setGenerador(random);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Genetico extends Algoritmo {
 	private void generarIndividuos() {
 		individuos = new ArrayList<Individuo>(tamaño);
 		for (int i = 0; i < tamaño; i++) {
-			individuos.add(Individuo.aleatorio(grilla)); 
+			individuos.add(Individuo.aleatorio(grilla));
 		}
 	}
 
@@ -112,7 +112,7 @@ public class Genetico extends Algoritmo {
 	private void agregarCaminosValidos() {
 		for (Individuo individuo : individuos) {
 			Camino caminoEncontrado = individuo.generarCamino();
-			
+
 			// Evitar añadir caminos duplicados a la lista de soluciones
 			if (caminoEncontrado.esCaminoValido(filas, columnas) && !caminosValidos.contains(caminoEncontrado)) {
 				caminosValidos.add(caminoEncontrado);

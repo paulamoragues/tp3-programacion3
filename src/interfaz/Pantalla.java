@@ -181,14 +181,14 @@ public class Pantalla {
 		}
 		panel.setBackground(colorFondo);
 
-		String textoCarga = celda.getCargaEntero() + "" ;
+		String textoCarga = celda.getCargaEntero() + "";
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
 
 		panel.add(labelCarga, BorderLayout.CENTER);
 		return panel;
 	}
-	
+
 	private void ajustarDimensionPanel(int filas, int columnas) {
 		int alturaCelda = 40;
 		int anchoCelda = 40;
@@ -213,50 +213,48 @@ public class Pantalla {
 		ventana.getContentPane().add(botonCargar);
 	}
 
-	//Paula revisa 🙏
+	// Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
-    try {
-        List<JsonGrilla.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
+		try {
+			List<JsonGrilla.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
 
-        if (grillas == null || grillas.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay grillas disponibles en el archivo.");
-            return;
-        }
+			if (grillas == null || grillas.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "No hay grillas disponibles en el archivo.");
+				return;
+			}
 
-        String[] opciones = new String[grillas.size()];
-        for (int i = 0; i < grillas.size(); i++) {
-            opciones[i] = (i + 1) + " - " + grillas.get(i).descripcion;
-        }
+			String[] opciones = new String[grillas.size()];
+			for (int i = 0; i < grillas.size(); i++) {
+				opciones[i] = (i + 1) + " - " + grillas.get(i).descripcion;
+			}
 
-        String seleccion = (String) JOptionPane.showInputDialog(
-            null,
-            "Seleccioná una grilla para cargar:",
-            "Seleccionar Grilla",
-            JOptionPane.PLAIN_MESSAGE,
-            null,
-            opciones,
-            opciones[0]
-        );
+			String seleccion = (String) JOptionPane.showInputDialog(
+					null,
+					"Seleccioná una grilla para cargar:",
+					"Seleccionar Grilla",
+					JOptionPane.PLAIN_MESSAGE,
+					null,
+					opciones,
+					opciones[0]);
 
-        if (seleccion != null) {
-            int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
-            grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
+			if (seleccion != null) {
+				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
+				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
 
-            ejecutarMediciones();
-            JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
-        }
+				ejecutarMediciones();
+				JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+			}
 
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
-                JOptionPane.ERROR_MESSAGE);
-    } catch (JsonSyntaxException e) {
-        JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
-                "Error de formato", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
-                JOptionPane.ERROR_MESSAGE);
-    }
-}
-
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (JsonSyntaxException e) {
+			JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
+					"Error de formato", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 }
