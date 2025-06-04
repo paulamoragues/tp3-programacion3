@@ -10,6 +10,7 @@ import logica.Grilla;
 
 public class GrillaTest {
 
+	// modificar con uso de generador prefijado
 	private Grilla grilla;
 
 	@Before

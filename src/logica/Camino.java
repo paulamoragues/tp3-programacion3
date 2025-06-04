@@ -25,7 +25,7 @@ public class Camino {
 		celdas.remove(i);
 	}
 
-	public int calcularSumaCargas() {
+	public int calcularSumaCeldas() {
 		int suma = 0;
 		for (Celda celda : celdas) {
 			suma += (celda.getCargaEntero());
@@ -33,7 +33,7 @@ public class Camino {
 		return suma;
 	}
 
-	public boolean esCaminoValido(int filas, int columnas) {
+	public boolean esValido(int filas, int columnas) {
 		if (celdas.isEmpty()) {
 			return false;
 		}
@@ -41,7 +41,7 @@ public class Camino {
 
 		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1)
 				&& (ultimaCelda.getColumna() == columnas - 1);
-		boolean sumaCorrecta = (calcularSumaCargas() == 0);
+		boolean sumaCorrecta = (calcularSumaCeldas() == 0);
 
 		return llegoAlDestino && sumaCorrecta;
 	}

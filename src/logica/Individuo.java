@@ -90,7 +90,7 @@ public class Individuo implements Comparable<Individuo> {
 			// Penalización muy alta si el camino no tiene la longitud correcta
 			return Integer.MAX_VALUE / 2;
 		}
-		int suma = camino.calcularSumaCargas();
+		int suma = camino.calcularSumaCeldas();
 		return Math.abs(suma);
 	}
 

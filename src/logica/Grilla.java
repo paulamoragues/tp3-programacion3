@@ -23,6 +23,7 @@ public class Grilla {
 		}
 	}
 
+	// tiene que usar el generador 
 	public void generarGrillaAleatoria() {
 		Random rand = new Random();
 		for (int fila = 0; fila < filas; fila++) {
@@ -32,8 +33,8 @@ public class Grilla {
 			}
 		}
 	}
-	
-	// Esto está mal
+
+	// esto está mal
 	public void cargarDesdeEnteros(int[][] datos) {
 		if (datos.length != filas || datos[0].length != columnas) {
 			throw new IllegalArgumentException("Dimensiones no coinciden con la grilla.");
@@ -45,6 +46,12 @@ public class Grilla {
 				matriz[i][j] = new Celda(i, j, carga);
 			}
 		}
+	}
+
+	public int getCargaCelda(int fila, int columna) {
+		verificarFilaValida(fila);
+		verificarColumnaValida(columna);
+		return matriz[fila][columna].getCargaEntero();
 	}
 
 	public Celda getCelda(int fila, int columna) {
@@ -74,13 +81,12 @@ public class Grilla {
 	}
 
 	private void verificarCargasValida(boolean[][] cargas) {
-		if (cargas.length != filas) {
+		if (cargas.length != filas) 
 			throw new IllegalArgumentException("Cantidad de filas no coincide.");
-		}
+		
 		for (int i = 0; i < filas; i++) {
-			if (cargas[i].length != columnas) {
+			if (cargas[i].length != columnas) 
 				throw new IllegalArgumentException("La fila " + i + " no tiene la cantidad de columnas esperadas.");
-			}
 		}
 	}
 

@@ -57,6 +57,6 @@ public class BackTrackingTest {
 		assertNotEquals(bt.getCantidadLlamadas(), 27);
 	}
 	
-	// Faltan más
+	// testear caminos encontrados
 
 }

@@ -57,6 +57,6 @@ public class FuerzaBrutaTest {
 		assertNotEquals(fb.getCantidadLlamadas(), 33);
 	}
 	
-	// Faltan más
+	// testear caminos encontrados
 
 }

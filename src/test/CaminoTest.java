@@ -41,7 +41,7 @@ public class CaminoTest {
 	public void calcularSumaCargasTest() {
 		camino.agregarCelda(new Celda(0, 0, true)); // +1
 		camino.agregarCelda(new Celda(0, 1, false)); // -1
-		assertEquals(0, camino.calcularSumaCargas());
+		assertEquals(0, camino.calcularSumaCeldas());
 	}
 
 	// ???
@@ -54,7 +54,7 @@ public class CaminoTest {
 		camino.agregarCelda(grilla.getCelda(2, 0));
 		camino.agregarCelda(grilla.getCelda(2, 1));
 
-		assertTrue(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
+		assertTrue(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class CaminoTest {
 		camino.agregarCelda(grilla.getCelda(1, 1));
 		camino.agregarCelda(grilla.getCelda(2, 1));
 
-		assertFalse(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
+		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class CaminoTest {
 		camino.agregarCelda(grilla.getCelda(1, 0));
 		camino.agregarCelda(grilla.getCelda(0, 0));
 
-		assertFalse(camino.esCaminoValido(grilla.getFilas(), grilla.getColumnas()));
+		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
 	@Test

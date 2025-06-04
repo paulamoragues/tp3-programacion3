@@ -16,6 +16,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.*;
+
 import logica.*;
 import utilidades.GrillaServicio;
 import utilidades.JsonGrilla;
@@ -32,8 +33,10 @@ public class Pantalla {
 	private JScrollPane scrollResultados;
 
 	private JPanel panelGrilla;
-	private Set<Point> celdasCamino;
 	private Grilla grillaActual;
+	
+	// !!!
+	private Set<Point> celdasCamino;
 
 	public Pantalla() {
 		inicializarPantalla();
@@ -166,25 +169,23 @@ public class Pantalla {
 	private void llenarPanelConCeldas(int filas, int columnas) {
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
-				Celda celda = grillaActual.getCelda(fila, col);
-				panelGrilla.add(crearPanelCelda(celda, fila, col));
+				int carga = grillaActual.getCargaCelda(fila, col);
+				panelGrilla.add(crearPanelCelda(fila, col, carga));
 			}
 		}
 	}
 
-	private JPanel crearPanelCelda(Celda celda, int fila, int columna) {
+	private JPanel crearPanelCelda(int fila, int columna, int carga) {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-		Color colorFondo = Color.WHITE;
-
 		// esto hay que cambiar
-		if (celdasCamino.contains(new Point(fila, columna))) {
-			colorFondo = new Color(144, 238, 144);
-		}
-		panel.setBackground(colorFondo);
-
-		String textoCarga = celda.getCargaEntero() + "" ;
+		if (celdasCamino.contains(new Point(fila, columna))) 
+			panel.setBackground(Color.YELLOW);
+		 else 
+			panel.setBackground(Color.WHITE);
+		
+		String textoCarga = carga + "" ;
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
 
@@ -198,7 +199,7 @@ public class Pantalla {
 		panelGrilla.setPreferredSize(new Dimension(columnas * anchoCelda, filas * alturaCelda));
 	}
 
-	// borrar
+	// modificar
 	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {
 		if (algoritmo.getCantidadCaminos() > 0) {
 			Camino camino = algoritmo.getCamino(0);
@@ -215,7 +216,6 @@ public class Pantalla {
 		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
-
 	
 	
 	

@@ -3,7 +3,7 @@ package generador;
 public class GeneradorPrefijado implements Generador {
 	private boolean[] bits;
 	private int indice;
-	
+
 	private int posicionMutar1;
 	private int posicionMutar2;
 	private int posicion;
