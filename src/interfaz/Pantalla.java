@@ -8,12 +8,16 @@ import com.google.gson.JsonSyntaxException;
 import algoritmo.Algoritmo;
 import generador.GeneradorAleatorio;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import logica.*;
+import utilidades.GrillaServicio;
 import utilidades.JsonGrilla;
 
 public class Pantalla {
@@ -209,26 +213,50 @@ public class Pantalla {
 		ventana.getContentPane().add(botonCargar);
 	}
 
-	// está maaaal
+	//Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
-		try {
-			grillaActual = JsonGrilla.cargarDesdeJSON("grilla.json");
-			JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+    try {
+        List<JsonGrilla.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
 
-			if (grillaActual != null) {
-				ejecutarMediciones();
-			}
+        if (grillas == null || grillas.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay grillas disponibles en el archivo.");
+            return;
+        }
 
-			// polémico
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
-					JOptionPane.ERROR_MESSAGE);
-		} catch (JsonSyntaxException e) {
-			JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
-					"Error de formato", JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
+        String[] opciones = new String[grillas.size()];
+        for (int i = 0; i < grillas.size(); i++) {
+            opciones[i] = (i + 1) + " - " + grillas.get(i).descripcion;
+        }
+
+        String seleccion = (String) JOptionPane.showInputDialog(
+            null,
+            "Seleccioná una grilla para cargar:",
+            "Seleccionar Grilla",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            opciones,
+            opciones[0]
+        );
+
+        if (seleccion != null) {
+            int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
+            grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
+
+            ejecutarMediciones();
+            JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+        }
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
+                JOptionPane.ERROR_MESSAGE);
+    } catch (JsonSyntaxException e) {
+        JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
+                "Error de formato", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
 }

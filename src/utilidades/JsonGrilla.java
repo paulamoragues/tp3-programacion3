@@ -1,36 +1,41 @@
 package utilidades;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.List;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
-import logica.Grilla;
+import com.google.gson.reflect.TypeToken;
 
 public class JsonGrilla {
-	List<Grilla> grillas;
 
-//	public static Grilla cargarDesdeJSON(String archivo) {
-//		Gson gson = new Gson();
-//		Grilla grilla = null;
-//
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(archivo));
-//			grilla = gson.fromJson(br, Grilla.class);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return grilla;
-//	}
+    // Clase interna que representa una grilla con su descripción
+    public static class GrillaConDescripcion {
+        public String descripcion;
+        public int[][] grilla;
 
-	public static Grilla cargarDesdeJSON(String archivo) throws IOException, JsonSyntaxException {
-		Gson gson = new Gson();
-		try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-			return gson.fromJson(br, Grilla.class);
-		}
-	}
+        // Constructor opcional si necesitás crear grillas desde el código
+        public GrillaConDescripcion(String descripcion, int[][] grilla) {
+            this.descripcion = descripcion;
+            this.grilla = grilla;
+        }
+    }
 
+    /**
+     * Carga todas las grillas desde un archivo JSON
+     * @param ruta Ruta al archivo (por ejemplo "grilla.json")
+     * @return Lista de grillas con descripción
+     * @throws IOException si hay problemas de lectura
+     */
+    public static List<GrillaConDescripcion> cargarTodas(String ruta) throws IOException {
+        Gson gson = new Gson();
+        Reader reader = new FileReader(ruta);
+
+        Type tipoLista = new TypeToken<List<GrillaConDescripcion>>() {}.getType();
+        List<GrillaConDescripcion> grillas = gson.fromJson(reader, tipoLista);
+
+        reader.close();
+        return grillas;
+    }
 }
