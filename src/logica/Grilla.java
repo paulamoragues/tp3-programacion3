@@ -32,8 +32,8 @@ public class Grilla {
 			}
 		}
 	}
-
-	// Archivo
+	
+	// Esto está mal
 	public void cargarDesdeEnteros(int[][] datos) {
 		if (datos.length != filas || datos[0].length != columnas) {
 			throw new IllegalArgumentException("Dimensiones no coinciden con la grilla.");

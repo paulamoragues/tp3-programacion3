@@ -25,10 +25,6 @@ public class Celda {
 		return carga ? 1 : -1;
 	}
 
-	public void setCarga(boolean carga) {
-		this.carga = carga;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

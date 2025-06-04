@@ -111,7 +111,7 @@ public class Pantalla {
 		ventana.getContentPane().add(botonEjecutar);
 	}
 
-	// ..
+	// ?
 	private void generarGrillaAleatoria() {
 		Random rand = new Random();
 		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
@@ -125,6 +125,8 @@ public class Pantalla {
 
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
+		
+		// quitar
 		celdasCamino = new HashSet<>();
 
 		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
@@ -134,7 +136,8 @@ public class Pantalla {
 		algoritmoFB.buscarCaminos();
 		algoritmoBT.buscarCaminos();
 		algoritmoGenetico.buscarCaminos();
-
+		
+		// deberia ser algoritmoGenetico.primerCaminoEncontrado(); 
 		guardarPrimerCaminoEncontrado(algoritmoGenetico);
 
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
@@ -144,8 +147,6 @@ public class Pantalla {
 				algoritmoFB.getCantidadLlamadas(), algoritmoBT.getCantidadLlamadas() });
 
 		actualizarPanelGrilla();
-		tablaResultados.repaint();
-		panelGrilla.repaint();
 	}
 
 	private void actualizarPanelGrilla() {
@@ -165,7 +166,8 @@ public class Pantalla {
 	private void llenarPanelConCeldas(int filas, int columnas) {
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
-				panelGrilla.add(crearPanelCelda(grillaActual.getCelda(fila, col), fila, col));
+				Celda celda = grillaActual.getCelda(fila, col);
+				panelGrilla.add(crearPanelCelda(celda, fila, col));
 			}
 		}
 	}
@@ -176,12 +178,13 @@ public class Pantalla {
 
 		Color colorFondo = Color.WHITE;
 
+		// esto hay que cambiar
 		if (celdasCamino.contains(new Point(fila, columna))) {
 			colorFondo = new Color(144, 238, 144);
 		}
 		panel.setBackground(colorFondo);
 
-		String textoCarga = celda.getCargaEntero() + "";
+		String textoCarga = celda.getCargaEntero() + "" ;
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
 
@@ -195,6 +198,7 @@ public class Pantalla {
 		panelGrilla.setPreferredSize(new Dimension(columnas * anchoCelda, filas * alturaCelda));
 	}
 
+	// borrar
 	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {
 		if (algoritmo.getCantidadCaminos() > 0) {
 			Camino camino = algoritmo.getCamino(0);
@@ -204,7 +208,6 @@ public class Pantalla {
 			}
 		}
 	}
-	// ..
 
 	private void inicializarBotonCargarGrilla() {
 		JButton botonCargar = new JButton("Cargar Grilla");
@@ -213,6 +216,9 @@ public class Pantalla {
 		ventana.getContentPane().add(botonCargar);
 	}
 
+	
+	
+	
 	// Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
 		try {
@@ -240,9 +246,9 @@ public class Pantalla {
 			if (seleccion != null) {
 				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
 				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
-
-				ejecutarMediciones();
+				
 				JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+				ejecutarMediciones();
 			}
 
 		} catch (IOException e) {
