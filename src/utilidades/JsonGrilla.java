@@ -24,7 +24,7 @@ public class JsonGrilla {
 
     /**
      * Carga todas las grillas desde un archivo JSON
-     * @param ruta Ruta al archivo (por ejemplo "grilla.json")
+     * @param ruta grilla.json
      * @return Lista de grillas con descripción
      * @throws IOException si hay problemas de lectura
      */
