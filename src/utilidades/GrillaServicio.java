@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
 
+import generador.GeneradorGrillaPrefijada;
 import logica.Grilla;
 
 public class GrillaServicio {
@@ -26,9 +27,9 @@ public class GrillaServicio {
         }
 
         JsonGrilla.GrillaConDescripcion seleccionada = grillas.get(indice);
-        int[][] matriz = seleccionada.grilla;
-        Grilla grilla = new Grilla(matriz.length, matriz[0].length);
-        grilla.cargarDesdeEnteros(matriz);
+        boolean [][] matriz = seleccionada.grilla;
+        Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(seleccionada.grilla, matriz.length, matriz[0].length));
+        grilla.generarGrilla();
         return grilla;
     }
 }
