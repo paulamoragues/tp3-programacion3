@@ -109,7 +109,7 @@ public class Pantalla {
 
 	private void inicializarBotonGenerarGrilla() {
 		JButton botonEjecutar = new JButton("Generar Grilla Aleatoria");
-		botonEjecutar.setBounds(510, 142, 200, 40);
+		botonEjecutar.setBounds(400, 142, 200, 40);
 		botonEjecutar.addActionListener(e -> generarGrillaAleatoria());
 		ventana.getContentPane().add(botonEjecutar);
 	}
@@ -207,7 +207,7 @@ public class Pantalla {
 
 	private void inicializarBotonCargarGrilla() {
 		JButton botonCargar = new JButton("Cargar Grilla");
-		botonCargar.setBounds(290, 142, 200, 40);
+		botonCargar.setBounds(180, 142, 200, 40);
 		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
@@ -253,7 +253,7 @@ public class Pantalla {
 	
 	private void inicializarBotonBenchmark() {
 		JButton botonBenchmark = new JButton("Ejecutar Benchmark");
-		botonBenchmark.setBounds(720, 142, 200, 40);
+		botonBenchmark.setBounds(620, 142, 200, 40);
 		botonBenchmark.addActionListener(e -> ejecutarBenchmark());
 		ventana.getContentPane().add(botonBenchmark);
 	}
