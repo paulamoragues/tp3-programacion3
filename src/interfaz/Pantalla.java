@@ -7,6 +7,7 @@ import com.google.gson.JsonSyntaxException;
 
 import algoritmo.Algoritmo;
 import generador.GeneradorAleatorio;
+import generador.GeneradorGrillaAleatoria;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,8 +25,8 @@ import utilidades.JsonGrilla;
 public class Pantalla {
 	private static final int ANCHO = 1000;
 	private static final int ALTO = 600;
-	private int limitePosiblesFilas = 15;
-	private int limitePosiblesColumnas = 15;
+
+	
 
 	private JFrame ventana;
 	private JTable tablaResultados;
@@ -116,12 +117,10 @@ public class Pantalla {
 
 	// ?
 	private void generarGrillaAleatoria() {
-		Random rand = new Random();
-		int cantFilas = rand.nextInt(limitePosiblesFilas) + 1;
-		int cantColumnas = rand.nextInt(limitePosiblesColumnas) + 1;
-
-		grillaActual = new Grilla(cantFilas, cantColumnas);
-		grillaActual.generarGrillaAleatoria();
+		
+		grillaActual = new Grilla(new GeneradorGrillaAleatoria());
+		grillaActual.generarGrilla();
+		
 
 		ejecutarMediciones();
 	}
@@ -262,5 +261,8 @@ public class Pantalla {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
+
+
 
 }
