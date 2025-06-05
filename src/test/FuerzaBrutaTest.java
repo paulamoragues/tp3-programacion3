@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import generador.GeneradorGrillaPrefijada;
 import logica.FuerzaBruta;
 import logica.Grilla;
 
@@ -16,8 +17,10 @@ public class FuerzaBrutaTest {
 				{ true, true, true, false } 
 		};
 		
-		Grilla grilla = new Grilla(3, 4);
-		grilla.generarGrillaPrefijada(cargas);
+			Grilla grilla = new Grilla (new GeneradorGrillaPrefijada(cargas , 3, 4));
+			grilla.generarGrilla();
+		
+
 		return grilla;
 	}
 
