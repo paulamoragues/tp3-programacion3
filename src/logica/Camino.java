@@ -7,13 +7,12 @@ import java.util.Objects;
 public class Camino {
 	private List<Celda> celdas;
 
-	// Constructores
 	public Camino() {
 		celdas = new ArrayList<>();
 	}
 
 	public Camino(Camino otro) {
-		celdas = new ArrayList<>(otro.celdas); 
+		celdas = new ArrayList<>(otro.celdas);
 	}
 
 	public void agregarCelda(Celda celda) {
@@ -39,8 +38,8 @@ public class Camino {
 		}
 		Celda ultimaCelda = celdas.get(getTamaño() - 1);
 
-		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1)
-				&& (ultimaCelda.getColumna() == columnas - 1);
+		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1) && 
+				(ultimaCelda.getColumna() == columnas - 1);
 		boolean sumaCorrecta = (calcularSumaCeldas() == 0);
 
 		return llegoAlDestino && sumaCorrecta;
@@ -65,20 +64,10 @@ public class Camino {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null || getClass() != obj.getClass())
+		if (!(obj instanceof Camino))
 			return false;
 		Camino otro = (Camino) obj;
-		if (this.celdas.size() != otro.celdas.size()) {
-			return false;
-		}
-		for (int i = 0; i < this.celdas.size(); i++) {
-			Celda c1 = this.celdas.get(i);
-			Celda c2 = otro.celdas.get(i);
-			if (!c1.equals(c2)) {
-				return false;
-			}
-		}
-		return true;
+		return celdas.equals(otro.celdas);
 	}
 
 	@Override

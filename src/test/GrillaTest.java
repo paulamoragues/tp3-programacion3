@@ -10,7 +10,6 @@ import logica.Celda;
 import logica.Grilla;
 
 public class GrillaTest {
-
 	private Grilla grilla;
 
 	@Before

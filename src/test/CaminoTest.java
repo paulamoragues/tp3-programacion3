@@ -7,21 +7,25 @@ import org.junit.Test;
 
 import generador.GeneradorGrillaPrefijada;
 import logica.Camino;
-import logica.Celda;
 import logica.Grilla;
 
 public class CaminoTest {
+	private Grilla grilla;
 	private Camino camino;
 
 	@Before
 	public void setUp() {
+		boolean[][] cargas = { { false, true }, { false, true }, { true, true } };
+		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 2));
+		grilla.generarGrilla();
+
 		camino = new Camino();
 	}
 
 	@Test
 	public void agregarCeldaTest() {
-		Celda c = new Celda(0, 0, true);
-		camino.agregarCelda(c);
+		camino.agregarCelda(grilla.getCelda(0, 0));
+
 		assertEquals(1, camino.getTamaño());
 	}
 
@@ -32,24 +36,27 @@ public class CaminoTest {
 
 	@Test
 	public void eliminarCeldaCorrectaTest() {
-		Celda c = new Celda(1, 1, true);
-		camino.agregarCelda(c);
+		camino.agregarCelda(grilla.getCelda(0, 0));
 		camino.eliminarCelda(0);
+
 		assertEquals(0, camino.getTamaño());
 	}
 
 	@Test
 	public void calcularSumaCargasTest() {
-		camino.agregarCelda(new Celda(0, 0, true)); // +1
-		camino.agregarCelda(new Celda(0, 1, false)); // -1
+		camino.agregarCelda(grilla.getCelda(0, 0));
+		camino.agregarCelda(grilla.getCelda(0, 1));
+
 		assertEquals(0, camino.calcularSumaCeldas());
 	}
 
-	// ???
+	@Test
+	public void caminoValidoVacioTest() {
+		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
+	}
+
 	@Test
 	public void caminoValidoTest() {
-		Grilla grilla = crearGrilla();
-
 		camino.agregarCelda(grilla.getCelda(0, 0));
 		camino.agregarCelda(grilla.getCelda(1, 0));
 		camino.agregarCelda(grilla.getCelda(2, 0));
@@ -60,8 +67,6 @@ public class CaminoTest {
 
 	@Test
 	public void caminoIncorrectoSumaTest() {
-		Grilla grilla = crearGrilla();
-
 		camino.agregarCelda(grilla.getCelda(0, 0));
 		camino.agregarCelda(grilla.getCelda(0, 1));
 		camino.agregarCelda(grilla.getCelda(1, 1));
@@ -72,26 +77,24 @@ public class CaminoTest {
 
 	@Test
 	public void caminoIncorrectoPosicionTest() {
-		Grilla grilla = crearGrilla();
 		camino.agregarCelda(grilla.getCelda(1, 0));
 		camino.agregarCelda(grilla.getCelda(0, 0));
 
 		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getCeldaIncorrecta() {
+		camino.getCelda(0);
+	}
+
 	@Test
 	public void constructorCopiaTest() {
-		camino.agregarCelda(new Celda(0, 0, true));
+		camino.agregarCelda(grilla.getCelda(0, 0));
 		Camino copia = new Camino(camino);
 
-		assertEquals(camino, copia); // Mismo camino
-		assertNotSame(camino, copia); // Distinto objeto
+		assertEquals(camino, copia);
+		assertNotSame(camino, copia);
 	}
 
-	private Grilla crearGrilla() {
-		boolean[][] cargas = { { false, true }, { false, true }, { true, true } };
-		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 2));
-		grilla.generarGrilla();
-		return grilla;
-	}
 }
