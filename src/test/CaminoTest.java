@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import generador.GeneradorGrillaPrefijada;
 import logica.Camino;
 import logica.Celda;
 import logica.Grilla;
@@ -88,10 +89,10 @@ public class CaminoTest {
 	}
 
 	private Grilla crearGrilla() {
-		Grilla grilla = new Grilla(3, 2);
+		
 		boolean[][] cargas = { { false, true }, { false, true }, { true, true } };
-
-		grilla.generarGrillaPrefijada(cargas);
+		Grilla grilla =  new Grilla(new GeneradorGrillaPrefijada(cargas , 3, 2));
+		grilla.generarGrilla();
 		return grilla;
 	}
 }
