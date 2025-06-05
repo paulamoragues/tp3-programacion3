@@ -14,14 +14,16 @@ import logica.Grilla;
 import logica.Individuo;
 
 public class IndividuoTest {
-
 	private int filas = 3;
 	private int columnas = 4;
 	private Grilla grilla;
 
 	@Before
-	public void inicializar() {
-		generarGrilla();
+	public void setUp() {
+		boolean[][] cargas = { { true, true, true, false }, { false, false, false, false },
+				{ true, true, true, false } };
+		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, filas, columnas));
+		grilla.generarGrilla();
 	}
 
 	@Test
@@ -138,13 +140,6 @@ public class IndividuoTest {
 	private void assertIndividuo(String str, Individuo individuo) {
 		for (int i = 0; i < str.length(); i++)
 			assertEquals(str.charAt(i) == '1', individuo.get(i));
-	}
-
-	private void generarGrilla() {
-		boolean[][] cargas = { { true, true, true, false }, { false, false, false, false },
-				{ true, true, true, false } };
-		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, filas, columnas));
-		grilla.generarGrilla();
 	}
 
 }

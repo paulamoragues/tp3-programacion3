@@ -27,7 +27,7 @@ public class CaminoTest {
 		camino.agregarCelda(grilla.getCelda(0, 0));
 
 		assertEquals(1, camino.getTamaño());
-	}
+	} 
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void eliminarCeldaIncorrectaTest() {

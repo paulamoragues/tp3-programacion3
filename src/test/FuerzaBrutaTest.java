@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import generador.GeneradorGrillaPrefijada;
@@ -9,20 +10,19 @@ import logica.FuerzaBruta;
 import logica.Grilla;
 
 public class FuerzaBrutaTest {
+	private Grilla grilla;
 
-	public Grilla generarGrilla() {
+	@Before
+	public void setUp() {
 		boolean[][] cargas = { { true, false, false, false }, { false, true, true, false },
 				{ true, true, true, false } };
 
-		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 4));
+		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 4));
 		grilla.generarGrilla();
-
-		return grilla;
-	}
+	} 
 
 	@Test
 	public void cantidadCaminosCorrectoTest() {
-		Grilla grilla = generarGrilla();
 		FuerzaBruta fb = new FuerzaBruta(grilla);
 		fb.buscarCaminos();
 
@@ -31,7 +31,6 @@ public class FuerzaBrutaTest {
 
 	@Test
 	public void cantidadCaminosIncorrectoTest() {
-		Grilla grilla = generarGrilla();
 		FuerzaBruta fb = new FuerzaBruta(grilla);
 		fb.buscarCaminos();
 
@@ -40,7 +39,6 @@ public class FuerzaBrutaTest {
 
 	@Test
 	public void cantidadLlamadasCorrectasTest() {
-		Grilla grilla = generarGrilla();
 		FuerzaBruta fb = new FuerzaBruta(grilla);
 		fb.buscarCaminos();
 
@@ -49,7 +47,6 @@ public class FuerzaBrutaTest {
 
 	@Test
 	public void cantidadLlamadasIncorrectasTest() {
-		Grilla grilla = generarGrilla();
 		FuerzaBruta fb = new FuerzaBruta(grilla);
 		fb.buscarCaminos();
 

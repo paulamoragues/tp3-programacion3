@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import generador.GeneradorGrillaPrefijada;
@@ -9,19 +10,19 @@ import logica.BackTracking;
 import logica.Grilla;
 
 public class BackTrackingTest {
+	private Grilla grilla;
 
-	public Grilla generarGrilla() {
+	@Before
+	public void setUp() {
 		boolean[][] cargas = { { true, false, false, false }, { false, true, true, false },
-				{ true, true, true, false } };
+				{ true, true, true, false } }; 
 
-		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 4));
+		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 4));
 		grilla.generarGrilla();
-		return grilla;
-	}
+	} 
 
 	@Test
 	public void cantidadCaminosCorrectoTest() {
-		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
 
@@ -30,7 +31,6 @@ public class BackTrackingTest {
 
 	@Test
 	public void cantidadCaminosIncorrectoTest() {
-		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
 
@@ -39,7 +39,6 @@ public class BackTrackingTest {
 
 	@Test
 	public void cantidadLlamadasCorrectasTest() {
-		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
 
@@ -48,7 +47,6 @@ public class BackTrackingTest {
 
 	@Test
 	public void cantidadLlamadasIncorrectasTest() {
-		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
 

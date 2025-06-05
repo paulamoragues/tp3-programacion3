@@ -8,7 +8,7 @@ public class Camino {
 	private List<Celda> celdas;
 
 	public Camino() {
-		celdas = new ArrayList<>();
+		celdas = new ArrayList<>(); 
 	}
 
 	public Camino(Camino otro) {

@@ -37,7 +37,7 @@ public class Pantalla {
 	// !!!
 	private Set<Point> celdasCamino;
 
-	public Pantalla() { 
+	public Pantalla() {  
 		inicializarPantalla();
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
@@ -55,7 +55,7 @@ public class Pantalla {
 	}
 
 	private void inicializarTablaResultados() {
-		crearTablaResultados();
+		crearTablaResultados(); 
 		configurarTablaResultados();
 		agregarTablaResultados();
 	}
