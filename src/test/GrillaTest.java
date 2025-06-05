@@ -5,32 +5,36 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import generador.GeneradorGrillaPrefijada;
 import logica.Celda;
 import logica.Grilla;
 
 public class GrillaTest {
 
-	// modificar con uso de generador prefijado
 	private Grilla grilla;
 
 	@Before
 	public void setUp() {
-		grilla = new Grilla(3, 4);
+		boolean[][] cargas = { { false, true }, { false, true }, { true, true } };
+		grilla= new Grilla (new GeneradorGrillaPrefijada(cargas, 3, 2));
+		grilla.generarGrilla();
 	}
 
 	@Test
 	public void filasConstructorTest() {
+		
 		assertEquals(3, grilla.getFilas());
 	}
 
 	@Test
 	public void columnasConstructorTest() {
-		assertEquals(4, grilla.getColumnas());
+		
+		assertEquals(2, grilla.getColumnas());
 	}
 
 	@Test
 	public void generarGrillaNoNulaTest() {
-		grilla.generarGrillaAleatoria();
+		
 		for (int fila = 0; fila < grilla.getFilas(); fila++) {
 			for (int col = 0; col < grilla.getColumnas(); col++) {
 				assertNotNull(grilla.getCelda(fila, col));
@@ -38,18 +42,17 @@ public class GrillaTest {
 		}
 	}
 
-	@Test
+	@Test(expected = Exception.class)
 	public void generarGrillaNulaTest() {
-		for (int fila = 0; fila < grilla.getFilas(); fila++) {
-			for (int col = 0; col < grilla.getColumnas(); col++) {
-				assertNull(grilla.getCelda(fila, col));
-			}
-		}
+		
+		Grilla grilla= new Grilla (new GeneradorGrillaPrefijada(null, 2, 1));
+		grilla.generarGrilla();
+		
 	}
 
 	@Test
 	public void generarGrillaCeldasConPosicionCorrectaTest() {
-		grilla.generarGrillaAleatoria();
+		
 		for (int fila = 0; fila < grilla.getFilas(); fila++) {
 			for (int col = 0; col < grilla.getColumnas(); col++) {
 				Celda c = grilla.getCelda(fila, col);
@@ -61,7 +64,7 @@ public class GrillaTest {
 
 	@Test
 	public void generarGrillaPosicionIncorrectaTest() {
-		grilla.generarGrillaAleatoria();
+		
 		for (int fila = 0; fila < grilla.getFilas(); fila++) {
 			for (int col = 0; col < grilla.getColumnas(); col++) {
 				Celda c = grilla.getCelda(fila, col);
@@ -73,7 +76,7 @@ public class GrillaTest {
 
 	@Test
 	public void getCeldaEspecificaTest() {
-		grilla.generarGrillaAleatoria();
+		
 		Celda celda = grilla.getCelda(0, 0);
 		assertEquals(0, celda.getFila());
 		assertEquals(0, celda.getColumna());
@@ -81,7 +84,7 @@ public class GrillaTest {
 
 	@Test
 	public void getCeldaPosicionIncorrectaTest() {
-		grilla.generarGrillaAleatoria();
+		
 		Celda celda = grilla.getCelda(0, 0);
 		assertFalse(celda.getFila() != 0 || celda.getColumna() != 0);
 	}
