@@ -13,10 +13,10 @@ public class JsonGrilla {
     // Clase interna que representa una grilla con su descripción
     public static class GrillaConDescripcion {
         public String descripcion;
-        public int[][] grilla;
+        public boolean[][] grilla;
 
         // Constructor opcional si necesitás crear grillas desde el código
-        public GrillaConDescripcion(String descripcion, int[][] grilla) {
+        public GrillaConDescripcion(String descripcion, boolean[][] grilla) {
             this.descripcion = descripcion;
             this.grilla = grilla;
         }
