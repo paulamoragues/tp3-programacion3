@@ -1,52 +1,39 @@
 package logica;
 
-import java.util.Random;
+
+
+
+import generador.GeneradorGrilla;
+
 
 public class Grilla {
 	private Celda[][] matriz;
 	private int filas;
 	private int columnas;
+	private static GeneradorGrilla _random;
 
-	public Grilla(int filas, int columnas) {
-		this.filas = filas;
-		this.columnas = columnas;
+	public void setGenerador(GeneradorGrilla generador) {
+		_random = generador;
+	}
+
+	public Grilla(GeneradorGrilla generador) {
+		_random = generador;
+		this.filas = _random.nextIntFilas();
+		this.columnas = _random.nextIntColumnas();
 		this.matriz = new Celda[filas][columnas];
 	}
 
-	public void generarGrillaPrefijada(boolean[][] cargas) {
-		verificarCargasValida(cargas);
+
+	public void generarGrilla() {
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
-				boolean carga = cargas[fila][col];
+				boolean carga = _random.nextBoolean(fila, col);
 				matriz[fila][col] = new Celda(fila, col, carga);
 			}
 		}
 	}
 
-	// tiene que usar el generador 
-	public void generarGrillaAleatoria() {
-		Random rand = new Random();
-		for (int fila = 0; fila < filas; fila++) {
-			for (int col = 0; col < columnas; col++) {
-				boolean carga = rand.nextBoolean();
-				matriz[fila][col] = new Celda(fila, col, carga);
-			}
-		}
-	}
 
-	// esto está mal
-	public void cargarDesdeEnteros(int[][] datos) {
-		if (datos.length != filas || datos[0].length != columnas) {
-			throw new IllegalArgumentException("Dimensiones no coinciden con la grilla.");
-		}
-
-		for (int i = 0; i < filas; i++) {
-			for (int j = 0; j < columnas; j++) {
-				boolean carga = (datos[i][j] == 1);
-				matriz[i][j] = new Celda(i, j, carga);
-			}
-		}
-	}
 
 	public int getCargaCelda(int fila, int columna) {
 		verificarFilaValida(fila);
@@ -80,14 +67,8 @@ public class Grilla {
 		}
 	}
 
-	private void verificarCargasValida(boolean[][] cargas) {
-		if (cargas.length != filas) 
-			throw new IllegalArgumentException("Cantidad de filas no coincide.");
-		
-		for (int i = 0; i < filas; i++) {
-			if (cargas[i].length != columnas) 
-				throw new IllegalArgumentException("La fila " + i + " no tiene la cantidad de columnas esperadas.");
-		}
-	}
+
+
+
 
 }
