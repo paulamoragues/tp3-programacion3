@@ -2,10 +2,10 @@ package generador;
 
 import java.util.Random;
 
-public class GeneradorAleatorio implements Generador {
+public class GeneradorGeneticoAleatorio implements GeneradorGenetico {
 	private Random random;
 
-	public GeneradorAleatorio() {
+	public GeneradorGeneticoAleatorio() {
 		random = new Random();
 	}
 

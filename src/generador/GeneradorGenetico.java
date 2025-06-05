@@ -1,6 +1,6 @@
 package generador;
 
-public interface Generador {
+public interface GeneradorGenetico {
 	boolean nextBoolean();
 
 	int nextIntPosicion(int rango);

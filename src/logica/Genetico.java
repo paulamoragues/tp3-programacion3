@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import algoritmo.Algoritmo;
-import generador.Generador;
+import generador.GeneradorGenetico;
 
 public class Genetico extends Algoritmo {
 	private ArrayList<Individuo> individuos;
-	private Generador random;
+	private GeneradorGenetico random;
 
 	// Parámetros de la población
 	private int tamaño = 100;
@@ -21,7 +21,7 @@ public class Genetico extends Algoritmo {
 	// Estadísticas
 	private int iteracion;
 
-	public Genetico(Grilla grilla, Generador generador) {
+	public Genetico(Grilla grilla, GeneradorGenetico generador) {
 		super(grilla);
 		this.random = generador;
 

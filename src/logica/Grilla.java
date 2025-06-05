@@ -1,39 +1,32 @@
 package logica;
 
-
-
-
 import generador.GeneradorGrilla;
-
 
 public class Grilla {
 	private Celda[][] matriz;
 	private int filas;
 	private int columnas;
-	private static GeneradorGrilla _random;
+	private static GeneradorGrilla random;
 
 	public void setGenerador(GeneradorGrilla generador) {
-		_random = generador;
+		random = generador;
 	}
 
 	public Grilla(GeneradorGrilla generador) {
-		_random = generador;
-		this.filas = _random.nextIntFilas();
-		this.columnas = _random.nextIntColumnas();
+		random = generador;
+		this.filas = random.nextIntFilas();
+		this.columnas = random.nextIntColumnas();
 		this.matriz = new Celda[filas][columnas];
 	}
-
 
 	public void generarGrilla() {
 		for (int fila = 0; fila < filas; fila++) {
 			for (int col = 0; col < columnas; col++) {
-				boolean carga = _random.nextBoolean(fila, col);
+				boolean carga = random.nextBoolean(fila, col);
 				matriz[fila][col] = new Celda(fila, col, carga);
 			}
 		}
 	}
-
-
 
 	public int getCargaCelda(int fila, int columna) {
 		verificarFilaValida(fila);
@@ -44,7 +37,7 @@ public class Grilla {
 	public Celda getCelda(int fila, int columna) {
 		verificarFilaValida(fila);
 		verificarColumnaValida(columna);
-		return matriz[fila][columna];
+		return matriz[fila][columna]; 
 	}
 
 	public int getFilas() {
@@ -66,9 +59,5 @@ public class Grilla {
 			throw new IndexOutOfBoundsException("Columna fuera de rango: " + columna);
 		}
 	}
-
-
-
-
 
 }

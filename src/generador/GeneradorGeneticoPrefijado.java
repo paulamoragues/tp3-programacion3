@@ -1,6 +1,6 @@
 package generador;
 
-public class GeneradorPrefijado implements Generador {
+public class GeneradorGeneticoPrefijado implements GeneradorGenetico {
 	private boolean[] bits;
 	private int indice;
 
@@ -8,19 +8,19 @@ public class GeneradorPrefijado implements Generador {
 	private int posicionMutar2;
 	private int posicion;
 
-	public GeneradorPrefijado(String str) {
+	public GeneradorGeneticoPrefijado(String str) {
 		bits = new boolean[str.length()];
 		for (int i = 0; i < str.length(); i++)
 			bits[i] = str.charAt(i) == '1';
 		indice = 0;
 	}
 
-	public GeneradorPrefijado(int entero1, int entero2) {
+	public GeneradorGeneticoPrefijado(int entero1, int entero2) {
 		this.posicionMutar1 = entero1;
 		this.posicionMutar2 = entero2;
 	}
 
-	public GeneradorPrefijado(int entero) {
+	public GeneradorGeneticoPrefijado(int entero) {
 		this.posicion = entero;
 	}
 

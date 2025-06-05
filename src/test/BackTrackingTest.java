@@ -9,15 +9,12 @@ import logica.BackTracking;
 import logica.Grilla;
 
 public class BackTrackingTest {
-	
+
 	public Grilla generarGrilla() {
-		boolean[][] cargas = { 
-				{ true, false, false, false }, 
-				{ false, true, true, false }, 
-				{ true, true, true, false } 
-		};
-		
-		Grilla grilla = new Grilla (new GeneradorGrillaPrefijada(cargas , 3, 4));
+		boolean[][] cargas = { { true, false, false, false }, { false, true, true, false },
+				{ true, true, true, false } };
+
+		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 4));
 		grilla.generarGrilla();
 		return grilla;
 	}
@@ -27,16 +24,16 @@ public class BackTrackingTest {
 		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
-		
+
 		assertEquals(bt.getCantidadCaminos(), 3);
 	}
-	
+
 	@Test
 	public void cantidadCaminosIncorrectoTest() {
 		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
-		
+
 		assertNotEquals(bt.getCantidadCaminos(), 2);
 	}
 
@@ -45,19 +42,19 @@ public class BackTrackingTest {
 		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
-		
+
 		assertEquals(bt.getCantidadLlamadas(), 28);
 	}
-	
+
 	@Test
 	public void cantidadLlamadasIncorrectasTest() {
 		Grilla grilla = generarGrilla();
 		BackTracking bt = new BackTracking(grilla);
 		bt.buscarCaminos();
-		
+
 		assertNotEquals(bt.getCantidadLlamadas(), 27);
 	}
-	
+
 	// testear caminos encontrados
 
 }

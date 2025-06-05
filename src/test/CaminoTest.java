@@ -89,9 +89,9 @@ public class CaminoTest {
 	}
 
 	private Grilla crearGrilla() {
-		
+
 		boolean[][] cargas = { { false, true }, { false, true }, { true, true } };
-		Grilla grilla =  new Grilla(new GeneradorGrillaPrefijada(cargas , 3, 2));
+		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, 3, 2));
 		grilla.generarGrilla();
 		return grilla;
 	}

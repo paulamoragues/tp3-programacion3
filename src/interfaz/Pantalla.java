@@ -6,7 +6,7 @@ import javax.swing.table.*;
 import com.google.gson.JsonSyntaxException;
 
 import algoritmo.Algoritmo;
-import generador.GeneradorAleatorio;
+import generador.GeneradorGeneticoAleatorio;
 import generador.GeneradorGrillaAleatoria;
 
 import java.awt.BorderLayout;
@@ -26,8 +26,6 @@ public class Pantalla {
 	private static final int ANCHO = 1000;
 	private static final int ALTO = 600;
 
-	
-
 	private JFrame ventana;
 	private JTable tablaResultados;
 	private DefaultTableModel modeloResultados;
@@ -35,7 +33,7 @@ public class Pantalla {
 
 	private JPanel panelGrilla;
 	private Grilla grillaActual;
-	
+
 	// !!!
 	private Set<Point> celdasCamino;
 
@@ -115,31 +113,28 @@ public class Pantalla {
 		ventana.getContentPane().add(botonEjecutar);
 	}
 
-	// ?
 	private void generarGrillaAleatoria() {
-		
 		grillaActual = new Grilla(new GeneradorGrillaAleatoria());
 		grillaActual.generarGrilla();
-		
 
 		ejecutarMediciones();
 	}
 
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
-		
+
 		// quitar
 		celdasCamino = new HashSet<>();
 
 		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoBT = new BackTracking(grillaActual);
-		Genetico algoritmoGenetico = new Genetico(grillaActual, new GeneradorAleatorio());
+		Genetico algoritmoGenetico = new Genetico(grillaActual, new GeneradorGeneticoAleatorio());
 
 		algoritmoFB.buscarCaminos();
 		algoritmoBT.buscarCaminos();
 		algoritmoGenetico.buscarCaminos();
-		
-		// deberia ser algoritmoGenetico.primerCaminoEncontrado(); 
+
+		// deberia ser algoritmoGenetico.primerCaminoEncontrado();
 		guardarPrimerCaminoEncontrado(algoritmoGenetico);
 
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
@@ -179,11 +174,11 @@ public class Pantalla {
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
 		// esto hay que cambiar
-		if (celdasCamino.contains(new Point(fila, columna))) 
-			panel.setBackground(Color.YELLOW);
-		 else 
+		if (celdasCamino.contains(new Point(fila, columna)))
+			panel.setBackground(Color.ORANGE);
+		else
 			panel.setBackground(Color.WHITE);
-		
+
 		String textoCarga = carga + "" ;
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
@@ -215,9 +210,7 @@ public class Pantalla {
 		botonCargar.addActionListener(e -> cargarGrillaDesdeArchivo());
 		ventana.getContentPane().add(botonCargar);
 	}
-	
-	
-	
+
 	// Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
 		try {
@@ -233,19 +226,13 @@ public class Pantalla {
 				opciones[i] = (i + 1) + " - " + grillas.get(i).descripcion;
 			}
 
-			String seleccion = (String) JOptionPane.showInputDialog(
-					null,
-					"Seleccioná una grilla para cargar:",
-					"Seleccionar Grilla",
-					JOptionPane.PLAIN_MESSAGE,
-					null,
-					opciones,
-					opciones[0]);
+			String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccioná una grilla para cargar:",
+					"Seleccionar Grilla", JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
 
 			if (seleccion != null) {
 				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
 				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
-				
+
 				JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
 				ejecutarMediciones();
 			}
@@ -261,8 +248,5 @@ public class Pantalla {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
-
-
 
 }

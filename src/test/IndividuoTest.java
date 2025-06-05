@@ -8,9 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import generador.GeneradorGrillaPrefijada;
-import generador.GeneradorPrefijado;
+import generador.GeneradorGeneticoPrefijado;
 import logica.Camino;
-import logica.Celda;
 import logica.Grilla;
 import logica.Individuo;
 
@@ -36,7 +35,7 @@ public class IndividuoTest {
 	public void generarCaminoConSumaIncorrectaTest() {
 		Individuo individuo = crearIndividuo("10110");
 		Camino camino = individuo.generarCamino();
-								
+
 		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
@@ -121,18 +120,18 @@ public class IndividuoTest {
 	}
 
 	private Individuo crearIndividuo(String str) {
-		Individuo.setGenerador(new GeneradorPrefijado(str));
+		Individuo.setGenerador(new GeneradorGeneticoPrefijado(str));
 		Individuo individuo = Individuo.aleatorio(grilla);
 		return individuo;
 	}
 
 	private void mutar(Individuo individuo, int bit1, int bit2) {
-		Individuo.setGenerador(new GeneradorPrefijado(bit1, bit2));
+		Individuo.setGenerador(new GeneradorGeneticoPrefijado(bit1, bit2));
 		individuo.mutar();
 	}
 
 	private Individuo[] recombinar(Individuo individuo1, Individuo individuo2, int bit) {
-		Individuo.setGenerador(new GeneradorPrefijado(bit));
+		Individuo.setGenerador(new GeneradorGeneticoPrefijado(bit));
 		return individuo1.recombinar(individuo2);
 	}
 
@@ -142,10 +141,9 @@ public class IndividuoTest {
 	}
 
 	private void generarGrilla() {
-		
 		boolean[][] cargas = { { true, true, true, false }, { false, false, false, false },
 				{ true, true, true, false } };
-		grilla = new Grilla (new GeneradorGrillaPrefijada(cargas , filas, columnas));
+		grilla = new Grilla(new GeneradorGrillaPrefijada(cargas, filas, columnas));
 		grilla.generarGrilla();
 	}
 

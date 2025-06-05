@@ -1,6 +1,6 @@
 package logica;
 
-import generador.Generador;
+import generador.GeneradorGenetico;
 
 public class Individuo implements Comparable<Individuo> {
 
@@ -11,9 +11,9 @@ public class Individuo implements Comparable<Individuo> {
 	private boolean[] movimientos;
 
 	private Grilla grilla;
-	private static Generador random;
+	private static GeneradorGenetico random;
 
-	public static void setGenerador(Generador generador) {
+	public static void setGenerador(GeneradorGenetico generador) {
 		random = generador;
 	}
 
