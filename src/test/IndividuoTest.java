@@ -7,13 +7,17 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import generador.GeneradorGrillaPrefijada;
 import generador.GeneradorPrefijado;
 import logica.Camino;
+import logica.Celda;
 import logica.Grilla;
 import logica.Individuo;
 
 public class IndividuoTest {
 
+	private int filas = 3;
+	private int columnas = 4;
 	private Grilla grilla;
 
 	@Before
@@ -32,6 +36,7 @@ public class IndividuoTest {
 	public void generarCaminoConSumaIncorrectaTest() {
 		Individuo individuo = crearIndividuo("10110");
 		Camino camino = individuo.generarCamino();
+								
 		assertFalse(camino.esValido(grilla.getFilas(), grilla.getColumnas()));
 	}
 
@@ -137,10 +142,11 @@ public class IndividuoTest {
 	}
 
 	private void generarGrilla() {
-		grilla = new Grilla(3, 4);
+		
 		boolean[][] cargas = { { true, true, true, false }, { false, false, false, false },
 				{ true, true, true, false } };
-		grilla.generarGrillaPrefijada(cargas);
+		grilla = new Grilla (new GeneradorGrillaPrefijada(cargas , filas, columnas));
+		grilla.generarGrilla();
 	}
 
 }
