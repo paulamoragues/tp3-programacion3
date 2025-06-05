@@ -9,7 +9,7 @@ public class Grilla {
 	private static GeneradorGrilla random;
 
 	public void setGenerador(GeneradorGrilla generador) {
-		random = generador;
+		random = generador;  
 	}
 
 	public Grilla(GeneradorGrilla generador) {
@@ -25,13 +25,13 @@ public class Grilla {
 				boolean carga = random.nextBoolean(fila, col);
 				matriz[fila][col] = new Celda(fila, col, carga);
 			}
-		}
+		}  
 	}
 
 	public int getCargaCelda(int fila, int columna) {
 		verificarFilaValida(fila);
 		verificarColumnaValida(columna);
-		return matriz[fila][columna].getCargaEntero();
+		return matriz[fila][columna].getCargaEntero(); 
 	}
 
 	public Celda getCelda(int fila, int columna) {

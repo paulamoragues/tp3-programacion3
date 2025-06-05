@@ -43,11 +43,10 @@ public class GrillaTest {
 	public void generarGrillaNulaTest() {
 		Grilla grilla = new Grilla(new GeneradorGrillaPrefijada(null, 2, 1));
 		grilla.generarGrilla();
-
 	}
 
 	@Test
-	public void generarGrillaCeldasConPosicionCorrectaTest() {
+	public void generarGrillaCeldasPosicionCorrectaTest() {
 		for (int fila = 0; fila < grilla.getFilas(); fila++) {
 			for (int col = 0; col < grilla.getColumnas(); col++) {
 				Celda c = grilla.getCelda(fila, col);
@@ -68,6 +67,16 @@ public class GrillaTest {
 		}
 	}
 
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getCeldaFilaIncorrectaTest() {
+		grilla.getCelda(3, 1);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getCeldaColumaIncorrectaTest() {
+		grilla.getCelda(2, 2);
+	}
+
 	@Test
 	public void getCeldaEspecificaTest() {
 		Celda celda = grilla.getCelda(0, 0);
@@ -75,10 +84,20 @@ public class GrillaTest {
 		assertEquals(0, celda.getColumna());
 	}
 
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getCargaCeldaFilaIncorrectaTest() {
+		grilla.getCargaCelda(3, 1);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void getCargaCeldaColumnaIncorrectaTest() {
+		grilla.getCargaCelda(2, 2);
+	}
+
 	@Test
-	public void getCeldaPosicionIncorrectaTest() {
-		Celda celda = grilla.getCelda(0, 0);
-		assertFalse(celda.getFila() != 0 || celda.getColumna() != 0);
+	public void getCargaCeldaCorrectaTest() {
+		int carga = grilla.getCargaCelda(0, 0);
+		assertEquals(-1, carga);
 	}
 
 }

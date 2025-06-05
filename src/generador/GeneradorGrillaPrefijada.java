@@ -7,7 +7,7 @@ public class GeneradorGrillaPrefijada implements GeneradorGrilla {
 
 	public GeneradorGrillaPrefijada(boolean[][] valores, int filas, int columnas) {
 		this.filas = filas;
-		this.columnas = columnas;
+		this.columnas = columnas; 
 
 		verificarCargasValida(valores);
 		this.valores = valores;
