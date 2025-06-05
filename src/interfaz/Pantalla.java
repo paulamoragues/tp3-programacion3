@@ -43,6 +43,7 @@ public class Pantalla {
 		inicializarPanelGrilla();
 		inicializarBotonGenerarGrilla();
 		inicializarBotonCargarGrilla();
+		inicializarBotonBenchmark();
 		ventana.setVisible(true);
 	}
 
@@ -248,6 +249,44 @@ public class Pantalla {
 			JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void inicializarBotonBenchmark() {
+		JButton botonBenchmark = new JButton("Ejecutar Benchmark");
+		botonBenchmark.setBounds(720, 142, 200, 40);
+		botonBenchmark.addActionListener(e -> ejecutarBenchmark());
+		ventana.getContentPane().add(botonBenchmark);
+	}
+	
+	private void ejecutarBenchmark() {
+		SwingWorker<Void, Void> worker = new SwingWorker<>() {
+		    @Override
+		    protected Void doInBackground() {
+		        try {
+		            String ruta = "grilla.json";
+		            List<JsonGrilla.GrillaConDescripcion> grillasJson = JsonGrilla.cargarTodas(ruta);
+		            List<Grilla> grillas = new ArrayList<>();
+
+		            for (int i = 0; i < grillasJson.size(); i++) {
+		                grillas.add(GrillaServicio.crearGrillaDesdeIndice(ruta, i));
+		            }
+
+		            Benchmark benchmark = new Benchmark();
+		            Map<String, Map<String, Double>> resultados = benchmark.correrBenchmark(grillas);
+
+		            SwingUtilities.invokeLater(() -> {
+		                PantallaBenchmark ventana = new PantallaBenchmark(resultados);
+		                ventana.setVisible(true);
+		            });
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		        return null;
+		    }
+		};
+
+		worker.execute();
 	}
 
 }
