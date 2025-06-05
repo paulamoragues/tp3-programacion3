@@ -211,6 +211,7 @@ public class Pantalla {
 		ventana.getContentPane().add(botonCargar);
 	}
 
+	// !!!!
 	// Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
 		try {
