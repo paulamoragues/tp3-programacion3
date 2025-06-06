@@ -20,7 +20,7 @@ import java.util.*;
 
 import logica.*;
 import utilidades.GrillaServicio;
-import utilidades.JsonGrilla;
+import utilidades.GrillaJson;
 
 public class Pantalla {
 	private static final int ANCHO = 1000;
@@ -213,11 +213,11 @@ public class Pantalla {
 	}
 
 	// !!!!
-	// Paula revisa 🙏
 	private void cargarGrillaDesdeArchivo() {
 		try {
-			List<JsonGrilla.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
+			List<GrillaJson.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
 
+			// esto no va acá
 			if (grillas == null || grillas.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "No hay grillas disponibles en el archivo.");
 				return;
@@ -234,22 +234,25 @@ public class Pantalla {
 			if (seleccion != null) {
 				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
 				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
-
-				JOptionPane.showMessageDialog(null, "Grilla cargada correctamente.");
+				
+	            mostrarMensaje("Grilla cargada correctamente.", JOptionPane.INFORMATION_MESSAGE);
 				ejecutarMediciones();
 			}
-
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se pudo leer el archivo: " + e.getMessage(), "Error de lectura",
-					JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("No se pudo leer el archivo.", JOptionPane.ERROR_MESSAGE);
 		} catch (JsonSyntaxException e) {
-			JOptionPane.showMessageDialog(null, "El archivo JSON está malformado: " + e.getMessage(),
-					"Error de formato", JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("El archivo JSON está mal escrito.", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("Error inesperado.", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	private void mostrarMensaje(String mensaje, int tipoMensaje) {
+	    JOptionPane.showMessageDialog(null, mensaje, "Información", tipoMensaje);
+	}
+	
+	
+	
 	
 	private void inicializarBotonBenchmark() {
 		JButton botonBenchmark = new JButton("Ejecutar Benchmark");
@@ -264,7 +267,7 @@ public class Pantalla {
 		    protected Void doInBackground() {
 		        try {
 		            String ruta = "grilla.json";
-		            List<JsonGrilla.GrillaConDescripcion> grillasJson = JsonGrilla.cargarTodas(ruta);
+		            List<GrillaJson.GrillaConDescripcion> grillasJson = GrillaJson.cargarTodas(ruta);
 		            List<Grilla> grillas = new ArrayList<>();
 
 		            for (int i = 0; i < grillasJson.size(); i++) {
