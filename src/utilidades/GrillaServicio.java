@@ -23,7 +23,7 @@ public class GrillaServicio {
 			throw new IllegalStateException("No hay grillas disponibles en el archivo.");
 		}
 
-		if (indice < 0 || indice >= grillas.size()) {
+		if (indice < 0 || indice >= grillas.size()) { 
 			throw new IndexOutOfBoundsException("Índice de grilla fuera de rango.");
 		}
 

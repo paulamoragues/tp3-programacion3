@@ -1,6 +1,6 @@
 [
   {
-    "descripcion": "3x2",
+    "descripcion": "2x3",
     "grilla": [
       [true, false, true],
       [false, true, false]
@@ -9,8 +9,8 @@
     {
       "descripcion": "4x3",
       "grilla": [
-        [true, false, true],
-        [false, true, false],
+        [true, false, false],
+        [false, true, true],
         [true, false, true],
         [false, true, false]
       ]
@@ -46,8 +46,8 @@
       "grilla": [
         [true, false, true, false, true],
         [false, true, false, true, false],
-        [true, false, true, false, true],
-        [false, true, false, true, false],
+        [true, false, true, true, true],
+        [true, true, false, true, false],
         [true, false, true, false, true],
         [false, true, false, true, false]
       ]
@@ -59,7 +59,7 @@
         [false, true, false, true],
         [true, false, true, false],
         [false, true, false, true],
-        [true, false, true, false],
+        [true, false, true, true],
         [false, true, false, true],
         [true, false, true, false]
       ]
@@ -67,7 +67,7 @@
     {
       "descripcion": "8x3",
       "grilla": [
-        [true, false, true],
+        [true, true, true],
         [false, true, false],
         [true, false, true],
         [false, true, false],
@@ -99,7 +99,7 @@
         [true, false, true, false, true],
         [false, true, false, true, false],
         [true, false, true, false, true],
-        [false, true, false, true, false],
+        [false, true, true, true, false],
         [true, false, true, false, true],
         [false, true, false, true, false],
         [true, false, true, false, true],

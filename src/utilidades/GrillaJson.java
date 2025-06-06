@@ -8,7 +8,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class GrillaJson {
+public class GrillaJson { 
 
 	// Clase interna que representa una grilla con su descripción
 	public static class GrillaConDescripcion {

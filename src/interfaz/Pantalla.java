@@ -236,7 +236,7 @@ public class Pantalla {
 				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
 				
 	            mostrarMensaje("Grilla cargada correctamente.", JOptionPane.INFORMATION_MESSAGE);
-				ejecutarMediciones();
+				ejecutarMediciones(); 
 			}
 		} catch (IOException e) {
 			mostrarMensaje("No se pudo leer el archivo.", JOptionPane.ERROR_MESSAGE);
