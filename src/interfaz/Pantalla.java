@@ -6,6 +6,8 @@ import javax.swing.table.*;
 import com.google.gson.JsonSyntaxException;
 
 import algoritmo.Algoritmo;
+import benchmark.Benchmark;
+import benchmark.BenchmarkRunner;
 import generador.GeneradorGeneticoAleatorio;
 import generador.GeneradorGrillaAleatoria;
 
@@ -262,34 +264,25 @@ public class Pantalla {
 	}
 	
 	private void ejecutarBenchmark() {
-		SwingWorker<Void, Void> worker = new SwingWorker<>() {
-		    @Override
-		    protected Void doInBackground() {
-		        try {
-		            String ruta = "grilla.json";
-		            List<GrillaJson.GrillaConDescripcion> grillasJson = GrillaJson.cargarTodas(ruta);
-		            List<Grilla> grillas = new ArrayList<>();
+	    SwingWorker<Void, Void> worker = new SwingWorker<>() {
+	        @Override
+	        protected Void doInBackground() {
+	            try {
+	                Map<String, Map<String, Double>> resultados = BenchmarkRunner.ejecutarBenchmarkDesdeJson("grilla.json");
 
-		            for (int i = 0; i < grillasJson.size(); i++) {
-		                grillas.add(GrillaServicio.crearGrillaDesdeIndice(ruta, i));
-		            }
+	                SwingUtilities.invokeLater(() -> {
+	                    PantallaBenchmark ventana = new PantallaBenchmark(resultados);
+	                    ventana.setVisible(true);
+	                });
 
-		            Benchmark benchmark = new Benchmark();
-		            Map<String, Map<String, Double>> resultados = benchmark.correrBenchmark(grillas);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            return null;
+	        }
+	    };
 
-		            SwingUtilities.invokeLater(() -> {
-		                PantallaBenchmark ventana = new PantallaBenchmark(resultados);
-		                ventana.setVisible(true);
-		            });
-
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		        return null;
-		    }
-		};
-
-		worker.execute();
+	    worker.execute();
 	}
 
 }

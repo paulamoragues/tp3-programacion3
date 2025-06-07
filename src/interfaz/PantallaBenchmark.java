@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
-import utilidades.ChartUtils;
-
 public class PantallaBenchmark extends JFrame{
 	/**
 	 * 

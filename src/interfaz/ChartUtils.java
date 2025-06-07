@@ -1,4 +1,4 @@
-package utilidades;
+package interfaz;
 
 import java.util.Comparator;
 import java.util.Map;

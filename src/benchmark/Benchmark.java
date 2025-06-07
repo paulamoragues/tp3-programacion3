@@ -1,9 +1,13 @@
-package logica;
+package benchmark;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import generador.GeneradorGeneticoAleatorio;
+import logica.BackTracking;
+import logica.FuerzaBruta;
+import logica.Genetico;
+import logica.Grilla;
 
 public class Benchmark {
 
