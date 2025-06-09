@@ -8,10 +8,6 @@ public class Grilla {
 	private int columnas;
 	private static GeneradorGrilla random;
 
-	public void setGenerador(GeneradorGrilla generador) {
-		random = generador;  
-	}
-
 	public Grilla(GeneradorGrilla generador) {
 		random = generador;
 		this.filas = random.nextIntFilas();

@@ -9,7 +9,6 @@ import generador.GeneradorGrillaPrefijada;
 import logica.Grilla;
 
 public class GrillaServicio {
-	// ??????
 
 	public static List<GrillaJson.GrillaConDescripcion> cargarTodasLasGrillas(String ruta)
 			throws IOException, JsonSyntaxException {
