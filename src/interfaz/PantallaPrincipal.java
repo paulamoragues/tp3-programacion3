@@ -6,7 +6,6 @@ import javax.swing.table.*;
 import com.google.gson.JsonSyntaxException;
 
 import algoritmo.Algoritmo;
-import benchmark.Benchmark;
 import benchmark.BenchmarkRunner;
 import generador.GeneradorGeneticoAleatorio;
 import generador.GeneradorGrillaAleatoria;
@@ -24,7 +23,7 @@ import logica.*;
 import utilidades.GrillaServicio;
 import utilidades.GrillaJson;
 
-public class Pantalla {
+public class PantallaPrincipal {
 	private static final int ANCHO = 1000;
 	private static final int ALTO = 600;
 
@@ -39,7 +38,7 @@ public class Pantalla {
 	// !!!
 	private Set<Point> celdasCamino;
 
-	public Pantalla() {  
+	public PantallaPrincipal() {  
 		inicializarPantalla();
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
@@ -126,9 +125,6 @@ public class Pantalla {
 	private void ejecutarMediciones() {
 		modeloResultados.setRowCount(0);
 
-		// quitar
-		celdasCamino = new HashSet<>();
-
 		FuerzaBruta algoritmoFB = new FuerzaBruta(grillaActual);
 		BackTracking algoritmoBT = new BackTracking(grillaActual);
 		Genetico algoritmoGenetico = new Genetico(grillaActual, new GeneradorGeneticoAleatorio());
@@ -137,8 +133,7 @@ public class Pantalla {
 		algoritmoBT.buscarCaminos();
 		algoritmoGenetico.buscarCaminos();
 
-		// deberia ser algoritmoGenetico.primerCaminoEncontrado();
-		guardarPrimerCaminoEncontrado(algoritmoGenetico);
+		obtenerPrimerCaminoEncontrado(algoritmoGenetico);
 
 		modeloResultados.addRow(new Object[] { grillaActual.getFilas() + "x" + grillaActual.getColumnas(),
 				algoritmoFB.getTiempoEjecucion(), algoritmoBT.getTiempoEjecucion(),
@@ -197,7 +192,9 @@ public class Pantalla {
 	}
 
 	// modificar
-	private void guardarPrimerCaminoEncontrado(Algoritmo algoritmo) {
+	private void obtenerPrimerCaminoEncontrado(Algoritmo algoritmo) {
+		// deberia ser algoritmoGenetico.primerCaminoEncontrado();
+		celdasCamino = new HashSet<>();
 		if (algoritmo.getCantidadCaminos() > 0) {
 			Camino camino = algoritmo.getCamino(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
