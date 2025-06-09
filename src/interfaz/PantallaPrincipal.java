@@ -35,10 +35,9 @@ public class PantallaPrincipal {
 	private JPanel panelGrilla;
 	private Grilla grillaActual;
 
-	// !!!
 	private Set<Point> celdasCamino;
 
-	public PantallaPrincipal() {  
+	public PantallaPrincipal() {
 		inicializarPantalla();
 		inicializarTablaResultados();
 		inicializarPanelGrilla();
@@ -57,7 +56,7 @@ public class PantallaPrincipal {
 	}
 
 	private void inicializarTablaResultados() {
-		crearTablaResultados(); 
+		crearTablaResultados();
 		configurarTablaResultados();
 		agregarTablaResultados();
 	}
@@ -171,13 +170,12 @@ public class PantallaPrincipal {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-		// esto hay que cambiar
 		if (celdasCamino.contains(new Point(fila, columna)))
 			panel.setBackground(Color.ORANGE);
 		else
 			panel.setBackground(Color.WHITE);
 
-		String textoCarga = carga + "" ;
+		String textoCarga = carga + "";
 		JLabel labelCarga = new JLabel(textoCarga, SwingConstants.CENTER);
 		labelCarga.setForeground(Color.BLACK);
 
@@ -211,16 +209,9 @@ public class PantallaPrincipal {
 		ventana.getContentPane().add(botonCargar);
 	}
 
-	// !!!!
 	private void cargarGrillaDesdeArchivo() {
 		try {
 			List<GrillaJson.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
-
-			// esto no va acá
-			if (grillas == null || grillas.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "No hay grillas disponibles en el archivo.");
-				return;
-			}
 
 			String[] opciones = new String[grillas.size()];
 			for (int i = 0; i < grillas.size(); i++) {
@@ -233,9 +224,9 @@ public class PantallaPrincipal {
 			if (seleccion != null) {
 				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
 				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
-				
-	            mostrarMensaje("Grilla cargada correctamente.", JOptionPane.INFORMATION_MESSAGE);
-				ejecutarMediciones(); 
+
+				mostrarMensaje("Grilla cargada correctamente.", JOptionPane.INFORMATION_MESSAGE);
+				ejecutarMediciones();
 			}
 		} catch (IOException e) {
 			mostrarMensaje("No se pudo leer el archivo.", JOptionPane.ERROR_MESSAGE);
@@ -245,41 +236,38 @@ public class PantallaPrincipal {
 			mostrarMensaje("Error inesperado.", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void mostrarMensaje(String mensaje, int tipoMensaje) {
-	    JOptionPane.showMessageDialog(null, mensaje, "Información", tipoMensaje);
+		JOptionPane.showMessageDialog(null, mensaje, "Información", tipoMensaje);
 	}
-	
-	
-	
-	
+
 	private void inicializarBotonBenchmark() {
 		JButton botonBenchmark = new JButton("Ejecutar Benchmark");
 		botonBenchmark.setBounds(620, 142, 200, 40);
 		botonBenchmark.addActionListener(e -> ejecutarBenchmark());
 		ventana.getContentPane().add(botonBenchmark);
 	}
-	
+
 	private void ejecutarBenchmark() {
-	    SwingWorker<Void, Void> worker = new SwingWorker<>() {
-	        @Override
-	        protected Void doInBackground() {
-	            try {
-	                Map<String, Map<String, Double>> resultados = BenchmarkRunner.ejecutarBenchmarkDesdeJson("grilla.json");
+		SwingWorker<Void, Void> worker = new SwingWorker<>() {
+			@Override
+			protected Void doInBackground() {
+				try {
+					Map<String, Map<String, Double>> resultados = BenchmarkRunner
+							.ejecutarBenchmarkDesdeJson("grilla.json");
 
-	                SwingUtilities.invokeLater(() -> {
-	                    PantallaBenchmark ventana = new PantallaBenchmark(resultados);
-	                    ventana.setVisible(true);
-	                });
+					SwingUtilities.invokeLater(() -> {
+						PantallaChart ventana = new PantallaChart(resultados);
+						ventana.mostrar();
+					});
 
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	            return null;
-	        }
-	    };
-
-	    worker.execute();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		worker.execute();
 	}
 
 }

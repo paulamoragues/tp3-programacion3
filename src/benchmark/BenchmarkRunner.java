@@ -11,15 +11,15 @@ import utilidades.GrillaServicio;
 
 public class BenchmarkRunner {
 
-    public static Map<String, Map<String, Double>> ejecutarBenchmarkDesdeJson(String ruta) throws IOException {
-    	List<GrillaJson.GrillaConDescripcion> grillasJson = GrillaJson.cargarTodas(ruta);
-        List<Grilla> grillas = new ArrayList<>();
+	public static Map<String, Map<String, Double>> ejecutarBenchmarkDesdeJson(String ruta) throws IOException {
+		List<GrillaJson.GrillaConDescripcion> grillasJson = GrillaJson.cargarTodas(ruta);
+		List<Grilla> grillas = new ArrayList<>();
 
-        for (int i = 0; i < grillasJson.size(); i++) {
-            grillas.add(GrillaServicio.crearGrillaDesdeIndice(ruta, i));
-        }
+		for (int i = 0; i < grillasJson.size(); i++) {
+			grillas.add(GrillaServicio.crearGrillaDesdeIndice(ruta, i));
+		}
 
-        Benchmark benchmark = new Benchmark();
-        return benchmark.correrBenchmark(grillas);
-    }
+		Benchmark benchmark = new Benchmark();
+		return benchmark.correrBenchmark(grillas);
+	}
 }
