@@ -21,19 +21,19 @@ public class Grilla {
 				boolean carga = random.nextBoolean(fila, col);
 				matriz[fila][col] = new Celda(fila, col, carga);
 			}
-		}  
+		}
 	}
 
 	public int getCargaCelda(int fila, int columna) {
 		verificarFilaValida(fila);
 		verificarColumnaValida(columna);
-		return matriz[fila][columna].getCargaEntero(); 
+		return matriz[fila][columna].getCargaEntero();
 	}
 
 	public Celda getCelda(int fila, int columna) {
 		verificarFilaValida(fila);
 		verificarColumnaValida(columna);
-		return matriz[fila][columna]; 
+		return matriz[fila][columna];
 	}
 
 	public int getFilas() {
@@ -56,4 +56,8 @@ public class Grilla {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return filas + "x" + columnas;
+	}
 }

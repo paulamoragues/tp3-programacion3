@@ -16,7 +16,7 @@ public class Benchmark {
 		resultados.put("Backtracking", new HashMap<>());
 
 		for (Grilla grilla : grillas) {
-			String nombre = grilla.getFilas() + "x" + grilla.getColumnas();
+			String nombre = grilla.toString(); 
 
 			// Fuerza Bruta
 			FuerzaBruta fb = new FuerzaBruta(grilla);

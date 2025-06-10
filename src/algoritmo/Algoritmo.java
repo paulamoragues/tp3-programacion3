@@ -34,9 +34,8 @@ public abstract class Algoritmo {
 		return caminosValidos.size();
 	}
 
-	// obtener un camino para dibujar por pantalla desde acá, en vez de por interfaz
-	public Camino getCamino(int i) {
-		return caminosValidos.get(i);
+	public Camino getCamino(int indice) {
+		return caminosValidos.get(indice);
 	}
 
 }

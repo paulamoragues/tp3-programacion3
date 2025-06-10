@@ -8,20 +8,16 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class GrillaJson { 
+import logica.Grilla;
 
-	// Clase interna que representa una grilla con su descripción
-	public static class GrillaConDescripcion {
-		public String descripcion;
-		public boolean[][] grilla;
-	}
-	
-	public static List<GrillaConDescripcion> cargarTodas(String ruta) throws IOException {
+public class GrillaJson {
+
+	public static List<Grilla> cargarTodas(String ruta) throws IOException {
 		Gson gson = new Gson();
 		Reader reader = new FileReader(ruta);
 
-		Type tipoLista = new TypeToken<List<GrillaConDescripcion>>() {}.getType();
-		List<GrillaConDescripcion> grillas = gson.fromJson(reader, tipoLista);
+		Type tipoLista = new TypeToken<List<Grilla>>() {}.getType();
+		List<Grilla> grillas = gson.fromJson(reader, tipoLista);
 
 		reader.close();
 		return grillas;

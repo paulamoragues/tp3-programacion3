@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.*;
 
 import logica.*;
-import utilidades.GrillaServicio;
 import utilidades.GrillaJson;
 
 public class PantallaPrincipal {
@@ -34,8 +33,7 @@ public class PantallaPrincipal {
 
 	private JPanel panelGrilla;
 	private Grilla grillaActual;
-
-	private Set<Point> celdasCamino;
+	private Set<Point> celdasCamino = new HashSet<>();
 
 	public PantallaPrincipal() {
 		inicializarPantalla();
@@ -189,10 +187,8 @@ public class PantallaPrincipal {
 		panelGrilla.setPreferredSize(new Dimension(columnas * anchoCelda, filas * alturaCelda));
 	}
 
-	// modificar
 	private void obtenerPrimerCaminoEncontrado(Algoritmo algoritmo) {
-		// deberia ser algoritmoGenetico.primerCaminoEncontrado();
-		celdasCamino = new HashSet<>();
+		celdasCamino.clear();
 		if (algoritmo.getCantidadCaminos() > 0) {
 			Camino camino = algoritmo.getCamino(0);
 			for (int i = 0; i < camino.getTamaño(); i++) {
@@ -211,34 +207,44 @@ public class PantallaPrincipal {
 
 	private void cargarGrillaDesdeArchivo() {
 		try {
-			List<GrillaJson.GrillaConDescripcion> grillas = GrillaServicio.cargarTodasLasGrillas("grilla.json");
-
-			String[] opciones = new String[grillas.size()];
-			for (int i = 0; i < grillas.size(); i++) {
-				opciones[i] = (i + 1) + " - " + grillas.get(i).descripcion;
-			}
-
-			String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccioná una grilla para cargar:",
-					"Seleccionar Grilla", JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+			List<Grilla> grillas = GrillaJson.cargarTodas("grillas.json");
+			String seleccion = mostrarSelectorDeGrillas(grillas);
 
 			if (seleccion != null) {
-				int indiceSeleccionado = Integer.parseInt(seleccion.split(" ")[0]) - 1;
-				grillaActual = GrillaServicio.crearGrillaDesdeIndice("grilla.json", indiceSeleccionado);
-
-				mostrarMensaje("Grilla cargada correctamente.", JOptionPane.INFORMATION_MESSAGE);
+				int indice = obtenerIndiceDesdeSeleccion(seleccion);
+				grillaActual = grillas.get(indice);
 				ejecutarMediciones();
 			}
+
 		} catch (IOException e) {
-			mostrarMensaje("No se pudo leer el archivo.", JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("No se pudo leer el archivo.");
 		} catch (JsonSyntaxException e) {
-			mostrarMensaje("El archivo JSON está mal escrito.", JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("El archivo JSON está mal escrito.");
 		} catch (Exception e) {
-			mostrarMensaje("Error inesperado.", JOptionPane.ERROR_MESSAGE);
+			mostrarMensaje("Error inesperado.");
 		}
 	}
 
-	private void mostrarMensaje(String mensaje, int tipoMensaje) {
-		JOptionPane.showMessageDialog(null, mensaje, "Información", tipoMensaje);
+	private String mostrarSelectorDeGrillas(List<Grilla> grillas) {
+		String[] opciones = generarOpciones(grillas);
+		return (String) JOptionPane.showInputDialog(null, "Seleccioná una grilla para cargar:", "Seleccionar Grilla",
+				JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+	}
+
+	private String[] generarOpciones(List<Grilla> grillas) {
+		String[] opciones = new String[grillas.size()];
+		for (int i = 0; i < grillas.size(); i++) {
+			opciones[i] = (i + 1) + " - " + grillas.get(i);
+		}
+		return opciones;
+	}
+
+	private int obtenerIndiceDesdeSeleccion(String seleccion) {
+		return Integer.parseInt(seleccion.split(" ")[0]) - 1;
+	}
+
+	private void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void inicializarBotonBenchmark() {
@@ -254,7 +260,7 @@ public class PantallaPrincipal {
 			protected Void doInBackground() {
 				try {
 					Map<String, Map<String, Double>> resultados = BenchmarkRunner
-							.ejecutarBenchmarkDesdeJson("grilla.json");
+							.ejecutarBenchmarkDesdeJson("grillas.json");
 
 					SwingUtilities.invokeLater(() -> {
 						PantallaChart ventana = new PantallaChart(resultados);
@@ -262,7 +268,7 @@ public class PantallaPrincipal {
 					});
 
 				} catch (Exception e) {
-					e.printStackTrace();
+					mostrarMensaje("Error inesperado.");
 				}
 				return null;
 			}

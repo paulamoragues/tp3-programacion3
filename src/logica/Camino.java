@@ -8,7 +8,7 @@ public class Camino {
 	private List<Celda> celdas;
 
 	public Camino() {
-		celdas = new ArrayList<>(); 
+		celdas = new ArrayList<>();
 	}
 
 	public Camino(Camino otro) {
@@ -38,8 +38,7 @@ public class Camino {
 		}
 		Celda ultimaCelda = celdas.get(getTamaño() - 1);
 
-		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1) && 
-				(ultimaCelda.getColumna() == columnas - 1);
+		boolean llegoAlDestino = (ultimaCelda.getFila() == filas - 1) && (ultimaCelda.getColumna() == columnas - 1);
 		boolean sumaCorrecta = (calcularSumaCeldas() == 0);
 
 		return llegoAlDestino && sumaCorrecta;

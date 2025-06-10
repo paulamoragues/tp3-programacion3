@@ -1,0 +1,399 @@
+[
+  {
+    "filas": 2,
+    "columnas": 3,
+    "matriz": [
+      [
+        { "fila": 0, "columna": 0, "carga": true },
+        { "fila": 0, "columna": 1, "carga": false },
+        { "fila": 0, "columna": 2, "carga": true }
+      ],
+      [
+        { "fila": 1, "columna": 0, "carga": false },
+        { "fila": 1, "columna": 1, "carga": true },
+        { "fila": 1, "columna": 2, "carga": false }
+      ]
+    ]
+  },
+  {
+    "filas": 4,
+    "columnas": 3,
+    "matriz": [
+      [
+        { "fila": 0, "columna": 0, "carga": true },
+        { "fila": 0, "columna": 1, "carga": false },
+        { "fila": 0, "columna": 2, "carga": true }
+      ],
+      [
+        { "fila": 1, "columna": 0, "carga": false },
+        { "fila": 1, "columna": 1, "carga": true },
+        { "fila": 1, "columna": 2, "carga": true }
+      ],
+      [
+        { "fila": 2, "columna": 0, "carga": false },
+        { "fila": 2, "columna": 1, "carga": false },
+        { "fila": 2, "columna": 2, "carga": true }
+      ],
+      [
+        { "fila": 3, "columna": 0, "carga": true },
+        { "fila": 3, "columna": 1, "carga": true },
+        { "fila": 3, "columna": 2, "carga": false }
+      ]
+    ]
+  },
+  {
+    "filas": 5,
+    "columnas": 2,
+    "matriz": [
+      [
+        { "fila": 0, "columna": 0, "carga": true },
+        { "fila": 0, "columna": 1, "carga": false }
+      ],
+      [
+        { "fila": 1, "columna": 0, "carga": true },
+        { "fila": 1, "columna": 1, "carga": true }
+      ],
+      [
+        { "fila": 2, "columna": 0, "carga": true },
+        { "fila": 2, "columna": 1, "carga": false }
+      ],
+      [
+        { "fila": 3, "columna": 0, "carga": false },
+        { "fila": 3, "columna": 1, "carga": false }
+      ],
+      [
+        { "fila": 4, "columna": 0, "carga": true },
+        { "fila": 4, "columna": 1, "carga": false }
+      ]
+    ]
+  },
+  {
+    "filas": 2,
+    "columnas": 5,
+    "matriz": [
+      [
+        { "fila": 0, "columna": 0, "carga": true },
+        { "fila": 0, "columna": 1, "carga": true },
+        { "fila": 0, "columna": 2, "carga": true },
+        { "fila": 0, "columna": 3, "carga": false },
+        { "fila": 0, "columna": 4, "carga": true }
+      ],
+      [
+        { "fila": 1, "columna": 0, "carga": false },
+        { "fila": 1, "columna": 1, "carga": false },
+        { "fila": 1, "columna": 2, "carga": false },
+        { "fila": 1, "columna": 3, "carga": true },
+        { "fila": 1, "columna": 4, "carga": false }
+      ]
+    ]
+  },
+  {
+    "filas": 4,
+    "columnas": 4,
+    "matriz": [
+      [
+        { "fila": 0, "columna": 0, "carga": true },
+        { "fila": 0, "columna": 1, "carga": false },
+        { "fila": 0, "columna": 2, "carga": true },
+        { "fila": 0, "columna": 3, "carga": false }
+      ],
+      [
+        { "fila": 1, "columna": 0, "carga": false },
+        { "fila": 1, "columna": 1, "carga": true },
+        { "fila": 1, "columna": 2, "carga": false },
+        { "fila": 1, "columna": 3, "carga": true }
+      ],
+      [
+        { "fila": 2, "columna": 0, "carga": true },
+        { "fila": 2, "columna": 1, "carga": false },
+        { "fila": 2, "columna": 2, "carga": true },
+        { "fila": 2, "columna": 3, "carga": false }
+      ],
+      [
+        { "fila": 3, "columna": 0, "carga": false },
+        { "fila": 3, "columna": 1, "carga": true },
+        { "fila": 3, "columna": 2, "carga": false },
+        { "fila": 3, "columna": 3, "carga": true }
+      ]
+    ]
+  },
+   {
+      "filas": 6,
+      "columnas": 5,
+      "matriz": [
+        [
+          { "fila": 0, "columna": 0, "carga": true },
+          { "fila": 0, "columna": 1, "carga": false },
+          { "fila": 0, "columna": 2, "carga": true },
+          { "fila": 0, "columna": 3, "carga": false },
+          { "fila": 0, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 1, "columna": 0, "carga": false },
+          { "fila": 1, "columna": 1, "carga": true },
+          { "fila": 1, "columna": 2, "carga": false },
+          { "fila": 1, "columna": 3, "carga": true },
+          { "fila": 1, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 2, "columna": 0, "carga": true },
+          { "fila": 2, "columna": 1, "carga": false },
+          { "fila": 2, "columna": 2, "carga": true },
+          { "fila": 2, "columna": 3, "carga": false },
+          { "fila": 2, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 3, "columna": 0, "carga": false },
+          { "fila": 3, "columna": 1, "carga": true },
+          { "fila": 3, "columna": 2, "carga": false },
+          { "fila": 3, "columna": 3, "carga": true },
+          { "fila": 3, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 4, "columna": 0, "carga": true },
+          { "fila": 4, "columna": 1, "carga": false },
+          { "fila": 4, "columna": 2, "carga": true },
+          { "fila": 4, "columna": 3, "carga": false },
+          { "fila": 4, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 5, "columna": 0, "carga": false },
+          { "fila": 5, "columna": 1, "carga": true },
+          { "fila": 5, "columna": 2, "carga": false },
+          { "fila": 5, "columna": 3, "carga": true },
+          { "fila": 5, "columna": 4, "carga": false }
+        ]
+      ]
+    },
+    {
+      "filas": 7,
+      "columnas": 4,
+      "matriz": [
+        [
+          { "fila": 0, "columna": 0, "carga": true },
+          { "fila": 0, "columna": 1, "carga": false },
+          { "fila": 0, "columna": 2, "carga": true },
+          { "fila": 0, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 1, "columna": 0, "carga": false },
+          { "fila": 1, "columna": 1, "carga": true },
+          { "fila": 1, "columna": 2, "carga": false },
+          { "fila": 1, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 2, "columna": 0, "carga": true },
+          { "fila": 2, "columna": 1, "carga": false },
+          { "fila": 2, "columna": 2, "carga": true },
+          { "fila": 2, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 3, "columna": 0, "carga": false },
+          { "fila": 3, "columna": 1, "carga": false },
+          { "fila": 3, "columna": 2, "carga": false },
+          { "fila": 3, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 4, "columna": 0, "carga": true },
+          { "fila": 4, "columna": 1, "carga": false },
+          { "fila": 4, "columna": 2, "carga": true },
+          { "fila": 4, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 5, "columna": 0, "carga": false },
+          { "fila": 5, "columna": 1, "carga": true },
+          { "fila": 5, "columna": 2, "carga": false },
+          { "fila": 5, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 6, "columna": 0, "carga": true },
+          { "fila": 6, "columna": 1, "carga": true },
+          { "fila": 6, "columna": 2, "carga": true },
+          { "fila": 6, "columna": 3, "carga": false }
+        ]
+      ]
+    },
+    {
+      "filas": 8,
+      "columnas": 3,
+      "matriz": [
+        [
+          { "fila": 0, "columna": 0, "carga": true },
+          { "fila": 0, "columna": 1, "carga": false },
+          { "fila": 0, "columna": 2, "carga": true }
+        ],
+        [
+          { "fila": 1, "columna": 0, "carga": true },
+          { "fila": 1, "columna": 1, "carga": true },
+          { "fila": 1, "columna": 2, "carga": false }
+        ],
+        [
+          { "fila": 2, "columna": 0, "carga": true },
+          { "fila": 2, "columna": 1, "carga": false },
+          { "fila": 2, "columna": 2, "carga": true }
+        ],
+        [
+          { "fila": 3, "columna": 0, "carga": true },
+          { "fila": 3, "columna": 1, "carga": false },
+          { "fila": 3, "columna": 2, "carga": false }
+        ],
+        [
+          { "fila": 4, "columna": 0, "carga": true },
+          { "fila": 4, "columna": 1, "carga": false },
+          { "fila": 4, "columna": 2, "carga": true }
+        ],
+        [
+          { "fila": 5, "columna": 0, "carga": false },
+          { "fila": 5, "columna": 1, "carga": true },
+          { "fila": 5, "columna": 2, "carga": false }
+        ],
+        [
+          { "fila": 6, "columna": 0, "carga": false },
+          { "fila": 6, "columna": 1, "carga": false },
+          { "fila": 6, "columna": 2, "carga": true }
+        ],
+        [
+          { "fila": 7, "columna": 0, "carga": false },
+          { "fila": 7, "columna": 1, "carga": true },
+          { "fila": 7, "columna": 2, "carga": false }
+        ]
+      ]
+    },
+    {
+      "filas": 9,
+      "columnas": 4,
+      "matriz": [
+        [
+          { "fila": 0, "columna": 0, "carga": true },
+          { "fila": 0, "columna": 1, "carga": true },
+          { "fila": 0, "columna": 2, "carga": true },
+          { "fila": 0, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 1, "columna": 0, "carga": false },
+          { "fila": 1, "columna": 1, "carga": true },
+          { "fila": 1, "columna": 2, "carga": false },
+          { "fila": 1, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 2, "columna": 0, "carga": true },
+          { "fila": 2, "columna": 1, "carga": false },
+          { "fila": 2, "columna": 2, "carga": false },
+          { "fila": 2, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 3, "columna": 0, "carga": false },
+          { "fila": 3, "columna": 1, "carga": true },
+          { "fila": 3, "columna": 2, "carga": false },
+          { "fila": 3, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 4, "columna": 0, "carga": true },
+          { "fila": 4, "columna": 1, "carga": false },
+          { "fila": 4, "columna": 2, "carga": true },
+          { "fila": 4, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 5, "columna": 0, "carga": false },
+          { "fila": 5, "columna": 1, "carga": true },
+          { "fila": 5, "columna": 2, "carga": true },
+          { "fila": 5, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 6, "columna": 0, "carga": true },
+          { "fila": 6, "columna": 1, "carga": false },
+          { "fila": 6, "columna": 2, "carga": true },
+          { "fila": 6, "columna": 3, "carga": false }
+        ],
+        [
+          { "fila": 7, "columna": 0, "carga": false },
+          { "fila": 7, "columna": 1, "carga": true },
+          { "fila": 7, "columna": 2, "carga": false },
+          { "fila": 7, "columna": 3, "carga": true }
+        ],
+        [
+          { "fila": 8, "columna": 0, "carga": true },
+          { "fila": 8, "columna": 1, "carga": true },
+          { "fila": 8, "columna": 2, "carga": true },
+          { "fila": 8, "columna": 3, "carga": false }
+        ]
+      ]
+    },
+    {
+      "filas": 10,
+      "columnas": 5,
+      "matriz": [
+        [
+          { "fila": 0, "columna": 0, "carga": true },
+          { "fila": 0, "columna": 1, "carga": false },
+          { "fila": 0, "columna": 2, "carga": false },
+          { "fila": 0, "columna": 3, "carga": false },
+          { "fila": 0, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 1, "columna": 0, "carga": false },
+          { "fila": 1, "columna": 1, "carga": true },
+          { "fila": 1, "columna": 2, "carga": true },
+          { "fila": 1, "columna": 3, "carga": true },
+          { "fila": 1, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 2, "columna": 0, "carga": true },
+          { "fila": 2, "columna": 1, "carga": false },
+          { "fila": 2, "columna": 2, "carga": true },
+          { "fila": 2, "columna": 3, "carga": false },
+          { "fila": 2, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 3, "columna": 0, "carga": false },
+          { "fila": 3, "columna": 1, "carga": true },
+          { "fila": 3, "columna": 2, "carga": false },
+          { "fila": 3, "columna": 3, "carga": true },
+          { "fila": 3, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 4, "columna": 0, "carga": true },
+          { "fila": 4, "columna": 1, "carga": false },
+          { "fila": 4, "columna": 2, "carga": true },
+          { "fila": 4, "columna": 3, "carga": false },
+          { "fila": 4, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 5, "columna": 0, "carga": false },
+          { "fila": 5, "columna": 1, "carga": true },
+          { "fila": 5, "columna": 2, "carga": false },
+          { "fila": 5, "columna": 3, "carga": true },
+          { "fila": 5, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 6, "columna": 0, "carga": true },
+          { "fila": 6, "columna": 1, "carga": false },
+          { "fila": 6, "columna": 2, "carga": true },
+          { "fila": 6, "columna": 3, "carga": false },
+          { "fila": 6, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 7, "columna": 0, "carga": false },
+          { "fila": 7, "columna": 1, "carga": true },
+          { "fila": 7, "columna": 2, "carga": false },
+          { "fila": 7, "columna": 3, "carga": true },
+          { "fila": 7, "columna": 4, "carga": false }
+        ],
+        [
+          { "fila": 8, "columna": 0, "carga": false },
+          { "fila": 8, "columna": 1, "carga": true },
+          { "fila": 8, "columna": 2, "carga": true },
+          { "fila": 8, "columna": 3, "carga": false },
+          { "fila": 8, "columna": 4, "carga": true }
+        ],
+        [
+          { "fila": 9, "columna": 0, "carga": false },
+          { "fila": 9, "columna": 1, "carga": true },
+          { "fila": 9, "columna": 2, "carga": false },
+          { "fila": 9, "columna": 3, "carga": true },
+          { "fila": 9, "columna": 4, "carga": false }
+        ]
+      ]
+    }
+  ]
+  

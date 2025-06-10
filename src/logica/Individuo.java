@@ -73,12 +73,7 @@ public class Individuo implements Comparable<Individuo> {
 			hijo1.set(i, otro.get(i));
 			hijo2.set(i, this.get(i));
 		}
-
-		// Como se mencionó antes, el cruce de un punto puede generar hijos que no
-		// tienen el número correcto
-		// de movimientos 'abajo' y 'derecha'. El fitness se encargará de penalizar
-		// esto.
-
+		
 		return new Individuo[] { hijo1, hijo2 };
 	}
 
@@ -118,9 +113,6 @@ public class Individuo implements Comparable<Individuo> {
 			if (filaActual < grilla.getFilas() && columnaActual < grilla.getColumnas()) {
 				camino.agregarCelda(grilla.getCelda(filaActual, columnaActual));
 			} else {
-				// Si el camino se sale de los límites, detenemos la construcción.
-				// El fitness se encargará de penalizar este individuo por no tener la longitud
-				// correcta.
 				break;
 			}
 		}
